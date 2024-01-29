@@ -6,14 +6,14 @@
 %---------------------------------------------------------------
 \setcounter{page}{1}
 
-% The following environment can be used as a mini-introduction for a chapter. Use that any way it pleases you (or comment it out). It can contain, for instance, a summary of the chapter. Or, there can be a quotation.
+% The following environment can be used as a mini-introduction for a chapter. Use that anyway it pleases you (or comment it out). It can contain, for instance, a summary of the chapter. Or, there can be a quotation.
 \begin{chapterabstract}
-	Lorem ipsum dolor sit amet.
+	Product configurators and their value.
 \end{chapterabstract}
 
-Over the past few decades, the rise of online commerce has caused a shift in consumer expectations, resulting in an increased demand for customized products. This gives rise to the need to shift focus towards mass customization, where products are customized according to individual preferences. In order to thrive in this sector, companies must modify their product offerings to be able to meet the unique needs of users. This necessitates the existence of a system that enables customers to express their preferences and convert them into the product configurations. \cite{Fulkerson2000}
+Over the past few decades, the rise of e-commerce has caused a shift in consumer expectations, resulting in an increased demand for customized products. This gives rise to the need to shift focus towards mass customization, where products are customized according to individual preferences. To thrive in this sector, companies must modify their product offerings to be able to meet the unique needs of users. This necessitates the existence of a system (a toolkit), that enables customers to express their preferences and convert them into product configurations. \cite{Fulkerson2000}
 
-The introduction of customization has been shown to significantly improve the customer's perception of the value of the product. The involvement of consumers in the customization process leads to a stronger bond with the product, resulting in a perception of higher value compared to standard off-the-shelf products. This aspect of mass customization makes it an appealing and compelling strategy for businesses to implement. \cite{Schreier2006} However, when implementing such system, it is crucial to ensure that the customization process is pleasurable for the customer. Research has shown that the enjoyment experienced during the customization also affects the perceived value of the final product, highlighting the importance of good implementation. \cite{Franke2010}
+The introduction of customization has been shown to significantly improve the customer's perception of the product's value. The involvement of consumers in the customization process leads to a stronger bond with the product, resulting in a perception of higher value compared to standard off-the-shelf products. This aspect of mass customization makes it an appealing and compelling strategy for businesses to implement. \cite{Schreier2006} However, when implementing such a system, it is crucial to ensure that the customization process is pleasurable for the customer. Research has shown that the enjoyment experienced during the customization also affects the perceived value of the final product, highlighting the importance of good implementation. \cite{Franke2010}
 
 The task of transforming user preferences into concrete designs is a difficult endeavor that can be further hindered by a lack of effective communication between the customer's explanation of their desires and the business's comprehension. The use of online product configurators seemingly provides a solution for this issue by offering a user-friendly and visually appealing platform, which allows customers to customize products to their specifications, improves customer experience by increasing engagement and interactivity, and helps to bridge the gap between customer expectations and the end product. These tools have become an integral part of successful personalization strategies. \cite{Franke2003}
 
@@ -23,14 +23,29 @@ The introduction of modern technologies such as WebGL or Augmented Reality (AR) 
 \section{Objective of this thesis}
 %---------------------------------------------------------------
 
-The primary objective of this thesis is to design and implement an application (toolkit) for online configuration of modular products. The toolkit aims to be product-agnostic, adaptable and customizable, usable by a range of businesses, enabling their customers to interactively customize their modular products. The focus is on ensuring that the toolkit is not only flexible in accommodating various specific needs, but also straightforward for businesses to maintain after deploying, emphasizing lightweight infrastructure requirements. 
+The primary objective of this thesis is to design and implement an application (toolkit) for the online configuration of modular products. The toolkit aims to be product-agnostic, adaptable, and customizable, usable by a variety of businesses, enabling their customers to interactively customize their modular products. The focus is on ensuring that the toolkit is not only flexible in accommodating various specific needs, but also straightforward for businesses to maintain after deploying, emphasizing lightweight infrastructure requirements. 
 To accomplish this main objective, this requires an analysis of the characteristics found in current product configurators, as well as an examination of comparable solutions currently available to businesses.
 
 %---------------------------------------------------------------
 \section{Structure of this thesis}
 %---------------------------------------------------------------
 
-This thesis is divided into seven chapters. The initial chapter entails an examination of existing solutions and an investigation into the functionalities that should be incorporated into this particular application. The second chapter contains a discussion of the application's design, the technologies chosen, the architecture, and the data structures. The third chapter is devoted to implementation. Chapter four focuses on the deployment of the implemented application in a particular business as an example. In addition, it discusses the resulting changes in the business processes of the selected business. In the sixth chapter, the tests used in the development of the application are described. Finally, the last chapter summarizes the achieved results and suggests possible directions of future development.
+This thesis is divided into six chapters.
+
+\begin{description}
+\item[Chapter 1] The initial chapter entails an examination of existing solutions and an investigation into the functionalities that should be incorporated into this particular application.
+
+\item[Chapter 2] The second chapter discusses the design of the application, the technologies chosen, the architecture, and the data structures.
+
+\item[Chapter 3] The third chapter is devoted to implementation.
+
+\item[Chapter 4] Chapter four focuses on the deployment of the implemented application in a particular business as an example. In addition, it discusses the resulting changes in the business processes of the selected business.
+
+\item[Chapter 5] In the fifth chapter, the tests used in the development of the application are described.
+
+\item[Chapter 6] Finally, the last chapter summarizes the results achieved and suggests possible directions for future development.
+\end{description}
+
 
 %---------------------------------------------------------------
 \chapter{Analysis}
@@ -40,15 +55,35 @@ This thesis is divided into seven chapters. The initial chapter entails an exami
 	Lorem ipsum dolor sit amet. 
 \end{chapterabstract}
 
+Product configurators can be implemented in various ways, and the design of the tool itself determines the types of products that can be designed using the tool later on. The number of different unique configurations of a product that the tool can create is called the solution space. The size of the solution space is determined by two factors: the number of customizable attributes and the achievable values of each attribute. \cite{Huiwen2018} A relevant study examines the solution spaces of these toolkits and proposes an evaluation model that enables the categorization and assessment of various implementation approaches. Based on the target outcome and the guidance provided by the tool, the following mechanisms are specified: \cite{Hermans2012}
 
-At present, numerous companies are incorporating product configurators into their sales strategies in various industries, including automotive, fashion, furniture, housing, and more. These configurators serve as either the main or supplementary selling tool for these businesses.
+\begin{definition}[Veneer]
+Customization by adding a visual decorative layer. (e.g. printing, engraving, etching)
+\end{definition}
 
-The Configurator Database Project by cyLEDGE MEDIA aims to catalog these web-based configuration tools. In the 2017/2018 report, they tracked 1250 deployments of these tools, but the actual number will be much greater, as the database contains only the most commonly used solutions. \cite{cyLEDGE2018}
+\begin{definition}[Modularity]
+Customization by combining modules or components.
+\end{definition}
 
-\section{Donec odio tempus molestie}
+\begin{definition}[Parametric]
+Customization by changing parameter values of parts.
+\end{definition}
 
-Many
+\begin{definition}[Generative]
+Customization using code and scripting to synthesize the final form of the product.
+\end{definition}
 
-\subsection{Class aptent taciti}
+This thesis will primarily focus on toolkits that employ modularity mechanisms.
 
-Lorem ipsum dolor sit amet.
+
+
+
+
+\section{Exploring existing solutions}
+\subsection{Configurators in use}
+
+Currently, many companies are integrating product configurators into their sales strategies across multiple industries such as automotive, fashion, furniture, housing, and others. These configurators serve as either the main or supplementary sales tools for these businesses.
+
+The Configurator Database Project by cyLEDGE MEDIA aims to catalog these web-based configuration tools. In the 2017/2018 report, they tracked 1250 deployments of these tools; however, the true count will be significantly higher since the database only includes the most frequently visited applications. \cite{cyLEDGE2018}
+
+\subsection{Offered toolkits}
