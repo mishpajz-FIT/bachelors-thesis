@@ -60,24 +60,17 @@ Product configurators can be implemented in various ways, and the design of the 
 \begin{definition}[Veneer]
 Customization by adding a visual decorative layer. (e.g. printing, engraving, etching)
 \end{definition}
-
 \begin{definition}[Modularity]
 Customization by combining modules or components.
 \end{definition}
-
 \begin{definition}[Parametric]
-Customization by changing parameter values of parts.
+Customization by changing the parameter values of parts.
 \end{definition}
-
 \begin{definition}[Generative]
 Customization using code and scripting to synthesize the final form of the product.
 \end{definition}
 
-This thesis will primarily focus on toolkits that employ modularity mechanisms.
-
-
-
-
+The main focus of this thesis is toolkits that primarily employ modularity mechanisms, however, there are often some common characteristics among configuration tools with different mechanisms.
 
 \section{Exploring existing solutions}
 \subsection{Configurators in use}
@@ -86,4 +79,38 @@ Currently, many companies are integrating product configurators into their sales
 
 The Configurator Database Project by cyLEDGE MEDIA aims to catalog these web-based configuration tools. In the 2017/2018 report, they tracked 1250 deployments of these tools; however, the true count will be significantly higher since the database only includes the most frequently visited applications. \cite{cyLEDGE2018}
 
+An analysis of the 100 most viewed configurators from May 2020 to May 2021 in the Configurator Database Project was performed in a study that examined the shared characteristics of these configurations. The results of some of the relevant characteristics and design choices that the study has analyzed are presented in this section: \cite{Blazek2023}
+\begin{itemize}
+    \item \textbf{Responsive design}: 75.3\% of examined tools had responsive design (the design adapted to the viewport of the device) 
+    \item \textbf{Navigation}: 17.5\% of configurators had linear predefined navigation (meaning the configuration had to follow a specified sequence), whereas the majority of tools (82.5\%) had open navigation (user has the flexibility to configure the product in any order)
+    \item \textbf{Visualization} 79.4\% of tools utilized photorealistic visualization (as opposed to illustrations or no visualization), however, the study acknowledges that there were significant variations based on the industries in which the configurator is utilized
+    \item \textbf{Data transfer} The mean network data size transferred for 3D configurator was 35.6~MB
+    \item \textbf{Configuration options} 60.8\% of configurators offered more than ten customizable attributes
+    \item \textbf{Purchase capability} Given that car brands typically do not directly sell their cars online, it is logical to exclude them from the analysis of this particular characteristic. With the exclusion of vehicle configurators, 70.5\% of the configurators could complete an online purchase of the configured product
+    \item \textbf{Price calculation} 56.7\% of the configurators were able to instantly reflect the changes made to the configuration in the displayed price
+\end{itemize}
+
+Another article also used the same database of configurators to analyze common design elements. They identified several key designs that were prevalent in the majority of configurators analyzed. The following key insights of common, recommended designs from the article are relevant to this thesis: \cite{Leitner2014}
+\begin{itemize}
+    \item At the end of the configuration process, a summary of selected options is presented
+    \item To present the products that can be configured, images that are large enough to see details are used
+    \item If the configurator has linear predefined navigation, the navigation information is presented on a horizontal plane
+    \item Navigation bar is visible
+    \item Price and order button is clearly visible and available for completion purposes
+    \item Prices of the components are accessible in all phases of the configuration
+    \item Logo is displayed prominently
+    \item User preferences should be adaptable
+\end{itemize}
+
+As part of the analysis chapter of this thesis, it is essential to examine actual 3D~configurator applications. Due to the large number of existing applications, it is not within the scope of this work to perform an exhaustive analysis. Instead, this section will focus on a select group of four applications. These have been selected based on a combination of factors such as their popularity, functionality, and importance in the context of a modular product configuration. This selection is intended to provide insightful examples that highlight different approaches, rather than being representative of the entire domain.
+
+\subsubsection{IKEA PAX planner tool}
+\subsubsection{Lundia Original kastconfigurator}
+\subsubsection{Muuto planner}
+\subsubsection{LD Seating Nido}
+
 \subsection{Offered toolkits}
+
+\subsubsection{ThreeKit}
+\subsubsection{Emersyea}
+\subsubsection{Roomle}
