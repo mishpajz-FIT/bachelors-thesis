@@ -23,7 +23,7 @@ The introduction of modern technologies such as WebGL or Augmented Reality (AR) 
 \section{Objective of this thesis}
 %---------------------------------------------------------------
 
-The primary objective of this thesis is to design and implement an application (toolkit) for the online configuration of modular products. The toolkit aims to be product-agnostic, adaptable, and customizable, usable by a variety of businesses, enabling their customers to interactively customize their modular products. The focus is on ensuring that the toolkit is not only flexible in accommodating various specific needs, but also straightforward for businesses to maintain after deploying, emphasizing lightweight infrastructure requirements. 
+The primary objective of this thesis is to design and implement an application (toolkit) for the online configuration of modular products. The toolkit aims to be product-agnostic, adaptable, and customizable, usable by various businesses, enabling their customers to customize their modular products interactively. The focus is on ensuring that the toolkit is not only flexible in accommodating various specific needs, but also straightforward for businesses to maintain after deploying, emphasizing lightweight infrastructure requirements. 
 To accomplish this main objective, this requires an analysis of the characteristics found in current product configurators, as well as an examination of comparable solutions currently available to businesses.
 
 %---------------------------------------------------------------
@@ -99,17 +99,70 @@ Another article also used the same database of configurators to analyze common d
     \item Price and order button is clearly visible and available for completion purposes
     \item Prices of the components are accessible in all phases of the configuration
     \item Logo is displayed prominently
-    \item User preferences should be adaptable
 \end{itemize}
 
-As part of the analysis chapter of this thesis, it is essential to examine actual 3D~configurator applications. Due to the large number of existing applications, it is not within the scope of this work to perform an exhaustive analysis. Instead, this section will focus on a select group of four applications. These have been selected based on a combination of factors such as their popularity, functionality, and importance in the context of a modular product configuration. This selection is intended to provide insightful examples that highlight different approaches, rather than being representative of the entire domain.
+As part of the analysis chapter of this thesis, it is essential to examine actual 3D~configurator applications. Due to the large number of existing applications, it is not within the scope of this work to perform an exhaustive analysis. Instead, this section will focus on a select group of three applications. These have been selected based on a combination of factors such as their popularity, functionality, and importance in the context of a modular product configuration. This selection is intended to provide insightful examples that highlight different approaches, rather than being representative of the entire domain.
 
-\subsubsection{IKEA PAX planner tool}
-\subsubsection{Lundia Original kastconfigurator}
-\subsubsection{Muuto planner}
-\subsubsection{LD Seating Nido}
+\subsubsection{IKEA PAX Planner Tool}
 
-\subsection{Offered toolkits}
+IKEA is a widely recognized global home furnishings retailer specializing in affordable furniture. \cite{StatistaIkea}
+
+IKEA offers the PAX wardrobe, which is an easily configurable fitted wardrobe, for which they not only sell predefined configurations but also allow customers to modularly choose the ideal size, doors, knobs, handles, interior organization, and lightning.
+
+To accomplish this, they utilize the PAX planner web tool (3D configurator). \footnote{Available at: www.ikea.com/addon-app/storageone/pax/web/latest/cz/en/} 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm]{images/analysis_ikea-pax.png}
+\caption{IKEA PAX Planner Tool with example configuration}
+\end{figure}
+
+The configurator has open navigation and consists mainly of two views. At the beginning of the process, the application prompts the user to select the starting point of the configuration. The main larger view provides a 3D view of the current configuration, allowing users to observe objects from different viewpoints by moving along an orbital trajectory around them. All options that can be chosen and added to the current configuration are found in the secondary window. Users can interact with elements in the 3D view. The layout of components can be adjusted in this way, and the selection of a component provides users with additional information and real-life images of the selected item.
+The page is responsive, and the secondary window moves from the right side to a bottom sliding panel on mobile devices.
+The tool performs live price calculations and contains a final summary confirmation screen with the option to order the configured product. The configurator is a single-page application (SPA is a web application implementation approach that loads only a single page and then sequentially updates the content of the page with scripting on the client side, rather than loading whole new pages from the server \cite{Fink2014}) and does not update the URL based on the selected product or phase of the configuration.
+
+The configurator provides a range of creative features, such as the ability to change the visibility of some elements using a button (hiding the doors of a wardrobe to reveal the contents inside), the ability to display dimensions directly in the 3D view, undo and redo buttons, as well as the ability to save the configuration, which can be later loaded using generated code.
+
+\subsubsection{Muuto Product Planner}
+
+Muuto is a Scandinavian design company that produces furniture and home accessories. \cite{Muuto}
+
+The company provides the Product Planner (3D web-based configurator), which allows customers to customize and combine the designs of various products, such as storage systems, sofas, tables, or wall hangers, tailored to their specific needs. \footnote{Available at: https://planner.muuto.com/}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm]{images/analysis_muuto-product-planner.png}
+\caption{Muuto Product Planner tool with example configuration}
+\end{figure}
+
+The design of the configurator is similar to that in the previous case. The configurator also consists of two views and has open navigation. The primary views provide full 3D visualization, while the secondary views on the right side allow users to add components. On smaller devices, this secondary view transforms into a bottom slide panel, as the design is also responsive. The application follows a similar flow, starting with the selection of the starting point and then moving into the configurator. Live price calculation is also performed, and there is a summary page, but it is not possible to order the product, instead, the user is redirected to a physical store locator. In addition, there is also the possibility to display real dimensions and save the setup with distinct generated code, and the undo button allows one to revert previous actions.
+
+In addition, the tool also has inventive functionalities. The designed configuration can be quickly shared with other users using email, or it can be downloaded, in several file formats containing the 3D model itself. The application allows to view the product in AR, directly in a web browser, albeit only on Apple devices using the Universal Scene Description (USDZ) format and AR~Quick Look. \cite{Jackson2018}
+The application has multiple URL schemes that depend on the configuration phase, but they are not determined by the current product. 
+
+Due to the wide variety of products that it supports, the configurator is not restricted to generating configurations that are feasible to produce and can create impossible configurations.
+
+\subsubsection{LD Seating Nido configurator}
+
+LD Seating is a company based in the Czech Republic that specializes in the production of chairs, armchairs, and sofas. \cite{LDSeating}
+
+The company uses a 3D web-based configurator to market the Nido modular seating system, which consists of elements that are designed to be combined in various ways. \footnote{Available at: https://nido.ldseating.com/en/configurator}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=14cm]{images/analysis_nido-configurator.png}
+\caption{LD Seating Nido configurator with example configuration}
+\end{figure}
+
+The primary view of the configurator displays the 3D models of the components, and the flow of the application as well includes selecting a starting point, the product configuration itself, and a summary with confirmation. The controls for adding components and changing properties are integrated within the 3D scene itself. When user input is needed, a panel is opened on the right. The application is partially responsive, as the side panel does open in fullscreen on smaller viewports, however, there are some issues with image and text overflows on mobile devices. In this case, the configurator does not calculate the price and cannot directly place an order for the product but instead sends an inquiry for the configuration, and pressing the configuration confirmation results in displaying an inquiry form.
+
+The tool has the ability to display dimensions, and the user can download the resulting configuration as a file that contains the 3D model. The configurator provides the option to save the configuration, and although it operates as an SPA, the saved configuration is then accessible at a specific URL containing the unique identification of the configuration. This feature also enables a version history mechanism.
+
+\subsection{Provided toolkits}
+
+In this section of the analysis chapter, the focus shifts from specific 3D configurator applications to the fundamental toolkits. While many configurations are bespoke, tailored to the specific needs of individual companies and their products, sometimes even developed directly by the companies offering the products, there are providers offering more generic, adaptable solutions, aimed at companies which do not have the funds or capabilities to develop a fully custom solution. These offerings are also highly relevant to this thesis, as the objective of this thesis is to create a product-agnostic toolkit.
+
+A variety of providers offer these toolkits, with a focus on providing semi-custom or fully custom solutions, as well as generic options. To carry out a focused and relevant analysis, this section will examine three particular toolkits. These have been selected based on factors such as technological excellence, compatibility with modular products or number of clients.
 
 \subsubsection{ThreeKit}
 \subsubsection{Emersyea}
