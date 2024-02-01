@@ -70,10 +70,10 @@ Customization by changing the parameter values of parts.
 Customization using code and scripting to synthesize the final form of the product.
 \end{definition}
 
-The main focus of this thesis is toolkits that primarily employ modularity mechanisms, however, there are often some common characteristics among configuration tools with different mechanisms.
+The main focus of this thesis is on toolkits that primarily employ modularity mechanisms, however, there are often some common characteristics among configuration tools with different mechanisms.
 
-\section{Exploring existing solutions}
-\subsection{Configurators in use}
+\section{Existing solutions}
+\subsection{Applications of product configurators}
 
 Currently, many companies are integrating product configurators into their sales strategies across multiple industries such as automotive, fashion, furniture, housing, and others. These configurators serve as either the main or supplementary sales tools for these businesses.
 
@@ -109,12 +109,12 @@ IKEA is a widely recognized global home furnishings retailer specializing in aff
 
 IKEA offers the PAX wardrobe, which is an easily configurable fitted wardrobe, for which they not only sell predefined configurations but also allow customers to modularly choose the ideal size, doors, knobs, handles, interior organization, and lightning.
 
-To accomplish this, they utilize the PAX planner web tool (3D configurator). \footnote{Available at: www.ikea.com/addon-app/storageone/pax/web/latest/cz/en/} 
+To accomplish this, they utilize the PAX planner web tool (3D configurator). \footnote{Available at: \url{https://www.ikea.com/addon-app/storageone/pax/web/latest/cz/en/}} 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=14cm]{images/analysis_ikea-pax.png}
-\caption{IKEA PAX Planner Tool with example configuration}
+\caption{Screenshot of IKEA PAX Planner Tool with example configuration}
 \end{figure}
 
 The configurator has open navigation and consists mainly of two views. At the beginning of the process, the application prompts the user to select the starting point of the configuration. The main larger view provides a 3D view of the current configuration, allowing users to observe objects from different viewpoints by moving along an orbital trajectory around them. All options that can be chosen and added to the current configuration are found in the secondary window. Users can interact with elements in the 3D view. The layout of components can be adjusted in this way, and the selection of a component provides users with additional information and real-life images of the selected item.
@@ -127,12 +127,12 @@ The configurator provides a range of creative features, such as the ability to c
 
 Muuto is a Scandinavian design company that produces furniture and home accessories. \cite{Muuto}
 
-The company provides the Product Planner (3D web-based configurator), which allows customers to customize and combine the designs of various products, such as storage systems, sofas, tables, or wall hangers, tailored to their specific needs. \footnote{Available at: https://planner.muuto.com/}
+The company provides the Product Planner (3D web-based configurator), which allows customers to customize and combine the designs of various products, such as storage systems, sofas, tables, or wall hangers, tailored to their specific needs. \footnote{Available at: \url{https://planner.muuto.com/}}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=14cm]{images/analysis_muuto-product-planner.png}
-\caption{Muuto Product Planner tool with example configuration}
+\caption{Screenshot of Muuto Product Planner tool with example configuration}
 \end{figure}
 
 The design of the configurator is similar to that in the previous case. The configurator also consists of two views and has open navigation. The primary views provide full 3D visualization, while the secondary views on the right side allow users to add components. On smaller devices, this secondary view transforms into a bottom slide panel, as the design is also responsive. The application follows a similar flow, starting with the selection of the starting point and then moving into the configurator. Live price calculation is also performed, and there is a summary page, but it is not possible to order the product, instead, the user is redirected to a physical store locator. In addition, there is also the possibility to display real dimensions and save the setup with distinct generated code, and the undo button allows one to revert previous actions.
@@ -146,24 +146,38 @@ Due to the wide variety of products that it supports, the configurator is not re
 
 LD Seating is a company based in the Czech Republic that specializes in the production of chairs, armchairs, and sofas. \cite{LDSeating}
 
-The company uses a 3D web-based configurator to market the Nido modular seating system, which consists of elements that are designed to be combined in various ways. \footnote{Available at: https://nido.ldseating.com/en/configurator}
+The company uses a 3D web-based configurator to market the Nido modular seating system, which consists of elements that are designed to be combined in various ways. \footnote{Available at: \url{https://nido.ldseating.com/en/configurator}}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=14cm]{images/analysis_nido-configurator.png}
-\caption{LD Seating Nido configurator with example configuration}
+\caption{Screenshot of LD Seating Nido configurator with example configuration}
 \end{figure}
 
 The primary view of the configurator displays the 3D models of the components, and the flow of the application as well includes selecting a starting point, the product configuration itself, and a summary with confirmation. The controls for adding components and changing properties are integrated within the 3D scene itself. When user input is needed, a panel is opened on the right. The application is partially responsive, as the side panel does open in fullscreen on smaller viewports, however, there are some issues with image and text overflows on mobile devices. In this case, the configurator does not calculate the price and cannot directly place an order for the product but instead sends an inquiry for the configuration, and pressing the configuration confirmation results in displaying an inquiry form.
 
 The tool has the ability to display dimensions, and the user can download the resulting configuration as a file that contains the 3D model. The configurator provides the option to save the configuration, and although it operates as an SPA, the saved configuration is then accessible at a specific URL containing the unique identification of the configuration. This feature also enables a version history mechanism.
 
-\subsection{Provided toolkits}
+\subsection{Available toolkits}
 
-In this section of the analysis chapter, the focus shifts from specific 3D configurator applications to the fundamental toolkits. While many configurations are bespoke, tailored to the specific needs of individual companies and their products, sometimes even developed directly by the companies offering the products, there are providers offering more generic, adaptable solutions, aimed at companies which do not have the funds or capabilities to develop a fully custom solution. These offerings are also highly relevant to this thesis, as the objective of this thesis is to create a product-agnostic toolkit.
+In this section of the analysis chapter, the focus shifts from specific 3D configurator applications to the fundamental toolkits that power the configurators. While many configurators are bespoke, tailored to the specific needs of individual companies and their products, sometimes even developed directly by the companies offering the products, there are providers offering more generic, adaptable solutions, aimed at companies that do not have the need, funds, or capabilities to develop a fully custom solution. These offerings are also highly relevant to this thesis, as the objective of this thesis is to create a product-agnostic toolkit, which means that there is a need to consider the way the configurator is set up by the business.
 
-A variety of providers offer these toolkits, with a focus on providing semi-custom or fully custom solutions, as well as generic options. To carry out a focused and relevant analysis, this section will examine three particular toolkits. These have been selected based on factors such as technological excellence, compatibility with modular products or number of clients.
+A variety of providers offer these toolkits for product configurators, with the aim of providing semi-custom or fully custom solutions, as well as generic options. To carry out a focused and relevant analysis, this section will examine two particular toolkits. The choice of toolkits analyzed has been complicated by the fact that most providers are quite cautious about the details of the technology, typically revealing in-depth information only after a serious business inquiry. The choice was also based on factors such as the implementation approach and compatibility with modular products.
 
-\subsubsection{ThreeKit}
-\subsubsection{Emersyea}
+\subsubsection{Threekit}
+
+Threekit is a leading global company in visual commerce technologies that specializes in 3D product visualizations. The Threekit Platform, which enables clients to configure interactive product experiences according to their needs, functions as an administrative application and has the capability to generate product configurations. (see Figure \ref{fig:threekit-platform}) \cite{ThreeKitAboutUs} \cite{ThreeKitPlatform}
+
+The platform is very complex with many distinct features. At its core, it uses a catalog for storing all product data (the products themselves, materials used, configurable parts, etc.). The items in the catalog can then be loaded into The Treekit Player, which will display the models in 3D, with the option for users to change attributes (models and materials) that are tied to the item. The behavior of the configurator can be set up using item rules and logic that support conditions, queries, and even custom scripts. The platform also offers a data tables feature that is similar to spreadsheets and is designed to handle extensive configuration data and logic. The application also has a built-in asset editor for refining 2D and 3D assets and configuration options. (see Figure \ref{fig:threekit-editor}) Models of the products can be uploaded in many 3D formats. The platform provides API integration with multiple business systems. \cite{ThreeKitPlatformDocumentation}
+
+The offered solution is still partially tailored to the client, which is the reason why the service does not have standardized pricing. Instead, the price is determined through a personalized quote. It is important to note that the analysis of Threekit presented here is based on the publicly available documentation of the platform. Direct access to the full suite of Threekit's tools is typically available only after formalizing a business agreement with the company.
+
 \subsubsection{Roomle}
+
+Roomle is an Austrian company focused on pioneering visual product configuration. They provide solutions for product visualization, room design, and product configurators. Roomle's solution, called Rubens, is the "first Open Full Logic 3D-Configurator". The tool utilizes both parametric and modular mechanisms. The software allows integration with third parties through the use of an API. In addition, it supports front-end technologies on web and mobile platforms and has a built-in AR experience. \cite{RoomleAbout}
+
+A web application, Rubens Admin, is used for setting up the configurator. To add a product which will then be configured by customers, 3D models and materials are uploaded to the admin application. Components are defined using the RoomleScript language, which is loosely based on the JavaScript language. The design of the configurator itself can be tuned in the admin application as well. Multiple language variants can be defined for product names and descriptions. The configurator application (see Figure \ref{fig:roomle}) runs on the client side and can be simply embedded into a website. Additionally, it can utilize a JavaScript library that can subscribe to events or modify the configurator. A framework is also provided to utilize the configurator within an iOS application. The client-side application fetches the configurable products from Google Cloud. \cite{RoomleDocumentation}
+
+In terms of pricing, Roomle's Rubens configurator with the listed capabilities is offered to businesses at a monthly fee of 1450 euros. \cite{RoomleFullLogic}
+
+\section{Proposed solution}
