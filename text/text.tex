@@ -203,13 +203,13 @@ Software requirements can be separated into two categories. Functional requireme
 \subsubsection{Functional requirements}
 
 \begin{enumerate}
-\item \textbf{F1:} \label{itm:F1} 3D visualization
+\item \textbf{F1:}\label{itm:F1} 3D visualization
 \\The configured product should be shown to the user in a 3D perspective, with a changeable point of view. 
 
 \item \textbf{F2:} Product definition
 \\A toolkit operator should be able to simply manage configurable products, including quickly adding, updating, and removing products, and their configurable properties and attributes.
 
-\item \textbf{F3:} \label{itm:F3} Modularity mechanism
+\item \textbf{F3:}\label{itm:F3} Modularity mechanism
 \\The toolkit should incorporate modularity mechanisms that allow users to configure products by adding, removing or modifying components. Components should be capable of having multiple variations and should be defined as either optional or mandatory by the toolkit's operator, thereby enhancing configuration flexibility.
 
 \item \textbf{F4:} Parametric mechanism
@@ -242,10 +242,10 @@ Software requirements can be separated into two categories. Functional requireme
 
 \begin{enumerate}
 
-\item \textbf{NF1:} \label{itm:NF1} Multiplatform compatibility
+\item \textbf{NF1:}\label{itm:NF1} Multiplatform compatibility
 \\The solution should be functional on different operating systems and devices, including desktop and mobile platforms, ensuring wide accessibility.
 
-\item \textbf{NF2:} Responsiveness
+\item \textbf{NF2:}\label{itm:NF2} Responsiveness
 \\The user interface should be responsive, adapting to viewport sizes on different screens, ensuring optimal experience across all supported devices.
 
 \item \textbf{NF7:} Self-hostable
@@ -324,9 +324,11 @@ React is a user interface library created at Facebook in 2011, but soon after be
 React itself is just a user interface library that lacks more sophisticated functionalities, such as routing. There are several frameworks compatible with React, such as Next.js or Gatsby.js, which offer advanced features like caching, routing, server-side rendering, search engine optimization, and more. However, because the dynamic content of this web application is highly influenced by user interactions, the solution would not benefit from these frameworks. \cite{Eze2023} Therefore, the decision was made to maintain simplicity, opting for the utilization of select libraries for advanced features rather than complex frameworks. Prioritizing speed, simplicity, and minimal configuration requirements, Vite.js has been chosen as the build tool and development server. \cite{Said2023}
 
 \subsubsection{CSS framework}
+The development of a product configurator requires custom components. To define the styles of these custom designs, it will be necessary to utilize CSS (Cascading Style Sheets).
 
-%TODO
-TailwindCSS...
+TailwindCSS is a utilitfy-first CSS framework. It enables the creation of custom designs using predefined CSS utility classes, directly applicable in the React markup language, eliminating the necessity of manually writing CSS. It is highly and simply customizable, has comprehensive and illustrative documentation, and makes it easy to create responsive designs. The framework allows for a fast development process, however, it needs to be integrated carefully, as the direct combination of style classes with the rest of the code of the component can make the codebase look very disorganized. \cite{TailwindCSS}
+
+It was chosen for this project as a good balance between a fully custom solution and predefined components, for its ability to accelerate the development process and to help fulfill the requirement \hyperref[itm:NF2]{NF2}.
 
 \subsection{Programming languages}
 
