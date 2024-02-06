@@ -1,0 +1,40 @@
+\chapter{Additional Code Snippets} 
+
+\begin{lstlisting}[caption={~Creating and displaying a 3D red cube with Three.js},label={lst:threejs},captionpos=t,float,abovecaptionskip=-\medskipamount,belowcaptionskip=\medskipamount]
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+const geometry = new THREE.BoxGeometry(5, 5, 5);
+const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+camera.position.set(10, 10, 10);
+camera.lookAt(mesh.position);
+
+renderer.render(scene, camera);
+
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={~Creating a 3D red cube as a React component with R3F},label={lst:r3f},captionpos=t,float,abovecaptionskip=-\medskipamount,belowcaptionskip=\medskipamount]
+const Component = () => {
+    return (
+        <Canvas camera={{position: [10, 10, 10]}}>
+            <mesh>
+                <meshBasicMaterial color="red" />
+                <boxGeometry args={[5, 5, 5]} />
+            </mesh>
+        </Canvas>
+    )
+}
+\end{lstlisting}
