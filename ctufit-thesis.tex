@@ -48,7 +48,7 @@
 \ctufitsupervisor{Ing.\,Jiří Hunka} % replace with name of your supervisor/advisor (include academic degrees)
 \ctufitdepartment{Katedra softwarového inženýrství} % replace with the department of your defence
 \ctufityear{2024} % replace with the year of your defence
-\ctufitdeclarationplace{Praze} % replace with the place where you sign the declaration
+\ctufitdeclarationplace{Prague} % replace with the place where you sign the declaration
 \ctufitdeclarationdate{\today} % replace with the date of signature of the declaration
 \ctufitabstractCZE{Fill in abstract of this thesis in Czech language.}
 \ctufitabstractENG{Fill in abstract of this thesis in English language.}
@@ -99,6 +99,7 @@
 \usepackage{listings} % typesetting of sources
 %\usepackage[newfloat]{minted}\captionsetup[listing]{position=top} % typesetting of sources
 \usepackage{csquotes}
+\usepackage{todonotes}
 
 %theorems, definitions, etc.
 \theoremstyle{plain}
@@ -231,8 +232,11 @@ CSS & Cascading Style Sheets\\
 
 %%%%%%%%%%%%%%%%%%%
 % THE THESIS
-% MODIFY ANYTHING BELOW THIS LINE
 %%%%%%%%%%%%%%%%%%%
+
+\include{text/chapters/0}
+\include{text/chapters/1}
+\include{text/chapters/2}
 
 \include{text/text} % include `text.tex' from `text/' subdirectory
 
@@ -243,6 +247,7 @@ CSS & Cascading Style Sheets\\
 
 \backmatter % do not remove this command
 
+\todo{Add carrier (online) and dates to websites}
 \printbibliography % print out the BibLaTeX-generated bibliography list
 
 \include{text/medium} % include `medium.tex' from `text/' subdirectory

@@ -1,0 +1,89 @@
+\chapter{Design}
+
+\begin{chapterabstract}
+Lorem ipsum dolor sit amet...
+\end{chapterabstract}
+
+
+%---------------------------------------------------------------
+\section{Technologies}
+%---------------------------------------------------------------
+
+Choosing the appropriate technologies is crucial and will have a significant impact on the overall effectiveness and excellence of the developed solution. Selecting technologies requires assessing different technological choices based on all the factors that will enable them to meet the requirements outlined in the preceding chapter. The right technology stack can also decrease the time spent on development, minimize costs, and ensure the solution remains relevant in the future.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Platform}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+In considering the foundation for the modular product configurator, given the multiplatform requirement (\hyperref[itm:NF1]{NF1}), two distinct development approaches were evaluated: applications specifically designed for desktop and mobile platforms and a web application.
+
+Desktop and mobile applications can provide a better overall experience tailored to the specific platform and potentially be more performant as they can utilize the hardware better, however, in this case, they come with serious drawbacks. Having multiple applications that are designed for different devices would increase the amount of maintenance and development work required because each version would need to be managed (at least partially) separately. Furthermore, accessibility for users would be dramatically diminished since they would need to download and install the application prior to utilizing it and subsequently manage any updates that may arise.
+
+Developing separate desktop and mobile applications presents such significant challenges that the disadvantages far outweigh the advantages; therefore, a web application was selected for its better alignment with the project's requirements (this is also consistent with the norm in this space, as the majority of existing solutions that were analyzed in the previous chapter are web-based). There are also several key factors in favor of this solution: it can be accessed from any device with an internet connection and web browser, it is cost-effective as it possibly utilizes existing website infrastructure, and it has streamlined maintenance needs. The application will be client-side and focused on the front-end, as that is where the configuration process will be happening.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{3D visualization technology}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+To fulfill the requirement of 3D visualization (\hyperref[itm:F1]{F1}), a library will have to be used that will allow 3D graphics to be rendered in the browser. However, the range of options for this particular technology is quite restricted.
+
+Historically, the integration of 3D graphics required the use of external plugins, primarily Adobe Flash Player. The evolution of web standards, particularly the introduction of HTML5, has revolutionized this aspect, and it is now possible to render 3D graphics directly in the browser, eliminating the necessity for any plugin. \cite{Parisi2014}
+
+WebGL (Web Graphics Library) is a standard 3D graphics API for web browsers. It is based on OpenGL ES and can be used inside the HTML canvas element. WebGL is supported in all major desktop and mobile browsers. \footnote{WebGL browser support details: \url{https://caniuse.com/webgl}} It is utilized using C-like shading language (OpenGL Shading Language) and JavaScript. \cite{Parisi2012}
+
+Currently, there are no significant alternatives to WebGL. WebGPU aims to be a successor to WebGL, however, at the time of writing\footnote{February 2024} it is in a state of ongoing development and is not yet finalized or supported in web browsers.\footnote{WebGPU browser support details: \url{https://caniuse.com/webgpu}} \cite{WebGPU}
+
+
+%______________________________________________________________
+\subsubsection{WebGL framework}
+\label{section:WebGL}
+Direct WebGL programming is very powerful and offers fine-grain control, necessitating extensive code to be written in both JavaScript and its shader language. Fortunately, there are several frameworks that are built on top of WebGL and provide high-level abstractions and access. These frameworks can significantly reduce the amount of code required to achieve what would otherwise take hundreds of lines when using bare WebGL, often condensing it into just a few lines. \cite{Parisi2014}
+
+Three.js was selected from a range of frameworks, including Babylon.js and PixiJS, that are designed to streamline the process of developing in WebGL. This decision was made after considering several important factors.
+Three.js is considered an undisputed leader in this category, having the biggest community support, which can be evidenced by its popularity and the volume of contributions on GitHub.\footnote{Three.js GitHub: \url{https://github.com/mrdoob/three.js}} It is also open source, published under the MIT license, offering great freedom in development and distribution. Furthermore, Three.js uses the best practices of 3D graphics; it is lightweight, easy to use, cross-platform, and contains many prebuilt assets. \cite{Parisi2014} \cite{ThreeJs} \cite{BabylonJs} \cite{PixiJS}
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Front-end framework}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Leveraging front-end frameworks significantly enhances the development of web applications by addressing common front-end challenges. These frameworks often provide a structured approach for creating maintainable and reusable components, optimizing data manipulations, employing common design patterns, and ensuring that the user interface remains in sync with the underlying state. Various frameworks and libraries are available, such as React, Vue.js, or Angular, each with different benefits and drawbacks. The choice of which framework to use often involves complex decision making, influenced by specific project needs, team skills, and the unique characteristics of each framework. \cite{Gimeno2018} \cite{Pekarsky2020}
+
+For this solution, the decision has been greatly influenced by the selection of \hyperref[section:WebGL]{WebGL framework}, Three.js. The React Three Fiber (R3F) library offers a seamless integration of Three.js into the React ecosystem. R3F is a React renderer, enabling the direct use of Three.js components as React components. The integration is optimized, with the Three.js components rendered outside React's rendering process, therefore, having minimal overhead. Moreover, it is comprehensive, meaning that all Three.js features are exposed and accessible using this library. \cite{R3F}
+
+In addition, the Drei library, built on top of R3F, introduces a collection of useful components, abstractions, and helpers. These additions streamline the development with Three.js and React even more. \cite{Drei}
+
+These libraries make React an attractive choice for this project. To see how the code differs when aiming to achieve similar objectives, refer to Code Listing \ref{lst:threejs} for the plain Three.js version and Code Listing \ref{lst:r3f} for the R3F version, both creating a simple 3D red cube.
+
+React is a user interface library created at Facebook in 2011, but soon after became open source. React has gained widespread acclaim across many projects and has been continually developed since its inception. It emphasizes component-based architecture, where reactive components are written in JavaScript (or TypeScript) combined with HTML-like markup code, facilitating the creation of dynamic user interfaces. \cite{Banks2020}
+
+React itself is just a user interface library that lacks more sophisticated functionalities, such as routing. There are several frameworks compatible with React, such as Next.js or Gatsby.js, which offer advanced features like caching, routing, server-side rendering, search engine optimization, and more. However, because the dynamic content of this web application is highly influenced by user interactions, the solution would not benefit from these frameworks. \cite{Eze2023} Therefore, the decision was made to maintain simplicity, opting for the utilization of select libraries for advanced features rather than complex frameworks. Prioritizing speed, simplicity, and minimal configuration requirements, Vite.js has been chosen as the build tool and development server. \cite{Said2023}
+
+
+%______________________________________________________________
+\subsubsection{CSS framework}
+The development of a product configurator requires custom components. To define the styles of these custom designs, it will be necessary to utilize CSS (Cascading Style Sheets).
+
+TailwindCSS is a utilitfy-first CSS framework. It enables the creation of custom designs using predefined CSS utility classes, directly applicable in the React markup language, eliminating the necessity of manually writing CSS. It is highly and simply customizable, has comprehensive and illustrative documentation, and makes it easy to create responsive designs. The framework allows for a fast development process, however, it needs to be integrated carefully, as the direct combination of style classes with the rest of the code of the component can make the codebase look very disorganized. \cite{TailwindCSS}
+
+It was chosen for this project as a good balance between a fully custom solution and predefined components, for its ability to accelerate the development process and to help fulfill the requirement \hyperref[itm:NF2]{NF2}.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Programming languages}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+The selection of programming language is predetermined by the already chosen technologies and libraries, necessitating the use of React markup and JavaScript in some form.
+
+Fortunately, with Vite.js's ability to transpile TypeScript to JavaScript, and given that type declarations are exported from the chosen JavaScript libraries, TypeScript can also be used. \cite{Said2023}
+
+TypeScript is a programming language created by Microsoft that extends JavaScript by implementing strong typing. Strong typing helps detect bugs during development, reduce runtime errors, and improve overall code quality. It also allows for tighter integration with code editors, enabling features such as autocompletion or inline documentation. All code written in TypeScript is transpilable to JavaScript, which means that it is compatible with existing libraries and frameworks. \cite{TypeScript}
+
+Given these advantages, TypeScript will be used in this project in place of JavaScript, ensuring a maintainable, high-quality codebase.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Development tooling}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

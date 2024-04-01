@@ -1,0 +1,240 @@
+\chapter{Analysis}
+
+\begin{chapterabstract}
+A comprehensive evaluation of existing solutions, identifying key features and limitations. Outlining the specifications for the proposed solution.
+\end{chapterabstract}
+
+Product configurators can be implemented in various ways, and the design of the tool itself determines the types of products that can be designed using the tool later on. The number of different unique configurations of a product that the tool can create is called the solution space. The size of the solution space is determined by two factors: the number of customizable attributes and the achievable values of each attribute. \cite{Huiwen2018} A relevant study examines the solution spaces of these toolkits and proposes an evaluation model that enables the categorization and assessment of various implementation approaches. Based on the target outcome and the guidance provided by the tool, the following mechanisms are specified: \cite{Hermans2012}
+
+\begin{definition}[Veneer]
+Customization by adding a visual decorative layer. (e.g. printing, engraving, etching)
+\end{definition}
+\begin{definition}[Modularity]
+Customization by combining modules or components.
+\end{definition}
+\begin{definition}[Parametric]
+Customization by changing the parameter values of parts.
+\end{definition}
+\begin{definition}[Generative]
+Customization using code and scripting to synthesize the final form of the product.
+\end{definition}
+
+The main focus of this thesis is on toolkits that primarily employ modularity mechanisms, however, there are often some common characteristics among configuration tools with different mechanisms.
+
+
+%---------------------------------------------------------------
+\section{Existing solutions}
+%---------------------------------------------------------------
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Applications of product configurators}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Currently, many companies are integrating product configurators into their sales strategies across multiple industries such as automotive, fashion, furniture, housing, and others. These configurators serve as either the main or supplementary sales tools for these businesses.
+
+The Configurator Database Project by cyLEDGE MEDIA aims to catalog these web-based configuration tools. In the 2017/2018 report, they tracked 1250 deployments of these tools; however, the true count will be significantly higher since the database only includes the most frequently visited applications. \cite{cyLEDGE2018}
+
+An analysis of the 100 most viewed configurators from May 2020 to May 2021 in the Configurator Database Project was performed in a study that examined the shared characteristics of these configurations. The results of some of the relevant characteristics and design choices that the study has analyzed are presented in this section: \cite{Blazek2023}
+\begin{itemize}
+    \item \textbf{Responsive design}: 75.3\% of examined tools had responsive design (the design adapted to the viewport of the device) 
+    \item \textbf{Navigation}: 17.5\% of configurators had linear predefined navigation (meaning the configuration had to follow a specified sequence), whereas the majority of tools (82.5\%) had open navigation (user has the flexibility to configure the product in any order)
+    \item \textbf{Visualization} 79.4\% of tools utilized photorealistic visualization (as opposed to illustrations or no visualization), however, the study acknowledges that there were significant variations based on the industries in which the configurator is utilized
+    \item \textbf{Data transfer} The mean network data size transferred for 3D configurator was 35.6~MB
+    \item \textbf{Configuration options} 60.8\% of configurators offered more than ten customizable attributes
+    \item \textbf{Purchase capability} Given that car brands typically do not directly sell their cars online, it is logical to exclude them from the analysis of this particular characteristic. With the exclusion of vehicle configurators, 70.5\% of the configurators could complete an online purchase of the configured product
+    \item \textbf{Price calculation} 56.7\% of the configurators were able to instantly reflect the changes made to the configuration in the displayed price
+\end{itemize}
+
+Another article also used the same database of configurators to analyze common design elements. They identified several key designs that were prevalent in the majority of configurators analyzed. The following key insights of common, recommended designs from the article are relevant to this thesis: \cite{Leitner2014}
+\begin{itemize}
+    \item At the end of the configuration process, a summary of selected options is presented
+    \item To present the products that can be configured, images that are large enough to see details are used
+    \item If the configurator has linear predefined navigation, the navigation information is presented on a horizontal plane
+    \item Navigation bar is visible
+    \item Price and order button is clearly visible and available for completion purposes
+    \item Prices of the components are accessible in all phases of the configuration
+    \item Logo is displayed prominently
+\end{itemize}
+
+As part of the analysis chapter of this thesis, it is essential to examine actual 3D~configurator applications. Due to the large number of existing applications, it is not within the scope of this work to perform an exhaustive analysis. Instead, this section will focus on a select group of three applications. These have been selected based on a combination of factors such as their popularity, functionality, and importance in the context of a modular product configuration. This selection is intended to provide insightful examples that highlight different approaches, rather than being representative of the entire domain.
+
+
+%______________________________________________________________
+\subsubsection{IKEA PAX Planner Tool}
+
+IKEA is a widely recognized global home furnishings retailer specializing in affordable furniture. \cite{StatistaIkea}
+
+IKEA offers the PAX wardrobe, which is an easily configurable fitted wardrobe, for which they not only sell predefined configurations but also allow customers to modularly choose the ideal size, doors, knobs, handles, interior organization, and lightning.
+
+To accomplish this, they utilize the PAX planner web tool (3D configurator). \footnote{Available at: \url{https://www.ikea.com/addon-app/storageone/pax/web/latest/cz/en/}} 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/analysis_ikea-pax.png}
+\caption{Screenshot of IKEA PAX Planner Tool with example configuration}
+\end{figure}
+
+The configurator has open navigation and consists mainly of two views. At the beginning of the process, the application prompts the user to select the starting point of the configuration. The main larger view provides a 3D view of the current configuration, allowing users to observe objects from different viewpoints by moving along an orbital trajectory around them. All options that can be chosen and added to the current configuration are found in the secondary window. Users can interact with elements in the 3D view. The layout of components can be adjusted in this way, and the selection of a component provides users with additional information and real-life images of the selected item.
+The page is responsive, and the secondary window moves from the right side to a bottom sliding panel on mobile devices.
+The tool performs live price calculations and contains a final summary confirmation screen with the option to order the configured product. The configurator is a single-page application (SPA is a web application implementation approach that loads only a single page and then sequentially updates the content of the page with scripting on the client side, rather than loading whole new pages from the server \cite{Fink2014}) and does not update the URL based on the selected product or phase of the configuration.
+
+The configurator provides a range of creative features, such as the ability to change the visibility of some elements using a button (hiding the doors of a wardrobe to reveal the contents inside), the ability to display dimensions directly in the 3D view, undo and redo buttons, as well as the ability to save the configuration, which can be later loaded using generated code.
+
+
+%______________________________________________________________
+\subsubsection{Muuto Product Planner}
+
+Muuto is a Scandinavian design company that produces furniture and home accessories. \cite{Muuto}
+
+The company provides the Product Planner (3D web-based configurator), which allows customers to customize and combine the designs of various products, such as storage systems, sofas, tables, or wall hangers, tailored to their specific needs. \footnote{Available at: \url{https://planner.muuto.com/}}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/analysis_muuto-product-planner.png}
+\caption{Screenshot of Muuto Product Planner tool with example configuration}
+\end{figure}
+
+The design of the configurator is similar to that in the previous case. The configurator also consists of two views and has open navigation. The primary views provide full 3D visualization, while the secondary views on the right side allow users to add components. On smaller devices, this secondary view transforms into a bottom slide panel, as the design is also responsive. The application follows a similar flow, starting with the selection of the starting point and then moving into the configurator. Live price calculation is also performed, and there is a summary page, but it is not possible to order the product, instead, the user is redirected to a physical store locator. In addition, there is also the possibility to display real dimensions and save the setup with distinct generated code, and the undo button allows one to revert previous actions.
+
+In addition, the tool also has inventive functionalities. The designed configuration can be quickly shared with other users using email, or it can be downloaded, in several file formats containing the 3D model itself. The application allows to view the product in AR, directly in a web browser, albeit only on Apple devices using the Universal Scene Description (USDZ) format and AR~Quick Look. \cite{Jackson2018}
+The application has multiple URL schemes that depend on the configuration phase, but they are not determined by the current product. 
+
+Due to the wide variety of products that it supports, the configurator is not restricted to generating configurations that are feasible to produce and can create impossible configurations.
+
+
+%______________________________________________________________
+\subsubsection{LD Seating Nido configurator}
+
+LD Seating is a company based in the Czech Republic that specializes in the production of chairs, armchairs, and sofas. \cite{LDSeating}
+
+The company uses a 3D web-based configurator to market the Nido modular seating system, which consists of elements that are designed to be combined in various ways. \footnote{Available at: \url{https://nido.ldseating.com/en/configurator}}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{images/analysis_nido-configurator.png}
+\caption{Screenshot of LD Seating Nido configurator with example configuration}
+\end{figure}
+
+The primary view of the configurator displays the 3D models of the components, and the flow of the application as well includes selecting a starting point, the product configuration itself, and a summary with confirmation. The controls for adding components and changing properties are integrated within the 3D scene itself. When user input is needed, a panel is opened on the right. The application is partially responsive, as the side panel does open in fullscreen on smaller viewports, however, there are some issues with image and text overflows on mobile devices. In this case, the configurator does not calculate the price and cannot directly place an order for the product but instead sends an inquiry for the configuration, and pressing the configuration confirmation results in displaying an inquiry form.
+
+The tool has the ability to display dimensions, and the user can download the resulting configuration as a file that contains the 3D model. The configurator provides the option to save the configuration, and although it operates as a SPA, the saved configuration is then accessible at a specific URL containing the unique identification of the configuration. This feature also enables a version history mechanism.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Available toolkits}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+In this section of the analysis chapter, the focus shifts from specific 3D configurator applications to the fundamental toolkits that power the configurators. While many configurators are bespoke, tailored to the specific needs of individual companies and their products, sometimes even developed directly by the companies offering the products, there are providers offering more generic, adaptable solutions. These offerings are also highly relevant to this thesis, as the objective of this thesis is to create a product-agnostic toolkit, which means that there is a need to consider the way the configurator is set up by the business.
+
+A variety of providers offer these toolkits for product configurators, intending to provide semi-custom or fully custom solutions, as well as generic options. To carry out a focused and relevant analysis, this section will examine two particular toolkits. The choice of toolkits analyzed has been complicated by the fact that most providers are quite cautious about the details of the technology, typically revealing in-depth information only after a serious business inquiry. The choice was also based on factors such as the implementation approach and compatibility with modular products.
+
+
+%______________________________________________________________
+\subsubsection{Threekit}
+
+Threekit is a leading global company in visual commerce technologies that specializes in 3D product visualizations. The Threekit Platform, which enables clients to configure interactive product experiences according to their needs, functions as an administrative application and has the capability to generate product configurations. (see Figure \ref{fig:threekit-platform}) \cite{ThreeKitAboutUs} \cite{ThreeKitPlatform}
+
+The platform is very complex with many distinct features. At its core, it uses a catalog for storing all product data (the products themselves, materials used, configurable parts, etc.). The items in the catalog can then be loaded into The Treekit Player, which will display the models in 3D, with the option for users to change attributes (models and materials) that are tied to the item. The behavior of the configurator can be set up using item rules and logic that support conditions, queries, and even custom scripts. The platform also offers a data tables feature that is similar to spreadsheets and is designed to handle extensive configuration data and logic. The application also has a built-in asset editor for refining 2D and 3D assets and configuration options. (see Figure \ref{fig:threekit-editor}) Models of the products can be uploaded in many 3D formats. The platform provides API integration with multiple business systems. \cite{ThreeKitPlatformDocumentation}
+
+The offered solution is still partially tailored to the client, which is the reason why the service does not have standardized pricing. Instead, the price is determined through a personalized quote. It is important to note that the analysis of Threekit presented here is based on the publicly available documentation of the platform. Direct access to the full suite of Threekit's tools is typically available only after formalizing a business agreement with the company.
+
+
+%______________________________________________________________
+\subsubsection{Roomle}
+
+Roomle is an Austrian company focused on pioneering visual product configuration. They provide solutions for product visualization, room design, and product configurators. Roomle's solution, called Rubens, is the "first Open Full Logic 3D-Configurator". The tool utilizes both parametric and modular mechanisms. The software allows integration with third parties through the use of an API. In addition, it supports front-end technologies on web and mobile platforms and has a built-in AR experience. \cite{RoomleAbout}
+
+A web application, Rubens Admin, is used for setting up the configurator. To add a product which will then be configured by customers, 3D models and materials are uploaded to the admin application. Components are defined using the RoomleScript language, which is loosely based on the JavaScript language. The design of the configurator itself can be tuned in the admin application as well. Multiple language variants can be defined for product names and descriptions. The configurator application (see Figure \ref{fig:roomle}) runs on the client side and can be simply embedded into a website. Additionally, it can utilize a JavaScript library that can subscribe to events or modify the configurator. A framework is also provided to utilize the configurator within an iOS application. The client-side application fetches the configurable products from Google Cloud. \cite{RoomleDocumentation}
+
+In terms of pricing, Roomle's Rubens configurator with the listed capabilities is offered to businesses at a monthly fee of €1450. \cite{RoomleFullLogic}
+
+\todo{Expand on focused properties and add summary}
+
+
+%---------------------------------------------------------------
+\section{Proposed solution}
+%---------------------------------------------------------------
+
+This thesis aims to develop a new solution for the configuration of modular products. To do so, the proposed solution will incorporate the common characteristics identified in the platforms analyzed previously. The main differentiation factor of this proposed toolkit is its emphasis on catering to small businesses. As the existing toolkits that were examined were costly and mainly aimed at larger companies, this solution aims to fill this market gap. Therefore, the proposed toolkit will prioritize simplicity and cost-effectiveness, following the best practices seen in larger-scale solutions but with a specific focus on the needs and capabilities of the target market.
+The proposed toolkit is envisioned to be universal with regards to products, adaptable, and customizable, catering to a wide variety of modular products and industries. The solution should be straightforward for businesses to deploy and manage, without the need for extensive technical resources, ensuring that it is straightforward for smaller businesses to maintain and operate effectively.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Requirements}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Following the overview of objectives and the definition of the target market, it is necessary to formulate precise requirements for this solution. Detailing these features and characteristics is crucial for successful implementation. Thus, the description of requirements engineering for this solution will be provided here.
+
+The process of requirements engineering for software products involves gathering, analyzing, selecting, and managing requirements. It focuses on interpreting and understanding the goals, needs, and beliefs of stakeholders and transforming them into specific requirements.
+Software requirements can be separated into two categories. Functional requirements are those that describe what the system should be able to do. Non-functional requirements are not concerned with the specific functionality of the system, but instead put constraints on the solution that meets the functional requirements (they are often, among others, focused on performance, security, accessibility, and compatibility). \cite{Aurum2005}
+
+\todo{Use FURPS or similar system}
+
+
+%______________________________________________________________
+\subsubsection{Functional requirements}
+
+\begin{enumerate}
+\item \textbf{F1:}\label{itm:F1} 3D visualization
+\\The configured product should be shown to the user in a 3D perspective, with a changeable point of view. 
+
+\item \textbf{F2:} Product definition
+\\A toolkit operator should be able to simply manage configurable products, including quickly adding, updating, and removing products, and their configurable properties and attributes.
+
+\item \textbf{F3:}\label{itm:F3} Modularity mechanism
+\\The toolkit should incorporate modularity mechanisms that allow users to configure products by adding, removing or modifying components. Components should be capable of having multiple variations and should be defined as either optional or mandatory by the toolkit's operator, thereby enhancing configuration flexibility.
+
+\item \textbf{F4:} Parametric mechanism
+\\Parametric mechanisms should be incorporated as a complement to the modularity mechanisms (\hyperref[itm:F3]{F3}). Users should be able to configure parametric values for components and products. The possible ranges and values of parametric attributes should be predefined by the toolkit operator.
+
+\item \textbf{F5:} Material color customization
+\\Users should be able to change the appearance of components and products by selecting from a palette of materials and colors predefined by the toolkit's operator. The chosen appearance should be reflected in the visualization of the configuration (\hyperref[itm:F1]{F1}).
+
+\item \textbf{F6:} Live price calculation
+\\If the configured attributes have prices predefined by the toolkit's operator, the configurator should automatically update and display the price of the customized product with every change made.
+
+\item \textbf{F7:} Order completion
+\\The tool should facilitate the transition from product configuration to order placement. Upon confirmation of the configuration, the tool should be able to send an inquiry, call an API, or redirect the user elsewhere.
+
+\item \textbf{F8:} Configuration saving
+\\Users should have the ability to save the current configuration in a manner that allows them to modify or revise it at a later time.
+
+\item \textbf{F9:} Interface design customization
+\\The interface of the configurator should be customizable by the toolkit's operator, to align with the branding and design of the business using the toolkit.
+
+\item \textbf{F10:} Interface text customization
+\\The toolkit should provide a way for the operator to change the textual elements of the configurator's interface, ensuring that all interface elements are tailored to their needs and reflect the business's terminology and branding.
+
+\todo{Make requirements more detailed}
+
+% F11: AR
+% F12: undo button
+
+\end{enumerate}
+
+
+%______________________________________________________________
+\subsubsection{Non-functional requirements}
+
+\begin{enumerate}
+
+\item \textbf{NF1:}\label{itm:NF1} Multiplatform compatibility
+\\The solution should be functional on different operating systems and devices, including desktop and mobile platforms, ensuring wide accessibility.
+
+\item \textbf{NF2:}\label{itm:NF2} Responsiveness
+\\The user interface should be responsive, adapting to viewport sizes on different screens, ensuring optimal experience across all supported devices.
+
+\item \textbf{NF7:} Self-hostable
+\\The toolkit should be designed with the intent of being deployed and hosted on a business's preferred infrastructure, allowing for greater control over the data and flexibility for possible modifications. 
+
+\item \textbf{NF4:} Infrastructure requirements
+\\The toolkit is intended to ideally operate on the existing infrastructure of the business, leveraging the resources already possibly used to offer the products. The configurator should function on the client side, with minimal needs for a back-end server (utilizing a universal serverless architecture if needed). This approach reduces the demand for maintenance and is cost-effective, enhancing existing operations without necessitating significant new investments in infrastructure.
+
+\item \textbf{NF5:} Maintainability
+\\The codebase and architecture should be designed to facilitate easy modifications, updates, and enhancements. Industry standards should be adhered to during implementation, including comprehensive and clear documentation. The tool should require minimal routine maintenance by the operator.
+
+\item \textbf{NF6:} Performance
+\\The configurator should be developed with optimal performance under typical usage load, with swift loading and quick response times across all compatible devices, particularly those with lower processing power. Performance metrics should be defined and achieved.
+
+%NF7: security
+
+\end{enumerate}
