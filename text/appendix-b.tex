@@ -1,6 +1,6 @@
 \chapter{Additional code snippets} 
 
-\begin{lstlisting}[caption={~Creating and displaying a 3D red cube with Three.js},label={lst:threejs},captionpos=t,float,abovecaptionskip=-\medskipamount,belowcaptionskip=\medskipamount]
+\begin{lstlisting}[caption={~Creating and displaying a 3D red cube with Three.js},label={lst:threejs},captionpos=b,float,abovecaptionskip=\medskipamount,belowcaptionskip=\medskipamount]
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -26,7 +26,7 @@ renderer.render(scene, camera);
 \end{lstlisting}
 
 
-\begin{lstlisting}[caption={~Creating a 3D red cube as a React component with R3F},label={lst:r3f},captionpos=t,float,abovecaptionskip=-\medskipamount,belowcaptionskip=\medskipamount]
+\begin{lstlisting}[caption={~Creating a 3D red cube as a React component with R3F},label={lst:r3f},captionpos=b,float,abovecaptionskip=\medskipamount,belowcaptionskip=\medskipamount]
 const Component = () => {
     return (
         <Canvas camera={{position: [10, 10, 10]}}>
