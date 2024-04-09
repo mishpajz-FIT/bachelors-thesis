@@ -100,6 +100,18 @@ To improve the application's user experience with navigable URLs, allowing redir
 
 To address the requirement of user interface text customization (\hyperref[itm:F15]{F15}) and multilingual support (\hyperref[itm:NF8]{NF8}), an internationalization and localization library is essential. Such a library enables the dynamic sourcing of user-interface texts from separate files according to the application's current settings. Consequently, on the basis of the extensive set of features and extensions offered, the i18next internationalization framework was chosen for this project. \cite{Krukowski2023}
 
+%______________________________________________________________
+\subsubsection{State management}
+
+State management is a critical element of React applications that links the internal state directly to the user interface. Although React offers a basic mechanism by default, complex applications highly profit from a sophisticated state management library that manages state updates and interface redraws in a comprehensive manner. \cite{Ceddia2021}
+
+Although there are numerous different state management libraries, each with its advantages and disadvantages (such as Zustand, Redux, MobX, etc.), for this project, Valtio has been chosen. Valtio stands out for its extremely minimalistic API, while being very flexible with data structures. It uses proxies and allows direct mutations, making the handling of state as intuitive as working with regular JavaScript (or TypeScript) objects. This makes Valtio highly beneficial for this application, as it will simplify mapping the changing state to 3D objects, which will be necessary to fulfill the 3D preview requirement \hyperref[itm:F1]{F1}). \cite{Adepoju2023}
+
+%______________________________________________________________
+\subsubsection{Validation}
+
+To guarantee the integrity and structure of the loaded data, together with values that adhere to specified constraints, validation is crucial. Validation libraries have been designed for this purpose, and in this project, Zod has been chosen as the data validation library. Zod allows the inference of TypeScript types directly from the created data schemas, meaning a single schema definition can be used for parsing as well as type checking. Furthermore, Zod's is also very lightweight, and its powerful yet straitforward API for schema definition makes it an excellent choice for this task. \cite{Bhimani2023}
+
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Development tooling}
@@ -136,3 +148,89 @@ Prettier will automatically format the code to meet style guidelines, making it 
 %---------------------------------------------------------------
 \section{Domain model}
 %---------------------------------------------------------------
+
+Before implementation, an important part of the design process is the description of the domain model. This outlines the concepts with which the tool will work and defines the entities' interactions, establishing an important context that serves as a foundation for building the toolkit. A Unified Modeling Language (UML) diagram can easily represent the domain model. \cite{Wlaschin2018}
+
+The UML diagram that illustrates the domain model of the entities related to the proposed toolkit is presented in Figure \ref{fig:domain-model}. This model serves as a blueprint for the architecture of the system, outlining a coherent structure that aligns with the project objectives described in the previous chapters. 
+
+\begin{landscape}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{images/uml_domainmodel.png}
+\caption{Domain model as UML diagram}
+\label{fig:domain-model}
+\end{figure}
+\end{landscape}
+
+The model domain presents a structure of product and component specifications contained in a catalog, the dependencies between different entities, and illustrates the progression from generic specifications to concrete user configurations. This model aims to offer a clearer insight into the design rationale behind the tool, highlighting the transition from abstract specifications to customized user-driven outcomes.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Catalog}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+The catalog forms the backbone of our toolkit and defines the blueprint for customizable products. The catalog encompasses a variety of product specifications, each defining a configurable product along with all its potential customizations. This section delves into how these specifications lay the foundation for user-driven product configuration.
+The entities discussed in this section are as follows:
+\begin{itemize}
+    \item Catalog
+    \item Product Specification
+    \item Component Specification
+    \item Model
+    \item Mounting Point Specification
+    \item Material Specification
+    \item Color Specification
+    \item Administrator
+\end{itemize}
+
+A product specification acts as an overreaching comprehensive concept that encompasses all aspects of a given product. The entity may incorporate an action to finalize the configuration of the product, fulfilling the need for confirmation of the configuration (see requirement \hyperref[itm:F10]{F10}). Given that the tool focuses on the handling of modular products (see requirement \hyperref[itm:F3]{F3}), it is imperative that each product consists of various components. Therefore, the product specification is made up of component specifications, which represent all the various possible components that the product can have.
+
+To meet the requirement of 3D visualization (see requirement \hyperref[itm:F3]{F3}), component specifications must be linked to a model featuring 3D meshes. This model acts as a representation of the component that will be presented to the user during the configuration process. In addition to this, the component specification is composed of material specifications and mounting point specifications.
+
+Material specifications are needed with respect to the requirement of material color configuration (see requirement \hyperref[itm:F8]{F8}). They describe the materials of a given component that the user can customize, with each material specification providing mesh information specifying which part of the component this material influences, thereby enabling preview updates as the user makes selections. In addition, the material specification consists of color specifications that define the possible colors this material can take on in the configuration process.
+
+Mounting point specifications are introduced to address the requirement of fixed point component placement (see requirement \hyperref[itm:F6]{F6}). They represent points on a component to which other modular components can be attached. The specifications of mounting point include the relative position and rotation of the point, the requirement for a component's presence at this point, and possible specifications of components that can be mounted on the point.
+
+All these specifications are maintained in the catalog by the application administrator, who has the authority to modify any properties. The tool then utilizes these specifications to enable the configuration of tangible products.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Configuration}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Transitioning from potential to actual, the configuration section delves into how users bring customizable products to life through the toolkit.
+It illustrates how configured components are the building blocks of user-generated configurations, embodying the transformation from a generic template into a product uniquely tailored to individual preferences.
+The entities covered in this section include:
+\begin{itemize}
+    \item Configuration
+    \item Configured Component
+    \item User
+\end{itemize}
+
+Users of the application create configurations. The cornerstone of a configuration lies in its configured components. The specifications described in the previous section serve as templates for these configured components. While the specifications outline all the configuration options, a configured component indicates a particular option selected by the user. Beyond the base component specification, a configured component also stores the mounting point to which it is attached, as well as the selected colors of its materials. Thus, a configuration is composed entirely of these individually configured components.
+
+
+%---------------------------------------------------------------
+\section{User interface}
+%---------------------------------------------------------------
+
+The design of the user interface plays an essential part in the development of such a tool because it significantly influences user satisfaction when interacting with the tool. Good preparation of user interface design helps to determine the direction and streamline the implementation, as well as making clear from the beginning how to deal with factors such as responsiveness (see requirement \hyperref[itm:NF2]{NF2})
+
+In this section, low-fidelity wireframes are used to depict the proposed user interface, highlighting the layout and architecture of the application. This approach captures the most important information at this stage, leaving the finer details to be refined as part of the implementation phase.
+
+The configurator as an application is specific in that it primarily centers around the configuration process, with this interface being the most important and all other interfaces being secondary. In this section, the design of this configuration screen will be introduced, as well as the introductory and confirmation screens.
+
+The design is based on the analysis of existing solutions and respects the design principles of similar solutions that are most intuitive and the users may already feel familiar with.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Configuration screen}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Introduction screen}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Confirmation screen}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
