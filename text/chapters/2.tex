@@ -1,7 +1,7 @@
 \chapter{Design}
 
 \begin{chapterabstract}
-Lorem ipsum dolor sit amet...
+Selection of used technologies, establishment of the domain model, and initial design of the user interface layout.
 \end{chapterabstract}
 
 
@@ -217,20 +217,89 @@ The design of the user interface plays an essential part in the development of s
 
 In this section, low-fidelity wireframes are used to depict the proposed user interface, highlighting the layout and architecture of the application. This approach captures the most important information at this stage, leaving the finer details to be refined as part of the implementation phase.
 
-The configurator as an application is specific in that it primarily centers around the configuration process, with this interface being the most important and all other interfaces being secondary. In this section, the design of this configuration screen will be introduced, as well as the introductory and confirmation screens.
-
 The design is based on the analysis of existing solutions and respects the design principles of similar solutions that are most intuitive and the users may already feel familiar with.
 
+The configurator as an application is specific in that it primarily centers around the configuration process, with this interface being the most important and all other interfaces being secondary. In this section, the design of this configuration screen will be introduced, as well as the introductory and confirmation screens.
+
+The common element of all screens is the top bar with the logo of the business that operates the configurator, which should redirect the user to the main website of the company when clicked. All of this should be customizable in the admin settings of the application.
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Configuration screen}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+The configuration screen is presented to the user during the configuration process. The screen is dominated by the 3D preview of the configured product, featuring interactable components and spatial buttons for the addition of components into the configuration. Control buttons are placed in the upper left corner within the 3D preview, symbolizing their direct relation to the preview, yet maintaining their distinctiveness as a separate element. At the bottom of the screen, there is another bar, this one containing buttons that allow users to go back or to finalize the configuration. The wireframe of the configuration screen in its default state is shown in Figure \ref{fig:wireframe-configuration}, where the 3D preview of the product is represented by a blueish cube.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{images/wireframe_configuration_default.png}
+\caption{Wireframe of configuration screen}
+\label{fig:wireframe-configuration}
+\end{figure}
+
+This default view, as outlined in the previous paragraph, maximizes the viewport with the most important presentation, which is the 3D preview of the product. However, at some stages of the configuration process, it is also necessary to present the user with further information. Therefore, upon selecting a component within the 3D preview, the component should become highlighted and, following the approach of existing solutions analyzed, a side panel with detailed information about the selected component will emerge from the right. If necessary, another panel with further options presented to the user may appear at the bottom. This design strategy maximizes the screen space for the important elements while still being flexible enough to present additional information in a streamlined way. The wireframe of the interface with panels that contain additional information and options presented is shown in Figure \ref{fig:wireframe-configuration-panels}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{images/wireframe_configuration_panels.png}
+\caption{Wireframe of configuration screen with panels}
+\label{fig:wireframe-configuration-panels}
+\end{figure}
+
+To ensure responsiveness, a mobile version of the interface should also be outlined. The prioritization of the 3D preview in the default state makes this simple, as this just means that on smaller viewports the elements are presented in the same way, with the preview being in different aspect ratio, which is easily compensated by the 3D preview taking on different zoom level. The outline of this wireframe is presented in Figure \ref{fig:wireframe-configuration-mobile}.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/wireframe_configuration_mobile_default.png}
+        \caption{Wireframe of mobile configuration screen}
+        \label{fig:wireframe-configuration-mobile}
+    \end{minipage}\hfill
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/wireframe_configuration_mobile_panels.png}
+        \caption{Wireframe of mobile configuration screen with panels}
+        \label{fig:wireframe-configuration-panel-mobile}
+    \end{minipage}
+\end{figure}
+
+The wireframe for the mobile version of the interface with the presented detail side panel is shown in Figure \ref{fig:wireframe-configuration-panel-mobile}. At this reduced viewport size, the side panel can maintain the same internal layout but to be usable it needs to occupy the whole 3D preview. This will need to be kept in mind when utilizing interactions with the 3D preview, as it may not always be fully visible when the panels are active. 
+
+The design remains mostly consistent on both small and large viewports, while still being adaptive and responsive. This ensures that the familiarity with the tool is maintained for all viewport sizes.
+
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Introduction screen}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+The introduction screen is the first screen presented to the user when launching the application. It offers a simple way of selecting the configurable product from the catalog, with image and name of the product presented on a large tile. The selection of the product takes the user to the configuration process. Mobile interface of this screen mirrors the large version. The wireframe of the design can be seen in Figure \ref{fig:wireframe-introduction}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{images/wireframe_introduction_default.png}
+\caption{Wireframe of introduction screen}
+\label{fig:wireframe-introduction}
+\end{figure}
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Confirmation screen}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+The confirmation screen is presented to the user at the end of the configuration and satisfies the configuration review requirement (see requirement \hyperref[itm:F9]{F9}). The wireframe of the configuration screen is shown in Figure \ref{fig:wireframe-confirmation}. On the left side, the confirmation screen presents the selected and configured components in a comprehensive list and allows the user to review their choices. The right side of the screen contains two buttons, one to confirm the configuration, which can initiate the confirmation action, and another to return to the configuration process for any adjustments. 
+
+\begin{figure}[hb]
+\centering
+\includegraphics[width=0.7\textwidth]{images/wireframe_confirmation_default.png}
+\caption{Wireframe of confirmation screen}
+\label{fig:wireframe-confirmation}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{images/wireframe_confirmation_mobile_default.png}
+\caption{Wireframe of mobile confirmation screen}
+\label{fig:wireframe-confirmation-mobile}
+\end{figure}
+
+The wireframe for the mobile version of the confirmation screen is depicted in Figure \ref{fig:wireframe-confirmation-mobile}. In this layout, the summary spans the entire width of the screen, with the buttons moved to form a bar at the bottom of the screen.
+
+\todo{Add prices to the wireframes and images and names to the domain model.}
