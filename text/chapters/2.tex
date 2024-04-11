@@ -108,7 +108,7 @@ State management is a critical element of React applications that links the inte
 Although there are numerous different state management libraries, each with its advantages and disadvantages (such as Zustand, Redux, MobX, etc.), for this project, Valtio has been chosen. Valtio stands out for its extremely minimalistic API, while being very flexible with data structures. It uses proxies and allows direct mutations, making the handling of state as intuitive as working with regular JavaScript (or TypeScript) objects. This makes Valtio highly beneficial for this application, as it will simplify mapping the changing state to 3D objects, which will be necessary to fulfill the 3D preview requirement \hyperref[itm:F1]{F1}). \cite{Adepoju2023}
 
 %______________________________________________________________
-\subsubsection{Validation}
+\subsubsection{Validation} \label{zod}
 
 To guarantee the integrity and structure of the loaded data, together with values that adhere to specified constraints, validation is crucial. Validation libraries have been designed for this purpose, and in this project, Zod has been chosen as the data validation library. Zod allows the inference of TypeScript types directly from the created data schemas, meaning a single schema definition can be used for parsing as well as type checking. Furthermore, Zod's is also very lightweight, and its powerful yet straitforward API for schema definition makes it an excellent choice for this task. \cite{Bhimani2023}
 
@@ -146,7 +146,7 @@ Prettier will automatically format the code to meet style guidelines, making it 
 
 
 %---------------------------------------------------------------
-\section{Domain model}
+\section{Domain model} \label{domain-model}
 %---------------------------------------------------------------
 
 Before implementation, an important part of the design process is the description of the domain model. This outlines the concepts with which the tool will work and defines the entities' interactions, establishing an important context that serves as a foundation for building the toolkit. A Unified Modeling Language (UML) diagram can easily represent the domain model. \cite{Wlaschin2018}
@@ -157,7 +157,7 @@ The UML diagram that illustrates the domain model of the entities related to the
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{images/uml_domainmodel.png}
-\caption{Domain model as UML diagram}
+\caption{Domain model as a UML diagram}
 \label{fig:domain-model}
 \end{figure}
 \end{landscape}
@@ -209,7 +209,7 @@ The entities covered in this section include:
 Users of the application create configurations. The cornerstone of a configuration lies in its configured components. The specifications described in the previous section serve as templates for these configured components. While the specifications outline all the configuration options, a configured component indicates a particular option selected by the user. Beyond the base component specification, a configured component also stores the mounting point to which it is attached, as well as the selected colors of its materials. Thus, a configuration is composed entirely of these individually configured components.
 
 
-%---------------------------------------------------------------
+%______________________________________________________________
 \section{User interface}
 %---------------------------------------------------------------
 

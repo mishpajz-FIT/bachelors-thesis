@@ -38,3 +38,11 @@ const Component = () => {
     )
 }
 \end{lstlisting}
+
+\begin{lstlisting}[caption={~Conversion from Zod schema to TypeScript type},label={lst:zod},captionpos=b,float,abovecaptionskip=\medskipamount,belowcaptionskip=\medskipamount]
+import { z } from 'zod';
+
+const customSchema = z.number();
+
+type CustomType = z.infer<typeof customSchema>;
+\end{lstlisting}
