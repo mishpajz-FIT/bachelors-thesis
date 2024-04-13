@@ -1,6 +1,7 @@
 \chapter{Additional code snippets} 
 
-\begin{lstlisting}[caption={~Creating and displaying a 3D red cube with Three.js},label={lst:threejs},captionpos=b,float,abovecaptionskip=\medskipamount,belowcaptionskip=\medskipamount]
+\begin{listing}
+\begin{minted}{typescript}
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -8,7 +9,7 @@ document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 
 const geometry = new THREE.BoxGeometry(5, 5, 5);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const material = new THREE.MeshBasicMaterial({color: 0xff0000});
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
@@ -22,11 +23,13 @@ camera.position.set(10, 10, 10);
 camera.lookAt(mesh.position);
 
 renderer.render(scene, camera);
+\end{minted}
+\caption{Creating and displaying a 3D red cube with Three.js}
+\label{listing:threejs}
+\end{listing}
 
-\end{lstlisting}
-
-
-\begin{lstlisting}[caption={~Creating a 3D red cube as a React component with R3F},label={lst:r3f},captionpos=b,float,abovecaptionskip=\medskipamount,belowcaptionskip=\medskipamount]
+\begin{listing}
+\begin{minted}{typescript}
 const Component = () => {
     return (
         <Canvas camera={{position: [10, 10, 10]}}>
@@ -37,12 +40,19 @@ const Component = () => {
         </Canvas>
     )
 }
-\end{lstlisting}
+\end{minted}
+\caption{Creating a 3D red cube as a React component with R3F}
+\label{lisiting:r3f}
+\end{listing}
 
-\begin{lstlisting}[caption={~Conversion from Zod schema to TypeScript type},label={lst:zod},captionpos=b,float,abovecaptionskip=\medskipamount,belowcaptionskip=\medskipamount]
+\begin{listing}
+\begin{minted}{typescript}
 import { z } from 'zod';
 
 const customSchema = z.number();
 
 type CustomType = z.infer<typeof customSchema>;
-\end{lstlisting}
+\end{minted}
+\caption{Conversion from Zod schema to TypeScript type}
+\label{listing:zod}
+\end{listing}

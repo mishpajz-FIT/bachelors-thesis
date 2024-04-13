@@ -225,7 +225,7 @@
 % tables settings
 
 % https://amytabb.com/til/2022/09/01/latex-tabular-multiple-rows-one-cell/
-\newcommand*{\multrow}[1]{\begin{tabular}{@{}l@{}} #1 \end{tabular}}
+\newcommand*{\multrow}[2]{\begin{tabular}{@{}#1@{}} #2 \end{tabular}}
 
 % tables settings end
 
@@ -551,3 +551,9 @@
 		\setmintedinline{bgcolor={}}
 	}{}%
 }
+
+% bullet points
+
+\newcommand{\rectanglebullet}{\raisebox{2pt}{\tikz{\filldraw[fill=black] (0,0) rectangle (0.2,0.05);}}}
+
+% bullet points end

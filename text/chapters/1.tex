@@ -45,7 +45,7 @@ An analysis of the 100 most viewed configurators  from May 2020 to May 2021 was 
 \end{description}
 
 Another article \cite{Leitner2014} also used The Configurator Database Project to analyze common design elements. They identified several key designs that were prevalent in the majority of configurators analyzed. The following key insights of commonly used designs from the article are relevant to this thesis:
-\begin{itemize}
+\begin{itemize}[label=\rectanglebullet]
     \item At the end of the configuration process, a summary of selected options is presented.
     \item To present the products that can be configured, detailed images are used.
     \item If the configurator has linear predefined navigation, the navigation information is presented on a horizontal plane.
@@ -59,9 +59,8 @@ The previous paragraphs discussed general trends among all product configurators
 
 Due to the large number of existing applications, it is not within the scope of this work to perform an exhaustive analysis. Instead, this section will focus on a select group of three applications. These have been selected based on a combination of factors such as their popularity, functionality, and importance in the context of a modular product configuration. This selection is intended to provide insightful examples that highlight different approaches, rather than being representative of the entire domain.
 
-\pagebreak
 \noindent The main aspects under consideration are as follows:\nopagebreak
-\begin{itemize}
+\begin{itemize}[label=\rectanglebullet]
     \item \textbf{Navigation:} How does the user navigate in the application during the configuration process?
     \item \textbf{Visualization style:} How is the product visualized within the configuration process?
     \item \textbf{Placement options:} Can the modular components be freely placed, or are they restricted to fixed points?
@@ -76,7 +75,7 @@ Due to the large number of existing applications, it is not within the scope of 
 \end{itemize}
 
 \noindent Furthermore, the design decisions are also discussed:\nopagebreak
-\begin{itemize}
+\begin{itemize}[label=\rectanglebullet]
     \item \textbf{Views:} What is the position and size of the views inside the application?
     \item \textbf{Navigation bars:} Where are the navigation bars placed and how are they utilized?
     \item \textbf{Button placements:} How are different buttons placed within the application's interface?
@@ -163,7 +162,7 @@ In this section of the analysis chapter, the focus shifts from specific 3D modul
 A variety of providers offer these toolkits for creating product configurators, intending to provide semi-custom or fully custom solutions, as well as generic options. This section examines two particular toolkits to carry out a focused and relevant analysis. The choice of toolkits analyzed has been complicated by the fact that most providers are quite cautious about the details of the technology, typically revealing in-depth information only after a serious business inquiry. The choice was also based on factors such as the implementation approach and compatibility with modular products.
 
 \noindent This section seeks to answer the following questions about the toolkits: 
-\begin{itemize}
+\begin{itemize}[label=\rectanglebullet]
     \item \textbf{Administration}: How is the product configurator created and administered?
     \item \textbf{Assets}: How are assets stored and cataloged?
     \item \textbf{Product configuration}: How are the configuration options and rules defined?
@@ -173,9 +172,9 @@ A variety of providers offer these toolkits for creating product configurators, 
 %______________________________________________________________
 \subsubsection{Threekit}
 
-Threekit is a leading global company in visual commerce technologies that specializes in 3D product visualizations. The Threekit Platform, which enables clients to configure interactive product experiences according to their needs, functions as an administrative application and has the capability to generate product configurators (see Figure \ref{fig:threekit-platform}). \cite{ThreeKitAboutUs} \cite{ThreeKitPlatform}
+Threekit is a leading global company in visual commerce technologies that specializes in 3D product visualizations. The Threekit Platform, which enables clients to configure interactive product experiences according to their needs, functions as an administrative application and has the capability to generate product configurators (see \autoref{fig:threekit-platform}). \cite{ThreeKitAboutUs} \cite{ThreeKitPlatform}
 
-The platform is very complex with many distinct features. At its core, it uses a catalog for storing all product data (the products themselves, materials used, configurable parts, etc.). The items in the catalog can then be loaded into The Treekit Player, which will display the models in 3D, with the option for users to change attributes (models and materials) that are tied to the item. The behavior of the configurator can be set up using item rules and logic that support conditions, queries, and even custom scripts. The platform also offers a data tables feature that is similar to spreadsheets and is designed to handle extensive configuration data and logic. The application also has a built-in asset editor for refining 2D and 3D assets and configuration options (see Figure \ref{fig:threekit-editor}). Models of the products can be uploaded in many 3D formats. The platform provides API integration with the leading e-Commerce and ERP systems. \cite{ThreeKitPlatformDocumentation}
+The platform is very complex with many distinct features. At its core, it uses a catalog for storing all product data (the products themselves, materials used, configurable parts, etc.). The items in the catalog can then be loaded into The Treekit Player, which will display the models in 3D, with the option for users to change attributes (models and materials) that are tied to the item. The behavior of the configurator can be set up using item rules and logic that support conditions, queries, and even custom scripts. The platform also offers a data tables feature that is similar to spreadsheets and is designed to handle extensive configuration data and logic. The application also has a built-in asset editor for refining 2D and 3D assets and configuration options (see \autoref{fig:threekit-editor}). Models of the products can be uploaded in many 3D formats. The platform provides API integration with the leading e-Commerce and ERP systems. \cite{ThreeKitPlatformDocumentation}
 
 The offered solution is still partially tailored to the client, which is the reason why the service does not have standardized pricing. Instead, the price is determined through a personalized quote. It is important to note that the analysis of Threekit presented here is based on the publicly available documentation of the platform. Direct access to the full suite of Threekit's tools is typically available only after formalizing a business agreement with the company.
 
@@ -183,9 +182,9 @@ The offered solution is still partially tailored to the client, which is the rea
 %______________________________________________________________
 \subsubsection{Roomle}
 
-Roomle is an Austrian company focused on pioneering visual product configuration. They provide solutions for product visualization, room design, and product configurators. Roomle's solution, called Rubens, is the "first Open Full Logic 3D-Configurator". The tool utilizes both parametric and modular mechanisms. The software allows integration with third parties through the use of an API. In addition, it supports front-end technologies on web and mobile platforms and has a built-in AR experience. \cite{RoomleAbout}
+Roomle is an Austrian company focused on pioneering visual product configuration. They provide solutions for product visualization, room design, and product configurators. Roomle's solution, called Rubens, is the \enquote{Open Full Logic 3D-Configurator}. The tool utilizes both parametric and modular mechanisms. The software allows integration with third parties through the use of an API. In addition, it supports front-end technologies on web and mobile platforms and has a built-in AR experience. \cite{RoomleAbout}
 
-Web application, Rubens Admin, is used to set up the configurator application. To add a product which will then be configured by customers, 3D models and materials are uploaded to the admin application. Components are defined using the RoomleScript language, which is loosely based on the JavaScript language. The design of the configurator itself can be tuned in the admin application as well. Multiple language variants can be defined for product names and descriptions. The configurator application (see Figure \ref{fig:roomle}) runs on the client side and can be simply embedded into a website. Additionally, it can utilize a JavaScript library that can subscribe to events or modify the configurator. A framework is also provided to utilize the configurator within an iOS application. \cite{RoomleDocumentation}
+Web application, Rubens Admin, is used to set up the configurator application. To add a product which will then be configured by customers, 3D models and materials are uploaded to the admin application. Components are defined using the RoomleScript language, which is loosely based on the JavaScript language. The design of the configurator itself can be tuned in the admin application as well. Multiple language variants can be defined for product names and descriptions. The configurator application (see \autoref{fig:roomle}) runs on the client side and can be simply embedded into a website. Additionally, it can utilize a JavaScript library that can subscribe to events or modify the configurator. A framework is also provided to utilize the configurator within an iOS application. \cite{RoomleDocumentation}
 
 In terms of pricing, Roomle's Rubens configurator with the listed capabilities is offered to businesses at a monthly fee of €1450. \cite{RoomleFullLogic}
 
@@ -196,75 +195,66 @@ In terms of pricing, Roomle's Rubens configurator with the listed capabilities i
 All the product configurators analyzed have common characteristics, especially in terms of navigation and visualization styles, which remain consistent across different tools. Despite this, certain trade-offs were observed between them, especially regarding placement options. While some solutions offer users the freedom to position components anywhere, others restricted placement to fixed points. This variance stems from implementation complexity, as the fixed-point system is simpler, furthermore offering a better way to restrict impossible configurations.
 Another significant distinction was observed in the product finalization process, which ranged from the ability to place an order to being directed to a physical store.
 
-The key points discussed in the analysis of modular product configurators are summarized in the following table (see Table \ref{table:1}).
+The key points discussed in the analysis of modular product configurators are summarized in the following table (see \autoref{table:summary-analysis}).
 
-\begin{table}[h]
+\begin{table}[ht!]
 \centering
-\begin{tabular}{|l||l|l|l|} 
-\hline
-\parbox[c][7ex]{4cm}{Features} &
-\multrow{IKEA \\ Pax Planner} &
-\multrow{Muuto \\ Product Planner} &\multrow{LD Seating \\ Nido Configurator} \\ 
-\hline\hline
-\parbox[c][6ex]{4cm}{Navigation}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.8cm}*{3}{>{\centering\arraybackslash}p{2.5cm}}} 
+\toprule
+\parbox[c][7ex]{3.8cm}{\textbf{Features}} &
+\multrow{c}{\textbf{IKEA} \\ \textbf{Pax} \\ \textbf{Planner}} &
+\multrow{c}{\textbf{Muuto} \\ \textbf{Product} \\ \textbf{Planner}} &\multrow{c}{\textbf{LD Seating} \\ \textbf{Nido} \\ \textbf{Configurator}} \\ 
+\midrule
+\parbox[c][7ex]{3.8cm}{Navigation}
     & Open
     & Open
     & Open \\ 
-\hline
-\parbox[c][6ex]{4cm}{Visualization}
+\parbox[c][7ex]{3.8cm}{Visualization}
     & Realistic
     & Realistic
     & Realistic \\ 
-\hline
-\parbox[c][6ex]{4cm}{Placement options}
+\parbox[c][7ex]{3.8cm}{Placement options}
     & Free
     & Free
     & Fixed points\\ 
-\hline
-\parbox[c][6ex]{4cm}{Camera movement}
+\parbox[c][7ex]{3.8cm}{Camera movement}
     & Orbital
-    & \multrow{Orbital, \\ static}
+    & \multrow{c}{Orbital; \\ Static}
     & Orbital \\
-\hline
-\parbox[c][6ex]{4cm}{Impossible configurations} 
+\parbox[c][7ex]{3.8cm}{Impossible \\ configurations} 
     & No
     & Yes
     & No \\
-\hline
-\parbox[c][6ex]{4cm}{Responsiveness}
+\parbox[c][7ex]{3.8cm}{Responsiveness}
     & Yes
     & Yes
     & Yes \\
-\hline
-\parbox[c][6ex]{4cm}{Price calculation}
+\parbox[c][7ex]{3.8cm}{Price calculation}
     & Yes
     & Yes
     & No \\
-\hline
-\parbox[c][6ex]{4cm}{Purchase option}
+\parbox[c][7ex]{3.8cm}{Purchase option}
     & E-shop order
     & Store locator
     & Inquiry form \\
-\hline
-\parbox[c][6ex]{4cm}{Save option}
+\parbox[c][7ex]{3.8cm}{Save option}
     & Server-side
-    & \multrow{Server-side, \\ local}
-    & \multrow{Server-side, \\ local} \\
-\hline
-\parbox[c][6ex]{4cm}{Version history }
+    & \multrow{c}{Server-side; \\ Local}
+    & \multrow{c}{Server-side; \\ Local} \\
+\parbox[c][7ex]{3.8cm}{Version history}
     & Undo \& redo 
     & Undo \& redo
-    & \multrow{Undo \& redo, \\ multiple saves} \\
-\hline
-\parbox[c][6ex]{4cm}{VR or AR}
+    & \multrow{c}{Undo \& redo; \\ Multiple saves} \\
+\parbox[c][7ex]{3.8cm}{VR or AR}
     & No
     & Yes
     & No \\
-\hline
+\bottomrule
 \end{tabular}
 \caption{Summary of key points discussed in the analysis of modular product configurators}
-\label{table:1}
+\label{table:summary-analysis}
 \end{table}
+
 
 The user interface design of the analyzed configurations also displayed similarities, particularly in layout style, featuring a primary 3D preview on the left, a secondary view on the right, and buttons surrounding the primary view.
 
@@ -317,7 +307,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F1:} \label{itm:F1} 3D product visualization
 \vspace{2pt}
 \\The tool shall offer users 3D visualization of their configured product, employing realistic models to accurately represent the components used and their characteristics.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Must
     \item[Difficulty:] Complex
 \end{description}
@@ -326,7 +316,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F2:} Dynamic orbital camera controls
 \vspace{2pt}
 \\The tool should have dynamic orbital camera controls that allow users to view the product in 3D product visualization (see requirement \hyperref[itm:F1]{F1}) from any angle by rotating, panning, and zooming the camera around the product. This feature aims to provide an engaging visual experience that allows users to examine the product with a 360-degree view. Controls should be intuitive, allowing seamless navigation through mouse actions or touch gestures depending on the device being used.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Must
     \item[Difficulty:] Simple
 \end{description}
@@ -335,7 +325,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F3:} \label{itm:F3} Modularity configuration mechanism
 \vspace{2pt}
 \\The toolkit should incorporate modularity mechanisms that allow users to configure products by adding, removing or modifying components within the overall product or in relation to other components. Different versions may be available for each component, and the toolkit administrator should have the ability to designate them either as optional or mandatory, thereby enhancing the flexibility of configuration.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Must
     \item[Difficulty:] Intermediate
 \end{description}
@@ -344,7 +334,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F4:} Component interactivity
 \vspace{2pt}
 \\The configurator should support interactivity with each component of the product. Users should be able to select components directly within the 3D visualization (see requirement \hyperref[itm:F1]{F1}), which should allow them to change attributes of the components, remove it or swap it with alternative options (see requirement \hyperref[itm:F3]{F3}). The changes made by the users should be immediately visible, allowing for an iterative and engaging customization process. Moreover, the components that are interacted with need to offer feedback, such as highlighting, in order to assist users in navigating the accessible customization choices.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Should
     \item[Difficulty:] Complex
 \end{description}
@@ -353,7 +343,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F5:} Open navigation
 \vspace{2pt}
 \\The configurator should offer high flexibility in the order of configuring components and attributes, avoiding a linear step-by-step configuration and requiring all changes to be performed at any point during the configuration process. This flexibility enhances the user's ability to navigate freely among various different components of the product (see requirement \hyperref[itm:F3]{F3}).
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Should
     \item[Difficulty:] Simple
 \end{description}
@@ -362,7 +352,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F6:} \label{itm:F6} Fixed point component placement
 \vspace{2pt}
 \\In alignment with the modularity configuration mechanism (see requirement \hyperref[itm:F3]{F3}), the configurator should enable components to be attached to other components or the main product exclusively at predefined fixed points. While this approach restricts the potential solution space, it greatly streamlines the configuration process from the user side and helps to ensure that the configured product remains within the realm of feasible configurations.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Should
     \item[Difficulty:] Intermediate
 \end{description}
@@ -371,7 +361,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F7:} Component collision detection
 \vspace{2pt}
 \\The tool should incorporate a collision detection system to prevent components from being positioned in such a way that would result in physical overlaps during configuration. This feature is essential to maintain the realism and feasibility of the configured product.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Could
     \item[Difficulty:] Complex
 \end{description}
@@ -380,7 +370,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F8:} \label{itm:F8} Material color configuration
 \vspace{2pt}
 \\Users should be able to modify the appearance of components and products through a selection from a palette of materials and colors, predefined by the toolkit's administrator. The chosen appearance should immediately be reflected in the 3D visualization (see requirement \hyperref[itm:F1]{F1}) of the configuration.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Could
     \item[Difficulty:] Complex
 \end{description}
@@ -389,7 +379,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F9:} \label{itm:F9} Configuration review
 \vspace{2pt}
 \\Before the configuration process is finalized, users should be presented with a review page that allows for a detailed examination of their product configuration. This feature should provide a summary listing all selected components, materials, colors, and any custom parameters. In addition, users should be able to return to previous configuration steps to make any necessary adjustments.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Should
     \item[Difficulty:] Simple
 \end{description}
@@ -398,7 +388,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F10:} \label{itm:F10} Configuration confirmation
 \vspace{2pt}
 \\At the end of the configuration process, users should be presented with a confirmation button, provided that an administrator has set up a specific confirmation action for the product. This button is intended for users to confirm their choices and trigger a predetermined action, like performing an API request or being directed to another page, as specified by the administrator. This should allow for a smooth transition, where, upon configuration confirmation, the user is engaged in a follow-up action, like a checkout process or being guided to a physical store locator page. The ability to perform a custom API call set by the administrator at the end of the configuration process provides a flexible way to integrate the configurator with different systems or processes, thus improving its functionality and delivering a seamless user experience from start to finish.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Should
     \item[Difficulty:] Simple
 \end{description}
@@ -407,7 +397,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F11:} Inquiry form
 \vspace{2pt}
 \\As an extension of configuration confirmation (see requirement \hyperref[itm:F10]{F10}), the administrator should be able to set the product's confirmation action to trigger an inquiry form. In this scenario, when users click on the confirmation button, they should encounter a form asking for their contact details. Once completed, the created product configuration along with the user's contact information should be sent to an API predefined by the toolkit's administrator. This allows for a standard inquiry form process directly within the configurator application.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Should
     \item[Difficulty:] Simple
 \end{description}
@@ -416,7 +406,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F12:} Configuration local saving and retrieval
 \vspace{2pt}
 \\The tool should allow users to save the current product configuration locally, allowing them to pause the customization process without losing progress. Users should have the ability to easily access and resume editing their saved configurations at a later time. The advantage of local save functionality compared to server-side saves is that it requires no active management or intervention from the toolkit operator, simplifying the system's overall maintenance.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Could
     \item[Difficulty:] Intermediate
 \end{description}
@@ -425,7 +415,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F13:} Undo and redo actions
 \vspace{2pt}
 \\The configurator should integrate undo and redo functionality, enabling users to easily revert or reapply changes made anytime during the configuration process.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Should
     \item[Difficulty:] Intermediate
 \end{description}
@@ -434,7 +424,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F14:} Interface color scheme customization
 \vspace{2pt}
 \\The interface of the configurator should offer customizable options, enabling the toolkit's administrator to tailor the color scheme and images to align with the branding and design of the business using the toolkit.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Could
     \item[Difficulty:] Simple
 \end{description}
@@ -443,7 +433,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F15:} \label{itm:F15} Interface texts customization
 \vspace{2pt}
 \\The toolkit should provide a way for the administrator to change the textual contents of the configurator's interface, ensuring that the language, tone, and terminology used are perfectly aligned with the business's needs and reflect the business's terminology and branding.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Could
     \item[Difficulty:] Intermediate
 \end{description}
@@ -452,7 +442,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F16:} \label{itm:F16} Visual product catalog management
 \vspace{2pt}
 \\The toolkit should provide administrators with the ability to visually manage the catalog of configurable products and their components. The visual preview of the components provided within catalog management should mirror the 3D previews in the actual configuration process (see requirement \hyperref[itm:F1]{F1}). This management system should allow administrators to add, update, or remove products and components, along with specifying their precise mounting locations, directly through an intuitive visual interface (see requirement \hyperref[itm:F6]{F6}).
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Must
     \item[Difficulty:] Complex
 \end{description}
@@ -461,7 +451,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F17:} Product properties and attributes management
 \vspace{2pt}
 \\The toolkit should provide a way to manage the properties and attributes of the products and components in the catalog (see requirement \hyperref[itm:F16]{F16}), allowing administrators to define and adjust the characteristics that users can configure. It should allow for the detailed specification of each product's features, such as color options, material types (see requirement \hyperref[itm:F8]{F8}), and any other attributes that define the product's functionality and appearance.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Must
     \item[Difficulty:] Complex
 \end{description}
@@ -471,7 +461,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F18:} Real-time price calculation
 \vspace{2pt}
 \\If the configured attributes and components have prices predefined by the toolkit's administrator, the configurator should automatically update and display the price of the whole customized product with every change made. The tool should be capable of dealing with different currencies.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Won't
     \item[Difficulty:] Intermediate
 \end{description}
@@ -480,7 +470,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \item \textbf{F19:} AR viewing capabilities
 \vspace{2pt}
 \\The configurator should extend its visualization features (see requirement \hyperref[itm:F1]{F1}) to include AR viewing capabilities, enabling users to project their configured products into their real-world environment through their device's camera. In case the device they are using does not have AR capability, the tool should provide a seamless way for the user to open the configuration in AR on another device that does have such capability.
-\begin{description}
+\begin{description}[noitemsep]
     \item[Priority:] Won't
     \item[Difficulty:] Complex
 \end{description}

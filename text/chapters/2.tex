@@ -55,7 +55,7 @@ For this solution, the decision has been greatly influenced by the selection of 
 
 In addition, the Drei library, built on top of R3F, introduces a collection of useful components, abstractions, and helpers. These additions streamline the development with Three.js and React even more. \cite{Drei}
 
-These libraries make React an attractive choice for this project. To see how the code differs when aiming to achieve similar objectives, refer to Code listing \ref{lst:threejs} for the plain Three.js version and Code listing \ref{lst:r3f} for the R3F version, both creating a simple 3D red cube.
+These libraries make React an attractive choice for this project. To see how the code differs when aiming to achieve similar objectives, refer to \autoref{listing:threejs} for the plain Three.js version and \autoref{lisiting:r3f} for the R3F version, both creating a simple 3D red cube.
 
 React is a user interface library created at Facebook in 2011, but soon after became open source. React has gained widespread acclaim across many projects and has been continually developed since its inception. It emphasizes component-based architecture, where reactive components are written in JavaScript (or TypeScript) combined with HTML-like markup code, facilitating the creation of dynamic user interfaces. \cite{Banks2020}
 
@@ -151,10 +151,12 @@ Prettier will automatically format the code to meet style guidelines, making it 
 
 Before implementation, an important part of the design process is the description of the domain model. This outlines the concepts with which the tool will work and defines the entities' interactions, establishing an important context that serves as a foundation for building the toolkit. A Unified Modeling Language (UML) diagram can easily represent the domain model. \cite{Wlaschin2018}
 
-The UML diagram that illustrates the domain model of the entities related to the proposed toolkit is presented in Figure \ref{fig:domain-model}. This model serves as a blueprint for the architecture of the system, outlining a coherent structure that aligns with the project objectives described in the previous chapters. 
+The UML diagram that illustrates the domain model of the entities related to the proposed toolkit is presented in \autoref{fig:domain-model}. This model serves as a blueprint for the architecture of the system, outlining a coherent structure that aligns with the project objectives described in the previous chapters. 
+
+The model domain presents a structure of product and component specifications contained in a catalog, the dependencies between different entities, and illustrates the progression from generic specifications to concrete user configurations. This model aims to offer a clearer insight into the design rationale behind the tool, highlighting the transition from abstract specifications to customized user-driven outcomes.
 
 \begin{landscape}
-\begin{figure}[h]
+\begin{figure}
 \centering
 \includegraphics[width=\linewidth]{images/uml_domainmodel.png}
 \caption{Domain model as a UML diagram}
@@ -162,16 +164,13 @@ The UML diagram that illustrates the domain model of the entities related to the
 \end{figure}
 \end{landscape}
 
-The model domain presents a structure of product and component specifications contained in a catalog, the dependencies between different entities, and illustrates the progression from generic specifications to concrete user configurations. This model aims to offer a clearer insight into the design rationale behind the tool, highlighting the transition from abstract specifications to customized user-driven outcomes.
-
-
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Catalog}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 The catalog forms the backbone of the proposed toolkit and defines the blueprint for customizable products. The catalog encompasses a variety of product specifications, each defining a configurable product along with all its potential customizations. This section delves into how these specifications lay the foundation for user-driven product configuration.
 The entities discussed in this section are as follows:
-\begin{itemize}
+\begin{itemize}[label=\rectanglebullet]
     \item Catalog
     \item Product Specification
     \item Component Specification
@@ -200,7 +199,7 @@ All these specifications are maintained in the catalog by the application admini
 Transitioning from potential to actual, the configuration section delves into how users bring customizable products to life through the toolkit.
 It illustrates how configured components are the building blocks of user-generated configurations, embodying the transformation from a generic template into a product uniquely tailored to individual preferences.
 The entities covered in this section include:
-\begin{itemize}
+\begin{itemize}[label=\rectanglebullet]
     \item Configuration
     \item Configured Component
     \item User
@@ -227,8 +226,6 @@ The common element of all screens is the top bar with the logo of the business t
 \subsection{Configuration screen}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-The configuration screen is presented to the user during the configuration process. The screen is dominated by the 3D preview of the configured product, featuring interactable components and spatial buttons for the addition of components into the configuration. Control buttons are placed in the upper left corner within the 3D preview, symbolizing their direct relation to the preview, yet maintaining their distinctiveness as a separate element. At the bottom of the screen, there is another bar, this one containing buttons that allow users to go back or to finalize the configuration. The wireframe of the configuration screen in its default state is shown in Figure \ref{fig:wireframe-configuration}, where the 3D preview of the product is represented by a blueish cube.
-
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\textwidth]{images/wireframe_configuration_default.png}
@@ -236,7 +233,7 @@ The configuration screen is presented to the user during the configuration proce
 \label{fig:wireframe-configuration}
 \end{figure}
 
-This default view, as outlined in the previous paragraph, maximizes the viewport with the most important presentation, which is the 3D preview of the product. However, at some stages of the configuration process, it is also necessary to present the user with further information. Therefore, upon selecting a component within the 3D preview, the component should become highlighted and, following the approach of existing solutions analyzed, a side panel with detailed information about the selected component will emerge from the right. If necessary, another panel with further options presented to the user may appear at the bottom. This design strategy maximizes the screen space for the important elements while still being flexible enough to present additional information in a streamlined way. The wireframe of the interface with panels that contain additional information and options presented is shown in Figure \ref{fig:wireframe-configuration-panels}.
+The configuration screen is presented to the user during the configuration process. The screen is dominated by the 3D preview of the configured product, featuring interactable components and spatial buttons for the addition of components into the configuration. Control buttons are placed in the upper left corner within the 3D preview, symbolizing their direct relation to the preview, yet maintaining their distinctiveness as a separate element. At the bottom of the screen, there is another bar, this one containing buttons that allow users to go back or to finalize the configuration. The wireframe of the configuration screen in its default state is shown in  \autoref{fig:wireframe-configuration}, where the 3D preview of the product is represented by a blueish cube.
 
 \begin{figure}[h]
 \centering
@@ -245,7 +242,7 @@ This default view, as outlined in the previous paragraph, maximizes the viewport
 \label{fig:wireframe-configuration-panels}
 \end{figure}
 
-To ensure responsiveness, a mobile version of the interface should also be outlined. The prioritization of the 3D preview in the default state makes this simple, as this just means that on smaller viewports the elements are presented in the same way, with the preview being in different aspect ratio, which is easily compensated by the 3D preview taking on different zoom level. The outline of this wireframe is presented in Figure \ref{fig:wireframe-configuration-mobile}.
+This default view, as outlined in the previous paragraph, maximizes the viewport with the most important presentation, which is the 3D preview of the product. However, at some stages of the configuration process, it is also necessary to present the user with further information. Therefore, upon selecting a component within the 3D preview, the component should become highlighted and, following the approach of existing solutions analyzed, a side panel with detailed information about the selected component will emerge from the right. If necessary, another panel with further options presented to the user may appear at the bottom. This design strategy maximizes the screen space for the important elements while still being flexible enough to present additional information in a streamlined way. The wireframe of the interface with panels that contain additional information and options presented is shown in \autoref{fig:wireframe-configuration-panels}.
 
 \begin{figure}[h]
     \centering
@@ -263,15 +260,15 @@ To ensure responsiveness, a mobile version of the interface should also be outli
     \end{minipage}
 \end{figure}
 
-The wireframe for the mobile version of the interface with the presented detail side panel is shown in Figure \ref{fig:wireframe-configuration-panel-mobile}. At this reduced viewport size, the side panel can maintain the same internal layout but to be usable it needs to occupy the whole 3D preview. This will need to be kept in mind when utilizing interactions with the 3D preview, as it may not always be fully visible when the panels are active. 
+To ensure responsiveness, a mobile version of the interface should also be outlined. The prioritization of the 3D preview in the default state makes this simple, as this just means that on smaller viewports the elements are presented in the same way, with the preview being in different aspect ratio, which is easily compensated by the 3D preview taking on different zoom level. The outline of this wireframe is presented in \autoref{fig:wireframe-configuration-mobile}.
+
+The wireframe for the mobile version of the interface with the presented detail side panel is shown in \autoref{fig:wireframe-configuration-panel-mobile}. At this reduced viewport size, the side panel can maintain the same internal layout but to be usable it needs to occupy the whole 3D preview. This will need to be kept in mind when utilizing interactions with the 3D preview, as it may not always be fully visible when the panels are active. 
 
 The design remains mostly consistent on both small and large viewports, while still being adaptive and responsive. This ensures that the familiarity with the tool is maintained for all viewport sizes.
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Introduction screen}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-The introduction screen is the first screen presented to the user when launching the application. It offers a simple way of selecting the configurable product from the catalog, with image and name of the product presented on a large tile. The selection of the product takes the user to the configuration process. Mobile interface of this screen mirrors the large version. The wireframe of the design can be seen in Figure \ref{fig:wireframe-introduction}.
 
 \begin{figure}[h]
 \centering
@@ -280,11 +277,11 @@ The introduction screen is the first screen presented to the user when launching
 \label{fig:wireframe-introduction}
 \end{figure}
 
+The introduction screen is the first screen presented to the user when launching the application. It offers a simple way of selecting the configurable product from the catalog, with image and name of the product presented on a large tile. The selection of the product takes the user to the configuration process. Mobile interface of this screen mirrors the large version. The wireframe of the design can be seen in \autoref{fig:wireframe-introduction}.
+
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Confirmation screen}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-The confirmation screen is presented to the user at the end of the configuration and satisfies the configuration review requirement (see requirement \hyperref[itm:F9]{F9}). The wireframe of the configuration screen is shown in Figure \ref{fig:wireframe-confirmation}. On the left side, the confirmation screen presents the selected and configured components in a comprehensive list and allows the user to review their choices. The right side of the screen contains two buttons, one to confirm the configuration, which can initiate the confirmation action, and another to return to the configuration process for any adjustments. 
 
 \begin{figure}[hb]
 \centering
@@ -293,6 +290,8 @@ The confirmation screen is presented to the user at the end of the configuration
 \label{fig:wireframe-confirmation}
 \end{figure}
 
+The confirmation screen is presented to the user at the end of the configuration and satisfies the configuration review requirement (see requirement \hyperref[itm:F9]{F9}). The wireframe of the configuration screen is shown in \autoref{fig:wireframe-confirmation}. On the left side, the confirmation screen presents the selected and configured components in a comprehensive list and allows the user to review their choices. The right side of the screen contains two buttons, one to confirm the configuration, which can initiate the confirmation action, and another to return to the configuration process for any adjustments. 
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.3\textwidth]{images/wireframe_confirmation_mobile_default.png}
@@ -300,6 +299,6 @@ The confirmation screen is presented to the user at the end of the configuration
 \label{fig:wireframe-confirmation-mobile}
 \end{figure}
 
-The wireframe for the mobile version of the confirmation screen is depicted in Figure \ref{fig:wireframe-confirmation-mobile}. In this layout, the summary spans the entire width of the screen, with the buttons moved to form a bar at the bottom of the screen.
+The wireframe for the mobile version of the confirmation screen is depicted in  \autoref{fig:wireframe-confirmation-mobile}. In this layout, the summary spans the entire width of the screen, with the buttons moved to form a bar at the bottom of the screen.
 
 \todo{Add prices to the wireframes and images and names to the domain model.}

@@ -6,7 +6,7 @@ Lorem ipsum dolor sit amet...
 
 The following chapter will describe the implementation of the toolkit as envisioned in this thesis, building on the foundation created in the previous analysis and design chapters. 
 
-Implementation focuses primarily on the requirements outlined in Chapter \ref{requirements}, with an emphasis on those of the highest priority. The output of this chapter is the realization of a viable and usable tool.
+Implementation focuses primarily on the requirements outlined in \autoref{requirements}, with an emphasis on those of the highest priority. The output of this chapter is the realization of a viable and usable tool.
 
 %______________________________________________________________
 \section{Structure of the toolkit}
@@ -49,15 +49,15 @@ This structure is also implemented in such a way that if the need for a back-end
 }
 \vspace{16pt}
 
-Given the separation of the toolkit into the configurator and administrator components, the project is split into two subprojects in the \textquote{apps} directory. The configurator application is located in the main directory, while the admin directory contains the source files for the administrator application. Consequently, each of the subprojects has its own Vite configuration, among their \textquote{index.html} files, \textquote{src} directories for code and \textquote{package.json} for managing the subproject-specific dependencies. 
+Given the separation of the toolkit into the configurator and administrator components, the project is split into two subprojects in the \texttt{apps} directory. The configurator application is located in the main directory, while the admin directory contains the source files for the administrator application. Consequently, each of the subprojects has its own Vite configuration, among their \texttt{index.html} files, \texttt{src} directories for code and \texttt{package.json} for managing the subproject-specific dependencies. 
 
-To minimize code duplication, the \textquote{shared} library is located in the \textquote{packages} directory. This shared library contains common elements imported by both applications, such as data schemes, generic React components, custom React hooks, types and interfaces, CSS styles, or other utility functions. Using this shared package in the configurator and administrator applications ensures consistency and reduces redundancy across the toolkit.
+To minimize code duplication, the \texttt{shared} library is located in the \texttt{packages} directory. This shared library contains common elements imported by both applications, such as data schemes, generic React components, custom React hooks, types and interfaces, CSS styles, or other utility functions. Using this shared package in the configurator and administrator applications ensures consistency and reduces redundancy across the toolkit.
 
-Most dependencies are managed centrally in the root \textquote{package.json} file, with dependencies specific to the subprojects being handled in their corresponding package files. This approach optimizes dependency management across the entire project.
+Most dependencies are managed centrally in the root \texttt{package.json} file, with dependencies specific to the subprojects being handled in their corresponding package files. This approach optimizes dependency management across the entire project.
 
 It is important to note that the presented directory tree focuses on illustrating the separation of the project into subprojects: configurator and administrator applications, and the shared library. It is not exhaustive, as the actual project contains various other config and dot files.
 
-The following is a brief overview of the \textquote{src} directories, which organize the source code into logical sections. The directories have the same layout across all subprojects.
+The following is a brief overview of the \texttt{src} directories, which organize the source code into logical sections. The directories have the same layout across all subprojects.
 
 \vspace{12pt}
 \dirtree{%
@@ -74,6 +74,22 @@ The following is a brief overview of the \textquote{src} directories, which orga
 }
 \vspace{16pt}
 
+\todo{Unimplement baseSpec and prices in code, change size in MaterialSpecification in UML, change color of materials and mounted in UML, rename catalogue to catalog everywhere, add optional attributes in uml, id an product schema}
+
+%______________________________________________________________
+\section{Data schemas}
+%______________________________________________________________
+
+The data schemas are derived from the domain model discussed in \autoref{domain-model}. These schemas define the shape of the objects that are used to transfer and store information within the tool. 
+
+To visualize these schemas, a UML diagram is provided in \autoref{fig:data-schema}. The diagram provides a general overview of utilized the structures and associations, but the implementation requires slight adjustments.
+
+Data schemas are stored in the shared library discussed in the previous section. This ensures consistency, as they are used in both the main and admin applications. 
+
+The schemas are organized into three separate parts: Catalog, product specification, and user creation. Each of these parts corresponds to a separate file in the shared library, in addition to their different roles within the application. The parts are discussed in the following sections, and the UML diagram in \autoref{fig:data-schema} provides color coding to differentiate them.
+
+As discussed in \autoref{zod}, the implementation of data schemas utilizes the Zod validation library, which allows straightforward validation of the shape of the data during parsing. TypeScript types are then easily created from these Zod schemas, which is illustrated in \autoref{listing:zod}. \cite{Wycliffe2023} 
+
 \begin{landscape}
 \begin{figure}[h]
 \centering
@@ -83,30 +99,14 @@ The following is a brief overview of the \textquote{src} directories, which orga
 \end{figure}
 \end{landscape}
 
-\todo{Unimplement baseSpec and prices in code, change size in MaterialSpecification in UML, change color of materials and mounted in UML, rename catalogue to catalog everywhere, add optional attributes in uml, id an product schema}
-
-%______________________________________________________________
-\section{Data schemas}
-%______________________________________________________________
-
-The data schemas are derived from the domain model discussed in Chapter \ref{domain-model}. These schemas define the shape of the objects that are used to transfer and store information within the tool. 
-
-To visualize these schemas, a UML diagram is provided in Figure \ref{fig:data-schema}. The diagram provides a general overview of utilized the structures and associations, but the implementation requires slight adjustments.
-
-Data schemas are stored in the shared library discussed in the previous section. This ensures consistency, as they are used in both the main and admin applications. 
-
-The schemas are organized into three separate parts: Catalog, product specification, and user creation. Each of these parts corresponds to a separate file in the shared library, in addition to their different roles within the application. The parts are discussed in the following sections, and the UML diagram in Figure \ref{fig:data-schema} provides color coding to differentiate them.
-
-As discussed in Chapter \ref{zod}, the implementation of data schemas utilizes the Zod validation library, which allows straightforward validation of the shape of the data during parsing. TypeScript types are then easily created from these Zod schemas, which is illustrated in Code listing \ref{lst:zod}. \cite{Wycliffe2023} 
-
-
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Catalog}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 The catalog data schema, visualized with an orange tint in the UML diagram, is essential for the initial user interaction with the application.
 
-\begin{lstlisting}[caption={~Catalogue schema},label={lst:schema-catalogue},captionpos=b,abovecaptionskip=\medskipamount,belowcaptionskip=\medskipamount]
+\begin{listing}[h]
+\begin{minted}{text}
 export const SubmissionOptionSchema = z.object({
   type: SubmissionTypeSchema,
   endpointUrl: z.string().url(),
@@ -122,13 +122,16 @@ export const CatalogueProductSchema = z.object({
 export const CatalogueSchema = z.object({
   products: z.record(CatalogueProductSchema),
 });
-\end{lstlisting}
+\end{minted}
+\caption{Catalogue schema}
+\label{lisiting:schema-catalogue}
+\end{listing}
 
-Building upon the domain model, the catalog is created by the operator of the tool and covers all product specifications. However, compared to the domain model, there is an additional level of abstraction in the form of \textquote{CatalogueProduct}, which contains the most important information about the product specification, such as the name and the preview image. The catalog is separated from the product specifications, which are stored elsewhere. One reason for this is that the catalog will first be fetched when the configuration application is launched, and this information must be presented to the user as soon as possible. The specification of the product, which contains the information needed for the configuration process, can then be fetched from an URL stored inside this object after the user decides which product to configure, which is represented by the stereotype \textquote{urlLink} in the UML diagram.
+Building upon the domain model, the catalog is created by the operator of the tool and covers all product specifications. However, compared to the domain model, there is an additional level of abstraction in the form of \texttt{CatalogueProduct}, which contains the most important information about the product specification, such as the name and the preview image. The catalog is separated from the product specifications, which are stored elsewhere. One reason for this is that the catalog will first be fetched when the configuration application is launched, and this information must be presented to the user as soon as possible. The specification of the product, which contains the information needed for the configuration process, can then be fetched from an URL stored inside this object after the user decides which product to configure, which is represented by the stereotype \texttt{urlLink} in the UML diagram.
 
-In addition, each product stores information about the confirmation action in the form of a \textquote{SubmissionOption}, which specifies the type of action and the endpoint to which the application potentially sends the confirmed configuration.
+In addition, each product stores information about the confirmation action in the form of a \texttt{SubmissionOption}, which specifies the type of action and the endpoint to which the application potentially sends the confirmed configuration.
 
-The TypeScript implementation can be seen in Code listing \ref{lst:schema-catalogue}. In the catalogue, each product is stored using a record structure, with ID of the product as a key. The names have been arbitrarily limited to 100 characters to ensure that they can fit within the correct user interface position. URLs, except for the endpoint, are not validated to accommodate local addresses.
+The TypeScript implementation can be seen in \autoref{lisiting:schema-catalogue}. In the catalogue, each product is stored using a record structure, with ID of the product as a key. The names have been arbitrarily limited to 100 characters to ensure that they can fit within the correct user interface position. URLs, except for the endpoint, are not validated to accommodate local addresses.
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -139,19 +142,25 @@ The advantage of the structure where the catalog is separate from the specificat
 
 The product specification part is visualized by a green tint in the UML diagram.  
 
-\begin{lstlisting}[caption={~Product and component specification schema},label={lst:schema-componentspecification},captionpos=b,abovecaptionskip=\medskipamount,belowcaptionskip=\medskipamount]
+\begin{listing}[h]
+\begin{minted}{typescript}
 export const ComponentSpecificationSchema = z.object({
   name: z.string().max(100),
   description: z.string(),
   imageUrl: z.string(),
   modelUrl: z.string(),
-  materialSpecs: z.record(MaterialSpecificationSchema),
-  mountingPointsSpecs: z.record(MountingPointSpecificationSchema),
+  materialSpecs: z.record(
+    MaterialSpecificationSchema
+  ),
+  mountingPointsSpecs: z.record(
+    MountingPointSpecificationSchema
+  ),
   positionOffset: z.tuple(
     [z.number(), z.number(), z.number()]).optional(),
   rotationOffset: z.tuple(
     [z.number(), z.number(), z.number()]).optional(),
-  scaleOffset: z.tuple([z.number(), z.number(), z.number()]).optional(),
+  scaleOffset: z.tuple(
+    [z.number(), z.number(), z.number()]).optional(),
   ignoreCollisions: z.boolean().optional(),
 });
 
@@ -163,28 +172,28 @@ export const ProductSpecificationSchema = z.object({
   baseSpecs: z.record(BaseSpecificationSchema),
   componentSpecs: z.record(ComponentSpecificationSchema),
 });
-\end{lstlisting}
+\end{minted}
+\caption{Product and component specification schema}
+\label{lisiting:schema-componentspecification}
+\end{listing}
 
 This part of the data is created by the tool's operator and provides information about the available options for user configuration of a chosen product.
 
 The schemas are also derived from the domain model, although with some modifications such as changes in attributes and some objects being merged.
 
-Most of the concepts in this part are identical to the domain model; however, the new concept of \textquote{base} component is introduced here. Due to the modularity principle, each component is in some way mounted on another component. Base components are such components that can initiate the configuration as they are not mounted to other components. They represent the potentially first component of a configuration. These base components are defined in the product specification.
+Most of the concepts in this part are identical to the domain model; however, the new concept of \texttt{base} component is introduced here. Due to the modularity principle, each component is in some way mounted on another component. Base components are such components that can initiate the configuration as they are not mounted to other components. They represent the potentially first component of a configuration. These base components are defined in the product specification.
 
-In the data schema, the model is directly included in the component specification, with the \textquote{modelUrl} attribute pointing to a location with the 3D model file. To compensate for this coupling, attributes that modify the position, rotation, and scale of the model are added to the component specification. Further attributes are also present, such as a description or the option to ignore collisions for this component. The material specification includes the names of the model's meshes in the attribute \textquote{modelMaterials}, and the color specification features the \textquote{sortIndex} attribute, which determines the presentation order to the user.
+In the data schema, the model is directly included in the component specification, with the \texttt{modelUrl} attribute pointing to a location with the 3D model file. To compensate for this coupling, attributes that modify the position, rotation, and scale of the model are added to the component specification. Further attributes are also present, such as a description or the option to ignore collisions for this component. The material specification includes the names of the model's meshes in the attribute \texttt{modelMaterials}, and the color specification features the \texttt{sortIndex} attribute, which determines the presentation order to the user.
 
-In TypeScript, the aggregations depicted in the UML diagram are implemented as records, with the IDs serving as keys and the objects as values. Other associations are implemented using solely IDs. Color values are represented using hex code. The implementation of the product and component specifications can be viewed in Code listing \ref{lst:schema-componentspecification}. Other entities in this section are implemented similarly and therefore do not require detailed previews within the text of the thesis.
+In TypeScript, the aggregations depicted in the UML diagram are implemented as records, with the IDs serving as keys and the objects as values. Other associations are implemented using solely IDs. Color values are represented using hex code. The implementation of the product and component specifications can be viewed in \autoref{lisiting:schema-componentspecification}. Other entities in this section are implemented similarly and therefore do not require detailed previews within the text of the thesis.
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{User creation}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-User creation corresponds to the configuration entity of domain model, but has been renamed in implementation, as \textquote{configuraiton} is an ambiguous term that can mean several things in application development, for example configuration of the application itself. This makes it clearer what this data schema is representing.
-
-User creation is tinted blue in the UML diagram.
-
-\begin{lstlisting}[caption={~User creation schema},label={lst:schema-usercreation},captionpos=b,abovecaptionskip=\medskipamount,belowcaptionskip=\medskipamount]
+\begin{listing}[h]
+\begin{minted}{typescript}
 export const UserComponentSchema = z.object({
   componentSpec: z.string(),
   materials: z.record(z.string()),
@@ -195,13 +204,20 @@ export const UserCreationSchema = z.object({
   base: z.string(),
   components: z.record(UserComponentSchema),
 });
-\end{lstlisting}
+\end{minted}
+\caption{User creation schema}
+\label{lisiting:schema-usercreation}
+\end{listing}
+
+User creation corresponds to the configuration entity of domain model, but has been renamed in implementation, as \texttt{configuraiton} is an ambiguous term that can mean several things in application development, for example configuration of the application itself. This makes it clearer what this data schema is representing.
+
+User creation is tinted blue in the UML diagram.
 
 User creation stores the configured components, as well as the selected base component, which is the first component of the configuration. All other components are mounted on this component or other components.
 
-In contrast to the domain model, the configured component is represented by \textquote{UserComponent}. This configured component links to a component specification that serves as a template. It also stores information about the mounted components, including the specific mounting points where each component is attached, as well as the selected colors of the materials that have been customized.
+In contrast to the domain model, the configured component is represented by \texttt{UserComponent}. This configured component links to a component specification that serves as a template. It also stores information about the mounted components, including the specific mounting points where each component is attached, as well as the selected colors of the materials that have been customized.
 
-In the TypeScript implementation, which can be viewed in the Code listing \ref{lst:schema-usercreation}, the user components are stored in a record with their unique ID as the key. The component specification for each user component is linked by its ID. Information about mounted components are stored in records, with the mounting point specification ID as the key to identify the position and the ID of the user component as the value. Similarly, materials are organized with the material specification ID as the key and the ID of the selected color specification for that material as the value.
+In the TypeScript implementation, which can be viewed in the \autoref{lisiting:schema-usercreation}, the user components are stored in a record with their unique ID as the key. The component specification for each user component is linked by its ID. Information about mounted components are stored in records, with the mounting point specification ID as the key to identify the position and the ID of the user component as the value. Similarly, materials are organized with the material specification ID as the key and the ID of the selected color specification for that material as the value.
 
 
 %______________________________________________________________
