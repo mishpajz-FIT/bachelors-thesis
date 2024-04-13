@@ -58,7 +58,7 @@
 \ProcessOptions\relax
 
 % main declarations, loading files
-\LoadClass[a4paper]{book}[2020/04/10]
+\LoadClass[a4paper,11pt]{book}[2020/04/10]
 \RequirePackage{babel}[2021/03/03]
 \RequirePackage[bottom=4cm,footskip=4em]{geometry}[2020/01/02] %page layout
 \RequirePackage{setspace}[2011/12/19] %line spacing in title page
@@ -207,24 +207,6 @@
   \hspace*{0.67em}\bothIfFirst{#1}{~}#2}
 \captionsetup{labelformat=boxed}
 \captionsetup[table]{position=top}
-
-
-% https://tex.stackexchange.com/questions/95029/add-source-to-figure-caption
-\newcommand*{\captionsource}[2]{%
-  \caption[{#1}]{%
-    #1%
-    \\\hspace{\linewidth}%
-    \textbf{Source:} #2%
-  }%
-}
-% captions settings end
-
-% tables settings
-
-% https://amytabb.com/til/2022/09/01/latex-tabular-multiple-rows-one-cell/
-\newcommand*{\multrow}[1]{\begin{tabular}{@{}l@{}} #1 \end{tabular}}
-
-% tables settings end
 
 % lists settings
 \setlength\leftmargini  \parindent
