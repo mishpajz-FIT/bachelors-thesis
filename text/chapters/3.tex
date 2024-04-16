@@ -123,7 +123,7 @@ export const CatalogueSchema = z.object({
   products: z.record(CatalogueProductSchema),
 });
 \end{minted}
-\caption{Catalogue schema}
+\caption{Data schema of catalogue}
 \label{lisiting:schema-catalogue}
 \end{listing}
 
@@ -173,7 +173,7 @@ export const ProductSpecificationSchema = z.object({
   componentSpecs: z.record(ComponentSpecificationSchema),
 });
 \end{minted}
-\caption{Product and component specification schema}
+\caption{Data schema of product and component specifications}
 \label{lisiting:schema-componentspecification}
 \end{listing}
 
@@ -205,7 +205,7 @@ export const UserCreationSchema = z.object({
   components: z.record(UserComponentSchema),
 });
 \end{minted}
-\caption{User creation schema}
+\caption{Data schema of user creation}
 \label{lisiting:schema-usercreation}
 \end{listing}
 
@@ -270,7 +270,7 @@ export const Component = ({ componentId }) => {
   );
 };
 \end{minted}
-\caption{Component visualization implementation}
+\caption{Implementation of component visualization}
 \label{lisiting:impl-visulaization1}
 \end{listing}
 
@@ -323,7 +323,7 @@ Changing the colors of the materials is facilitated through the side panel. The 
   })}
 </group>
 \end{minted}
-\caption{Model composition implementation}
+\caption{Implementation of model composition}
 \label{lisiting:impl-modelcomposition}
 \end{listing}
 
@@ -379,7 +379,7 @@ export function collisionDetection(
   return collisionDetected;
 }
 \end{minted}
-\caption{Collision detection simplified implementation}
+\caption{Implementation of collision detection}
 \label{lisiting:impl-collisiondetection}
 \end{listing}
 
@@ -398,7 +398,7 @@ export const ContactInfoSchema = z.object({
   note: z.string().max(10000).optional(),
 });
 \end{minted}
-\caption{Contact information schema}
+\caption{Data schema of contact information}
 \label{listing:schema-contactinformation}
 \end{listing}
 
@@ -439,7 +439,7 @@ fetch(globalConfigUrl)
         );
   });
 \end{minted}
-\caption{Application config fetch and initialization implementation}
+\caption{Implementation of application initialization and config loading}
 \label{listing:impl-applicationconfig}
 \end{listing}
 
@@ -461,12 +461,130 @@ As part of the implementation, a default template localization in English is pro
 
 \subsection{Routing}
 
-Routing is performed using React Router library, which choice was discussed in \autoref{section:react-router}. 
+Routing within the application is performed using the React Router library, based on a choice discussed in \autoref{section:react-router}.
+
+Routes are split based on the three main screens designed using wireframes in \autoref{section:wireframes}. The routing pattern is implemented as follows:
+
+\begin{itemize}[label=\rectanglebullet]
+    \item Route \texttt{/} navigates to the introductory screen
+    \item Route \texttt{/editor/:productId} navigates to the screen with the configuration process itself. The parameter of product ID denotes the product int the catalog.
+    \item Route \texttt{/confirm/:productId} navigates to the confirmation screen using the same product ID as in the configuration process.
+\end{itemize}
+
+Routing helps the user navigate the application better, as forward and backward browser actions are possible, meaning that users can return from the confirmation screen to the configuration screen by clicking back; this means that the browsing history is preserved. Navigation between screens occurs without page refreshes, maintaining a seamless user experience.
+
+From an implementation standpoint, the utilization of different screens is also simplified, as they are managed centrally by the router, and are defined declaratively. 
+
+Errors are handled by the router as well, as if there is any issue that throws an unrecoverable error during the runtime of the application, it is intercepted by the router and an error screen is displayed.
 
 \subsubsection{Data flow}
 
-\subsection{Catalogue management}
+As the application follows a specific flow between the three routes during usage, there is also some data manipulation closely tied to this. Data flow is managed by the loader functions that are executed when accessing each route. This is necessary to ensure that the application handles transitions smoothly and maintains data integrity throughout the user's session.
+
+In the introductory screen route, the catalog is fetched into the memory to allow users to choose which product to configure.
+
+The configuration screen route fetches the product specification based on the ID specified within the route and prepares the user creation. In case the introductory screen is not opened and users navigate directly to this route, the catalog is fetched beforehand, as well to ensure that all necessary data is available.
+
+Furthermore, in the confirmation screen route, it is verified that some user configuration with this product ID was created. If not, the user is redirected to the configuration screen. 
+
+The error screen is displayed if there are any discrepancies during the routing process, such as if the route requests a product that does not exist in the catalog.
+
+\subsection{Catalog management} \label{section:catalog-management}
+
+As outlined in the previous sections, the toolkit is structured into two separate applications: the user-facing configuration and the administrator application. This approach aligns with requirement \hyperref[itm:F16]{F16}, which demands that catalog management should be visual rather than relying on direct file editing, and should mirror the preview visible during the configuration process. Furthemore, this also addresses the requirement \hyperref[itm:F17]{F17}, so that the properties of the products within the catalog are easily manageable.
+
+The administrator application is organized into two screens, each tailored for specific management tasks, which is reflected in its routing patterns, which are as follows:
+\begin{itemize}[label=\rectanglebullet]
+    \item Route \texttt{/catalogcomposer} and \texttt{/} navigates to a catalog composer screen, which provides a interface for editing the catalog data schema. In essence, it serves to modify the JSON file that contains the catalog using a visually appealing and user-friendly approach. The interface is based on structured forms that, compared to composing the file manually, enhance the efficiency and prevent errors. 
+    
+    \item Route \texttt{/productcomposer} navigates to a product composer screen that serves to set up component specifications and their properties. The interface of product composer aims to mirror the interface of the main application during the configuration process, but has an additional side panel on the left, which is utilized to add and remove component specifications. Selecting a component specification displays its model in the 3D preview area, while the side panel, which is used during the configuration process to present detailed information, offers settings for all attributes of the component specification, such as position, rotation, scale, mounting points, and materials.
+\end{itemize} 
+    
+For visual editing of positioning within the product composer's 3D preview, Drei's \texttt{PivotControl} is used, which displays interactive three-axis arrows for adjusting position and rotation of the component specifications. Interacting with this control immediately stores the new values in the underlying Valtio proxy, meaning the changes are immediately reflected in both the 3D preview and the side panel, where the corresponding values are displayed in input fields. 
+
+Given that no back-end has been implemented, the administrator application does not feature a save button. Instead, the capability to export the relevant JSON files containing the specified data schemas is provided. In addition, import of these already existing files is also possible, which provides flexibility and eases modifications.
+
+The admin application is used when administrators need to update configuration specifications or manage catalog settings. The implementation is done in such a way that future back-end integration tying the main and administrator applications should be possible if the need and opportunity arise.
+
 
 %______________________________________________________________
 \section{Views}
 %______________________________________________________________
+
+This section presents the visual aspect of the implemented views and screens, which are based on the wireframes described in \autoref{section:wireframes}. The implemented interfaces are shown using screenshots, providing a visual confirmation of the design's adherence to the designed wireframes and demonstrating the application of the design concepts discussed earlier.
+
+The choice of technologies (such as TailwindCSS) was paramount to this task, as it greatly facilitated the straightforward implementation of responsive design, making sure that the application performs well across a variety of device sizes and resolutions, as well as the accessibility features, such as automatic support for dark mode.
+
+\subsection{Configurator application}
+
+In the following section, screenshots of the three screens that were described using the wireframes are displayed. The interface is shown only in its light-mode version, given that the dark mode is identical, only with an inverted color scheme.
+
+\subsubsection{Introductory screen}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/screenshot_introduction.png}
+\caption{Screenshot of introduction screen}
+\label{fig:screenshot-introduction}
+\end{figure}
+
+The implemented introductory screen is presented in \autoref{fig:screenshot-introduction}. The implementation adheres closely to the designed wireframe. The background color of the main section differentiates this part from the top bar and enhances the visibility of the tiles.
+
+\todo{Replace logo with logo of the application.}
+For demonstration purposes, the screenshots feature a mocked product loaded from the catalog, and the title bar displays a fictional logo of a business, which is clickable and leads to a homepage of the business, adjustible in the application settings.  
+
+\subsubsection{Configuration screen}
+
+The screenshot of the implemented configuration screen is presented in \autoref{fig:screenshot-configuration}.
+
+The screenshot captures the interface during the ongoing configuration process with mocked products, illustrating the layout that includes an expanded side panel. The 3D preview displays the configured components that have been added to the user creation, along with spatial buttons for adding additional components. The selected component is highlighted using black edges.
+
+The side panel shows more details about the selected component, along with the options to change the color of its material, to remove it, or to change it.
+
+A button located in the upper left corner of the preview allows for resetting the camera angle, while the buttons at the bottom center are dedicated to undo and redo actions. This is a slight deviation from the wireframe, as placing the important action buttons here seems more convenient than in the upper left.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/screenshot_configurator.png}
+\caption{Screenshot of configuration screen}
+\label{fig:screenshot-configuration}
+\end{figure}
+
+\subsubsection{Confirmation screen}
+
+The implementation of the confirmation screen again closely follows the designed wireframe, as shown in \autoref{fig:screenshot-confirmation}.
+
+The screenshot contains a list of configured components for a mocked product, each displaying the details in the form of selected color of their material.
+
+The panel on the right side, which contains the different buttons, is floating; therefore, it stays fixed in the same position even if the page is scrolled. The panel contains back and confirm buttons, as well as a button for printing the component list visible on the left.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/screenshot_confirmation.png}
+\caption{Screenshot of confirmation screen}
+\label{fig:screenshot-confirmation}
+\end{figure}
+
+\subsection{Administrator application}
+
+This section presents the interfaces of the administrator application, which is described in more detail in the previous sections (see \autoref{section:catalog-management}).
+
+\subsubsection{Catalog composer}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/screenshot_catalogcomposer.png}
+\caption{Screenshot of catalog composer screen}
+\label{fig:screenshot-catalogcomposer}
+\end{figure}
+
+\subsubsection{Product composer}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/screenshot_productcomposer.png}
+\caption{Screenshot of product composer screen}
+\label{fig:screenshot-produtcomposer}
+\end{figure}
+
+\section{Summary of implementation}
