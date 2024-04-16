@@ -74,13 +74,13 @@ The following is a brief overview of the \texttt{src} directories, which organiz
 }
 \vspace{16pt}
 
-\todo{Unimplement baseSpec and prices in code, change size in MaterialSpecification in UML, change color of materials and mounted in UML, rename catalogue to catalog everywhere, add optional attributes in uml, id an product schema}
+\todo{Unimplement baseSpec in code, reference productspecification in usercreation, change size in MaterialSpecification in UML, change color of materials and mounted in UML, rename catalogue to catalog everywhere, add optional attributes in uml, id an product schema}
 
 %______________________________________________________________
 \section{Data schemas}
 %______________________________________________________________
 
-The data schemas are derived from the domain model discussed in \autoref{domain-model}. These schemas define the shape of the objects that are used to transfer and store information within the tool. 
+The data schemas are derived from the domain model discussed in \autoref{section:domain-model}. These schemas define the shape of the objects that are used to transfer and store information within the tool. 
 
 To visualize these schemas, a UML diagram is provided in \autoref{fig:data-schema}. The diagram provides a general overview of utilized the structures and associations, but the implementation requires slight adjustments.
 
@@ -88,7 +88,7 @@ Data schemas are stored in the shared library discussed in the previous section.
 
 The schemas are organized into three separate parts: Catalog, product specification, and user creation. Each of these parts corresponds to a separate file in the shared library, in addition to their different roles within the application. The parts are discussed in the following sections, and the UML diagram in \autoref{fig:data-schema} provides color coding to differentiate them.
 
-As discussed in \autoref{zod}, the implementation of data schemas utilizes the Zod validation library, which allows straightforward validation of the shape of the data during parsing. TypeScript types are then easily created from these Zod schemas, which is illustrated in \autoref{listing:zod}. \cite{Wycliffe2023} 
+As discussed in \autoref{section:zod}, the implementation of data schemas utilizes the Zod validation library, which allows straightforward validation of the shape of the data during parsing. TypeScript types are then easily created from these Zod schemas, which is illustrated in \autoref{listing:zod}. \cite{Wycliffe2023} 
 
 \begin{landscape}
 \begin{figure}[h]
@@ -224,22 +224,245 @@ In the TypeScript implementation, which can be viewed in the \autoref{lisiting:s
 \section{Challenges and solutions}
 %______________________________________________________________
 
+During the implementation phase of the project, various challenges emerged. This section touches on these challenges, detailing both the issues encountered and the innovative solutions used to overcome them. The majority of these challenges were related to the implementation of the defined requirements. Examining these obstacles offers valuable insight into the software engineering involved in the development of product configurators.
+
+
 \subsection{Component visualization}
+
+The implementation of component visualization primarily stems from requirement \hyperref[itm:F1]{F1}, which mandates a 3D visualization of the configured product while employing realistic models. The solution is shaped by the chosen 3D technology (see \autoref{section:3Dvistech}), primarily R3F library supported by Three.js, and the created data scheme described in the previous section.
+
+\begin{listing}[h!]
+\begin{minted}{typescript}
+export const Component = ({ componentId }) => {
+  const { 
+    component, componentSpec
+  } = useComponent(componentId);
+
+  return (
+    <group name={componentId
+    }>
+      <ComponentModel componentId={componentId} />
+
+      {Object.entries(componentSpec.mountingPointsSpecs).map(
+        ([mountingPointSpecId, mountingPoint]) => {
+          const mountedComponentId = component
+            .mounted[mountingPointSpecId];
+
+          return (
+            <group
+              key={mountingPointSpecId}
+              position={mountingPoint.position}
+              rotation={mountingPoint.rotation}
+            >
+              {mountedComponentId ? (
+                <Component componentId={mountedComponentId} />
+              ) : (
+                <MountingPointButton
+                  componentId={componentId}
+                  mountingPointSpecId={mountingPointSpecId}
+                />
+              )}
+            </group>
+          );
+        }
+      )}
+    </group>
+  );
+};
+\end{minted}
+\caption{Component visualization implementation}
+\label{lisiting:impl-visulaization1}
+\end{listing}
+
+A simplified version of the implementation is illustrated in \autoref{lisiting:schema-componentspecification}. The group feature of R3F library is utilized for effective position and rotation composition. The component is primarily made up of this group, which integrates the model and the mounting points of the component.
+
+Inside \texttt{ComponentModel}, the 3D model is loaded from a GLTF file, a format which can fully represent 3D objects widely used in web applications and greatly supported in the Three.js library. The position, rotation and scale of the model is adjusted by the values stored in the component specification, using a nested R3F group, which can be previewed in \autoref{lisiting:impl-modelcomposition}.
+
+Considering that configured components (other than the base) are mounted on top of each other, a recursive approach is employed to manage this hierarchical structure and mapping between the data schema and the visualization. Therefore, for each mounting point defined in the component specification, a nested group is utilized to adjust the position and rotation according to the mounting point specification. If a component is attached to this mounting point, it is recursively inserted into the group; otherwise, a spatial button is displayed at this place to facilitate the addition of the component. 
+
+This recursive nesting ensures that each mounted component's position and rotation are automatically adjusted through the group composition, eliminating the need for direct calculation of these values. The simplification this offers significantly outweighs the minor performance impact introduced by recursion.
+
+Properties are managed through Valtio proxies using custom hook \texttt{useComponent}, therefore whenever the underlying state changes, the interface including the 3D elements immediately redraws.
+All components are placed within an R3F \texttt{canvas} element. The orbital camera controls needed by the requirement \hyperref[itm:F2]{F2} are done using \texttt{OrbitControls} Three.js element integrated using Drei library, which is placed within the canvas and offers standard orbital camera controls.
+
 \subsubsection{Component interactivity}
+
+To meet the requirement \hyperref[itm:F4]{F4}, which enables users to select components directly within the visualization, an \texttt{onClick} event is utilized on the group containing the model. Upon clicking a component, a side panel is presented that displays detailed information about the selected component. To visually highlight the selected component in the visualization, an outline of the model is created using the \texttt{Edges} element from the Drei library, which is included within the same group as the model. The color of the outline can be configured by the application administrator. Additionally, an \texttt{ onPointerMissed} event employed on the canvas allows to deselect the component by clicking on the background.
 
 \subsection{Model material change}
 
+To fulfill the requirement \hyperref[itm:F8]{F8}, which allows users to modify the appearance of materials in a component, there must be a mechanism that allows the colors of parts of the model to be changed within the preview. Each GLTF file with model contains meshes and default materials. When the user changes the color of a material, the model needs to be decomposed into its atomic parts. This allows for each part's material to be found and adjusted. 
+
+In the implementation, which is in a simplified form presented in \autoref{lisiting:impl-modelcomposition}, it is iterated through all meshes and materials of the model, replacing the default materials for the customized ones whenever needed. As a result of this approach, the model is not inserted into the scene at once, but instead every mesh is included separately along with the corresponding material. This is achieved using the group where all the meshes of the model reside, which as mentioned in the previous section also changes the position, rotation, and scale of the model.
+
+Changing the colors of the materials is facilitated through the side panel. The new color value is stored in a Valtio proxy, from which it is read when composing the 3D model, ensuring dynamic updates of the visual preview whenever the user makes changes.
+
+\begin{listing}[h!]
+\begin{minted}{typescript}
+<group
+  onClick={onSelect}
+  position={componentSpec.positionOffset}
+  rotation={componentSpec.rotationOffset}
+  scale={componentSpec.scaleOffset}
+>
+  {Object.entries(model).map(([name, node]) => {
+    if (node.type === "Mesh") {
+      const mesh = node as Mesh;
+      const material =
+        customMaterials[mesh.material.name] 
+        || materials[mesh.material.name];
+
+      return (
+        <mesh
+          key={name}
+          geometry={mesh.geometry}
+          material={material}
+        />
+      );
+    }
+  })}
+</group>
+\end{minted}
+\caption{Model composition implementation}
+\label{lisiting:impl-modelcomposition}
+\end{listing}
+
 \subsection{Undo and redo actions}
+
+Undo and redo actions enable users to revert the changes made during the configuration process, fulfilling the requirement \hyperref[itm:F13]{F13}. Buttons for these actions are intuitively designed as forward and backward arrows and are placed around the preview view.
+
+Since the user's creation is stored in a Valtio proxy during the configuration process, the implementation of this feature is straightforward. Valtio provides an enhanced version of the proxy that maintains a history in the form of snapshots and includes callable undo and redo functions. The management of snapshots is smart, as multiple actions performed immediately after each other are considered to be aggregated within one snapshot. This is particularly useful for this application, since, for example, the addition of a new component consists of two operations: the creation of a new component in the store and then mounting it on a point on another component, which is correctly considered as only one snapshot. Therefore, except for the setup of the initial snapshot, this implementation approach did not need any additional adjustments.
 
 \subsection{Collision detection}
 
+Collision detection is necessary for preventing impossible configurations by disallowing physically overlaping components. This feature directly addresses the requirement \hyperref[itm:F7]{F7}. As the shapes of the components can be highly complicated, the method for detecting collisions needs to be based on the 3D preview working directly with the component models.
+
+Three.js provides a bounding-box method (where each model is considered to be cube shaped, and overlaps are determined based on these primitive shapes), which is far too simple for complex shapes and large amounts of models; therefore, a more sophisticated approach was needed. 
+
+The three-mesh-bvh package extends the Three.js library by providing an implementation of a bounding volume hierarchy (BVH) tree, which enables efficient shape intersection queries for high-definition meshes. \cite{Johnson2023}
+
+To compute the bounds tree, the entire scene is wrapped in a \texttt{bvh} element from the Drei library, which performs this computation on each mesh. Collision detection is performed for all mountable components at every unoccupied mounting point whenever there are additions or removals of user-created components or when attempting to swap the configured component. To do so, the model of the component is loaded, adjusted by values in component specification, and its position is set to the potential mounting location in the scene. This is not visible in the preview to the user and is performed using standard Three.js code. 
+
+Then, each mesh of the model is queried on geometry collision against the meshes of existing components in the preview, excluding the component containing the mounting point. This exclusion happens because, when a mounting point exists, even if there is a collision with the owning component, all defined mountable components should be allowed to be mounted. In addition, the administrator of the tool can exclude certain type of components from all collision calculations by specifying this in the component specification. Collision sensitivity can also be adjusted for each component specification. Setting this option to low sensitivity causes the loaded model that is checked for collisions with the scene to be slightly reduced in size, meaning close fits are more likely to pass.
+
+In case the model collides with existing components in the scene, the option to add the component to the configuration is not presented to the user.
+
+A highly simplified implementation that illustrates this principle can be seen in \autoref{lisiting:impl-collisiondetection}. Although the collision detection is highly computationally intensive, it is performed only after specific user actions, which are not supposed to be very frequent; therefore, the possible performance hit is deemed acceptable given its benefits.
+
+\begin{listing}[h!]
+\begin{minted}{typescript}
+export function collisionDetection(
+  model: THREE.Group,
+  scene: THREE.Scene
+): boolean {
+  const collisionDetected = false;
+
+  traverseMeshes(model, (modelMesh) => {
+    traverseMeshes(scene, (sceneMesh) => {
+      const transformMatrix = new THREE.Matrix4()
+        .copy(sceneMesh.matrixWorld)
+        .invert()
+        .multiply(modelMesh.matrixWorld);
+
+      if (
+        (sceneMesh.geometry as BVHBufferGeometry)
+          .boundsTree.intersectsGeometry(
+            modelMesh.geometry,
+            transformMatrix
+          )
+      ) {
+        collisionDetected = true;
+      }
+    });
+  });
+
+  return collisionDetected;
+}
+\end{minted}
+\caption{Collision detection simplified implementation}
+\label{lisiting:impl-collisiondetection}
+\end{listing}
+
 \subsection{Configuration confirmation}
-\subsubsection{Inquiry form}
+
+For the implemented tool to be useful, there needs to be a mechanism that will facilitate performing further actions with the user's configuration when the configuration process finishes. This is in accordance with the requirement \hyperref[itm:F10]{F10}.
+
+As needed by requirement \hyperref[itm:F9]{F9} and discussed previously, after completion of the product configuration, users are presented with a summary screen that details the selected options. To save the configuration for future reference in a readable way, a button has been introduced that enables saving this summary to PDF. Implementation of this button action needed to be done on the front-end and utilizes the HTML print API.
+
+\begin{listing}[h!]
+\begin{minted}{typescript}
+export const ContactInfoSchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  phone: z.string().max(20).optional(),
+  note: z.string().max(10000).optional(),
+});
+\end{minted}
+\caption{Contact information schema}
+\label{listing:schema-contactinformation}
+\end{listing}
+
+The administrator of the tool can define the confirmation action in the catalog. If such an action is defined, it must include an endpoint URL to ensure that these actions can be executed. The supported confirmation actions are as follows:
+
+\begin{enumerate}
+    \item \textbf{Preview}: This is the default behavior if no confirmation action is defined. In this case, the confirmation button is not presented to the user at all, and the configurator serves only as a preview tool. The URL of the endpoint is also not defined.
+    \item \textbf{Redirect}: This action allows for a simple flow where clicking the confirmation button redirects the user to the chosen URL.
+    \item \textbf{POST request}: Upon clicking the confirmation button, the user configuration, in the form of the user creation data schema presented in the previous sections, is sent using a POST request to the defined endpoint URL. The user creation is sent as a JSON in the body of the request. In order to present the result of this action as a success to the user, the response must return OK. Optionally, the response can contain a JSON body with valid URL as the \texttt{redirectUrl} field. If this is the case, and the request has been successful, users will be redirected to this returned URL, otherwise, the tool returns to the initial view. This mechanic facilitates possible integration with back-end systems or serverless functions for further processing.
+    \item \textbf{Inquiry form}: This action presents the user with an inquiry form asking for their contact information, such as name, email, phone number, and additional notes. This fulfills the requirement \hyperref[itm:F11]{F11}. When the form is sent, the process is identical to the POST request case, with the difference that the request contains the user contact details in the JSON payload under the field \texttt{contact}. This allows for direct creation of inquiries without the need for users to navigate away from the application. The structure of the contact data schema is detailed in \autoref{listing:schema-contactinformation}.
+\end{enumerate}
+
 
 \subsection{Application configuration}
+
+Application configuration is central for setting the behavior and appearance of the tool so that the individual preferences of the operator are met. Given that the solution is designed for adaptability, it is essential to provide extensive setup options. These settings are managed by the administrator of the application, allowing them to tailor the application without the need to change the code directly. This also helps to fulfill the interface customization requirement \hyperref[itm:F14]{F14}.
+
+\begin{listing}[h!]
+\begin{minted}{typescript}
+fetch(globalConfigUrl)
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    globalConfig.config = AppConfigSchema.parse(data);
+  })
+  .then(() => {
+    ReactDOM.createRoot(document.getElementById("root")!)
+        .render(<App />);
+  })
+  .catch((error) => {
+    console.error(error);
+    ReactDOM.createRoot(document.getElementById("root")!)
+        .render(
+            <p className="text-red-600">
+              Fatal error: couldn&apos;t initialize appconfig.
+            </p>
+        );
+  });
+\end{minted}
+\caption{Application config fetch and initialization implementation}
+\label{listing:impl-applicationconfig}
+\end{listing}
+
+As the tool is front-end-based, its configuration is handled using a JSON file. The file is fetched at the start of the application, before React is even initialized, from location \texttt{/appconfig.json}. This ensures that the configuration is not baked in the application, rather it is refreshed each time the application is accessed, meaning that the administrator can update the settings without the need to redeploy the entire application, which supports the maintainability requirement (\hyperref[itm:NF5]{NF5}). The implementation of the application initialization with the fetch of the config can be seen in \autoref{listing:impl-applicationconfig}.
+
+The config file includes the URL with the location of catalog (which is therefore also fetched at runtime, allowing for live updates), toggles for features, settings of the 3D preview, and color settings for the tint of the interface, meaning unless larger customization is required, there is no need for CSS modifications. It also includes locations of images such as logos or favicons, as well as the title of the website.
+
 \subsubsection{Interface texts}
 
+As described in \autoref{section:i18n}, the i18next library was chosen for localization. This addresses the multilingual support requirement (\hyperref[itm:NF8]{NF8}), as well as simplifies the interface text customization requirement (\hyperref[itm:F15]{F15}).
+
+The library is setup in such a way that it expects for all localization files to be located in \texttt{/locales/\{language\}/translation.json}, where \texttt{\{language\}} is a two-letter language code. This structure allows simple addition of further languages without impact in rest of the tool functionality, as the applicaiton performs automatic lookup for these translation files. One language needs to be designated as the default localization in the general config file, which serves as the fallback.
+
+Like the the general config file, the translation files are loaded at runtime, therefore changes to the interface texts or additions of new localizations can be performed without redeploying of the application.
+
+The application attempts to automatically choose the correct language based on the detected browser settings, but also allows users to override this selection via a two-letter parameter in the \texttt{?lng=} query of any URL in the application.  
+
+As part of the implementation, a default template localization in English is provided, providing a baseline.
+
 \subsection{Routing}
+
+Routing is performed using React Router library, which choice was discussed in \autoref{section:react-router}. 
+
 \subsubsection{Data flow}
 
 \subsection{Catalogue management}
