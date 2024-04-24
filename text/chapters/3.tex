@@ -157,6 +157,7 @@ export const ComponentSpecificationSchema = z.object({
     [z.number(), z.number(), z.number()]).optional(),
   ignoreCollisions: z.boolean().optional(),
   collisionSensitivity: z.number().min(50).max(100).optional(),
+  sortIndex: z.number().optional(),
 });
 
 export const ProductSpecificationSchema = z.object({
@@ -174,7 +175,9 @@ The schemas are also derived from the domain model, although with some modificat
 
 Most of the concepts in this part are identical to the domain model; however, the new concept of \texttt{base} component is introduced here. Due to the modularity principle, each component is in some way mounted on another component. Base components are such components that can initiate the configuration as they are not mounted to other components. They represent the potentially first component of a configuration. These base components are defined in the product specification.
 
-In the data schema, the model is directly included in the component specification, with the \texttt{modelUrl} attribute pointing to a location with the 3D model file. To compensate for this coupling, attributes that modify the position, rotation, and scale of the model are added to the component specification. Further attributes are also present, such as a description or the option to ignore collisions for this component. The material specification includes the names of the model's meshes in the attribute \texttt{modelMaterials}, and the color specification features the \texttt{sortIndex} attribute, which determines the presentation order to the user.
+In the data schema, the model is directly included in the component specification, with the \texttt{modelUrl} attribute pointing to a location with the 3D model file. To compensate for this coupling, attributes that modify the position, rotation, and scale of the model are added to the component specification. The component specification as well as the color specification include the \texttt{sortIndex} attribute, which determines the presentation order to the user, with lower number having higher priority. Further attributes are also present, such as a description or the option to ignore collisions for this component.
+
+The material specification includes the names of the model's meshes in the attribute \texttt{modelMaterials}. And the color specification includes the color value.
 
 In TypeScript, the aggregations depicted in the UML diagram are implemented as records, with the IDs serving as keys and the objects as values. Other associations are implemented using solely IDs. Color values are represented using hex code. The implementation of the product and component specifications can be viewed in \autoref{lisiting:schema-componentspecification}. Other entities in this section are implemented similarly and therefore do not require detailed previews within the text of the thesis.
 
@@ -290,39 +293,42 @@ To meet the requirement \hyperref[itm:F4]{F4}, which enables users to select com
 \subsection{Model Material Change}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-To fulfill the requirement \hyperref[itm:F8]{F8}, which allows users to modify the appearance of materials in a component, there must be a mechanism that allows the colors of parts of the model to be changed within the preview. Each GLTF file with model contains meshes and default materials. When the user changes the color of a material, the model needs to be decomposed into its atomic parts. This allows for each part's material to be found and adjusted. 
+To fulfill the requirement \hyperref[itm:F8]{F8}, which allows users to modify the appearance of materials in a component, there must be a mechanism that allows to change the colors of parts of the model within the preview. Each GLTF file with model contains meshes and default materials. When the user changes the color of a material, the model needs to be decomposed into its atomic parts. This allows for each part's material to be found and adjusted. 
 
-In the implementation, which is in a simplified form presented in \autoref{lisiting:impl-modelcomposition}, it is iterated through all meshes and materials of the model, replacing the default materials for the customized ones whenever needed. As a result of this approach, the model is not inserted into the scene at once, but instead every mesh is included separately along with the corresponding material. This is achieved using the group where all the meshes of the model reside, which as mentioned in the previous section also changes the position, rotation, and scale of the model.
+In the implementation, which is in a simplified form presented in \autoref{lisiting:impl-modelcomposition}, it is iterated in a recursive manner through all meshes of the model, replacing the default materials for the customized ones whenever needed. 
+
+As a result of this approach, the model is not inserted into the scene at once, but instead every mesh is included separately along with the corresponding material. This is achieved using the group where all the meshes of the model reside, which as mentioned in the previous section also changes the position, rotation, and scale of the model.
 
 Changing the colors of the materials is facilitated through the side panel. The new color value is stored in a Valtio proxy, from which it is read when composing the 3D model, ensuring dynamic updates of the visual preview whenever the user makes changes.
 
 \begin{listing}[h!]
 \begin{minted}{typescript}
-<group
-  onClick={onSelect}
-  position={componentSpec.positionOffset}
-  rotation={componentSpec.rotationOffset}
-  scale={componentSpec.scaleOffset}
->
-  {Object.entries(model).map(([name, node]) => {
-    if (node.type === "Mesh") {
-      const mesh = node as Mesh;
-      const material =
-        customMaterials[mesh.material.name] 
-        || materials[mesh.material.name];
-
-      return (
-        <mesh
-          key={name}
-          geometry={mesh.geometry}
-          material={material}
-        />
-      );
-    }
-  })}
-</group>
+export const Render = ({
+  object,
+  materialOverrides
+}: RenderProps) => {
+  if (object.type === "Group" || object.type === "Object3D") {
+    return (
+      <group data={object.data}>
+        {object.children.map((child) => (
+          <Render
+            object={child}
+            materialOverrides={materialOverrides}
+          />
+        ))}
+      </group>
+    );
+  } else if (object.type === "Mesh") {
+    return (
+      <mesh
+        material={getMaterial(mesh.material, materialOverrides) 
+        data={object.data}}
+      />
+    );
+  }
+};
 \end{minted}
-\caption{Implementation of model composition}
+\caption{Preview of model composition implementation}
 \label{lisiting:impl-modelcomposition}
 \end{listing}
 
@@ -384,7 +390,7 @@ export function collisionDetection(
   return collisionDetected;
 }
 \end{minted}
-\caption{Implementation of collision detection}
+\caption{Preview of collision detection implementation}
 \label{lisiting:impl-collisiondetection}
 \end{listing}
 
@@ -402,7 +408,7 @@ As needed by requirement \hyperref[itm:F9]{F9} and discussed previously, after c
 export const ContactInfoSchema = z.object({
   name: z.string(),
   email: z.string().email(),
-  phone: z.string().max(20).optional(),
+  phone: z.string().max(26).optional(),
   note: z.string().max(10000).optional(),
 });
 \end{minted}
@@ -436,20 +442,22 @@ fetch(globalConfigUrl)
     globalConfig.config = AppConfigSchema.parse(data);
   })
   .then(() => {
-    ReactDOM.createRoot(document.getElementById("root")!)
-        .render(<App />);
+    const i18n = configureI18n();
+    const router = createBrowserRouter(routes);
+    root.render(
+      <React.StrictMode>
+        <App i18n={i18n} router={router} />
+      </React.StrictMode>
+    );
   })
   .catch((error) => {
     console.error(error);
-    ReactDOM.createRoot(document.getElementById("root")!)
-        .render(
-            <p className="text-red-600">
-              Fatal error: couldn&apos;t initialize appconfig.
-            </p>
-        );
+    root.render(
+      <p className="text-red-600">Fatal error</p>
+    );
   });
 \end{minted}
-\caption{Implementation of application initialization and config loading}
+\caption{Preview of application initialization and config loading implementation}
 \label{listing:impl-applicationconfig}
 \end{listing}
 
@@ -458,6 +466,8 @@ As the tool is front-end-based, its configuration is handled using a JSON file. 
 This may increase the First Contentful Paint (FCP) metric, which measures the time it takes to display anything on screen during the loading of the application. \cite{Walton2023}
 
 However, in this case, the impact is minimal, as the resource is relatively small, and located in the same location as the rest of the application.
+
+Right after the config file is fetched, libraries for routing and internationalization are prepared. Then, React and the rest of the app is initialized. 
 
 The config file includes the URL with the location of catalog (which is therefore also fetched at runtime, allowing for live updates), toggles for features, settings of the 3D preview, and color settings for the tint of the interface, meaning unless larger customization is required, there is no need for CSS modifications. It also includes locations of images such as logos or favicons, as well as the title of the website.
 
@@ -469,9 +479,9 @@ As described in \autoref{section:i18n}, the i18next library was chosen for local
 
 The library is setup in such a way that it expects for all localization files to be located in \texttt{/locales/\{language\}/translation.json}, where \texttt{\{language\}} is a two-letter language code. This structure allows simple addition of further languages, as the applicaiton performs automatic lookup for these translation files. Only the general config file needs to be updated with the list of available languages. Additionally, one language must be designated as the default localization in the general config file, which will serve as the fallback.
 
-Like the the general config file, the translation files are loaded at runtime, therefore changes to the interface texts or additions of new localizations can be performed without redeploying of the application.
+Like the general config file, the translation files are loaded at runtime, therefore changes to the interface texts or additions of new localizations can be performed without redeploying of the application.
 
-The application attempts to automatically choose the correct language based on the detected browser settings, but also allows users to override this selection via a two-letter parameter in the \texttt{?lng=} query of any URL in the application.  
+The application attempts to automatically choose the correct language based on the detected browser settings, but also allows users to override this selection via a two-letter parameter in the \texttt{?lng=} query of any URL in the application. Language is also changeable using a menu.
 
 As part of the implementation, a default template localization in English is provided, providing a baseline.
 
@@ -561,6 +571,8 @@ For demonstration purposes, the screenshots feature a mocked product loaded from
 
 The implemented introductory screen is presented in \autoref{fig:screenshot-introduction}. The implementation adheres closely to the designed wireframe. The background color of the main section differentiates this part from the top bar and enhances the visibility of the tiles.
 
+Compared to the wireframes, the top bar also includes a settings button on the right, allowing users to choose theme or language.
+
 
 %______________________________________________________________
 \subsubsection{Configuration Screen}
@@ -574,11 +586,11 @@ The screenshot of the implemented configuration screen is presented in \autoref{
 \label{fig:screenshot-configuration}
 \end{figure}
 
-The screenshot captures the interface during the ongoing configuration process with mocked products, illustrating the layout that includes an expanded side panel. The 3D preview displays the configured components that have been added to the user creation, along with spatial buttons for adding additional components. The selected component is highlighted using black edges.
+The screenshot captures the interface during the ongoing configuration process with mocked products, illustrating the layout that includes an expanded side panel. The 3D preview displays the components that have been configured by the user, along with spatial buttons for adding additional components. The selected component is highlighted using black edges.
 
 The side panel shows more details about the selected component, along with the options to change the color of its material, remove it, or change it.
 
-A button located in the upper left corner of the preview allows for resetting the camera angle, while the buttons at the bottom center are dedicated to undo and redo actions. This is a slight deviation from the wireframe, as placing the important action buttons here seems more convenient than in the upper left.
+A buttons located in the upper left corner of the preview allow for resetting the camera angle or hiding spatial buttons, while the buttons at the bottom center are dedicated to undo and redo actions. This is a slight deviation from the wireframe, as placing the important action buttons here seems more convenient than in the upper left.
 
 
 %______________________________________________________________
@@ -586,7 +598,7 @@ A button located in the upper left corner of the preview allows for resetting th
 
 The implementation of the confirmation screen again closely follows the designed wireframe, as shown in \autoref{fig:screenshot-confirmation}.
 
-The screenshot contains a list of configured components for a mocked product, each displaying the details in the form of selected color of their material.
+The screenshot contains a list of configured components for a mocked product, optionally displaying the details in the form of selected colors of their materials.
 
 The panel on the right side, which contains the different buttons, is floating; therefore, it stays fixed in the same position even if the page is scrolled. The panel contains back and confirm buttons, as well as a button for printing the component list visible on the left.
 
@@ -604,7 +616,7 @@ The panel on the right side, which contains the different buttons, is floating; 
 
 This section presents the interfaces of the administrator application, which is described in more detail in the previous sections (see \autoref{section:catalog-management}).
 
-For demonstration purposes, the screenshots here include the same mocked product featured in the configurator application screenshots.
+For demonstration purposes, the screenshots included here feature mocked-up products being prepared for use in the configurator application
 
 The top bar in the administrator application includes a toggle switch between the two screens: Catalog Composer and Product Composer.
 
@@ -620,7 +632,7 @@ The top bar in the administrator application includes a toggle switch between th
 \end{figure}
 
 
-The screen presents catalog entries as tiles, each containing a form with editable fields of the catalog product. These entries are easily added using a button on the top right, or removed using a button within the tile.
+The screen presents catalog entries as tiles, each containing a form with editable fields of the catalog product. These entries are easily added using a button on the top right, or removed using a button within the tile, or button that removes all components at the bottom.
 
 The catalog can be downloaded as a JSON file using an export button located at the bottom of the screen. Furthermore, the catalog can be imported from JSON using an import button. The exported file can then be utilized in the user-facing application.
 
@@ -628,7 +640,7 @@ The catalog can be downloaded as a JSON file using an export button located at t
 %______________________________________________________________
 \subsubsection{Product Composer}
 
-The Product Composer screen copies the layout of the configuration screen of the user-facing application, but has an additional side panel on the left. This panel is used to add and remove component specifications or to select the base component specifications for products. Bottom of this panel also contains the import and export buttons, which serve to download or upload product specifications in a JSON file. Selecting a component specification within this panel displays its model in the 3D preview area, while the right side panel, used during the configuration process to present detailed information, allows for the adjustment of all component specification attributes, such as position, rotation, scale, mounting points, and materials.
+The Product Composer screen copies the layout of the configuration screen of the user-facing application, but has an additional side panel on the left. This panel is used to add and remove component specifications or to select the base component specifications for products. Bottom of this panel also contains the import, export and clear buttons, which serve to download or upload product specifications within a JSON file. Selecting a component specification within this panel displays its model in the 3D preview area, while the right side panel, used during the configuration process to present detailed information, allows for the adjustment of all component specification attributes, such as position, rotation, scale, mounting points, and materials.
 
 \begin{figure}[h!]
 \centering
@@ -690,6 +702,8 @@ The implemented versatile toolkit provides robust solutions for both user and ad
     No \\
 \hyperref[itm:F19]{F19} & AR viewing capabilities &
     No \\
+\hyperref[itm:F20]{F20} & Parametric configuration mechanism &
+    No \\
 \bottomrule
 \end{tabular}
 \caption{Summary of implemented functional requirements}
@@ -699,7 +713,7 @@ The implemented versatile toolkit provides robust solutions for both user and ad
 
 The implemented functional requirements are summarized in \autoref{table:summary-implementation}, providing a clear overview of the project's achievements and the functionality of the toolkit. As shown, the majority of the requirements have been implemented.
 
-Notably, the requirements concerning the configuration local saving and retrieval (\hyperref[itm:F12]{F12}), real-time price calculation (\hyperref[itm:F18]{F18}), and augmented reality (AR) viewing capabilities (\hyperref[itm:F19]{F19}) have not been implemented. These areas represent potential opportunities for further development. The omission of these functionalities was due to prioritization based on project scope and resource availability. Current technological constraints also played a role in the lack of implementation of the AR viewing capabilities requirement.
+Notably, the requirements concerning the configuration local saving and retrieval (\hyperref[itm:F12]{F12}), real-time price calculation (\hyperref[itm:F18]{F18}), augmented reality (AR) viewing capabilities (\hyperref[itm:F19]{F19}) and parametric configuration mechanism (\hyperref[itm:F20]{F20}) have not been implemented. These areas represent potential opportunities for further development. The omission of these functionalities was due to prioritization based on project scope and resource availability. Current technological constraints also played a role in the lack of implementation of the AR viewing capabilities requirement.
 
 The requirement for interface appearance customization has (\hyperref[itm:F14]{F14}) has been partially satisfied, as the application allows to change the color scheme by changing the config file, but elements such as button style are customizable only by changing the direct CSS code.
 
@@ -719,5 +733,3 @@ There are various possible enhancement this solution could incorporate to enhanc
 \end{itemize}
 
 The enhancements described in this section outline possible future development directions of this toolkit, aimed at increasing functionality, improving user experience, and ensuring scalability.
-
-\todo{Update images, model composition snippets, expand the phone size in ContactInfoSchema, add more info about i18n and router initialization, add sort index to components}

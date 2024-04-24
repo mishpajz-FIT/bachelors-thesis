@@ -388,7 +388,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \textbf{F10:} \label{itm:F10} Configuration processing
 \vspace{2pt}
-\\At the end of the configuration process, users should be presented with a confirmation button, provided that an administrator has set up a specific confirmation action for the product. This button is intended for users to confirm their choices and trigger a predetermined action, like performing an API request or being directed to another page, as specified by the administrator. This should allow for a smooth transition, where, upon configuration confirmation, the user is engaged in a follow-up action, like a checkout process or being guided to a physical store locator page. The ability to perform a custom API call set by the administrator at the end of the configuration process provides a flexible way to integrate the configurator with different systems or processes, thus improving its functionality and delivering a seamless user experience from start to finish.
+\\At the end of the configuration process, users should be optionally presented with a confirmation button, provided that an administrator has set up a specific confirmation action for the product. This button is intended for users to confirm their choices and trigger a predetermined action, such as calling a webhook or being directed to another page, as specified by the administrator. This should allow for a smooth transition, where, upon configuration confirmation, the user is engaged in a follow-up action, like a checkout process or being guided to a physical store locator page. The ability to perform a custom API call set by the administrator at the end of the configuration process provides a flexible way to integrate the configurator with different systems or processes, thus improving its functionality and delivering a seamless user experience from start to finish.
 \begin{description}[noitemsep]
     \item[Priority:] Should
     \item[Difficulty:] Simple
@@ -476,6 +476,14 @@ This preliminary assessment aims to classify the requirements without relying on
     \item[Difficulty:] Complex
 \end{description}
 \vspace{4pt}
+
+\item \textbf{F20:} \label{itm:F20} Parametric configuration
+\vspace{2pt}
+\\As a complement of the modularity mechanism (see requirement \hyperref[itm:F3]{F3}) the toolkit should incorporate parametric mechanisms that allow users to configure products by setting parametric values on the configured components when interacting with them (see requirement \hyperref[itm:F4]{F4}). The toolkit administrator should have the ability to create configurable parameters of the components, along with the types and possible range of values, enhancing the solution space of configuration.
+\begin{description}[noitemsep]
+    \item[Priority:] Could
+    \item[Difficulty:] Complex
+\end{description}
 
 \end{enumerate}
 
