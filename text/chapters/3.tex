@@ -226,7 +226,7 @@ During the implementation phase of the project, various challenges emerged. This
 \subsection{Component Visualization}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-The implementation of component visualization primarily stems from requirement \hyperref[itm:F1]{F1}, which mandates a 3D visualization of the configured product while employing realistic models. The solution is shaped by the chosen 3D technology (see \autoref{section:3Dvistech}), primarily R3F library supported by Three.js, and the created data scheme described in the previous section. This also facilitates the open navigation requirement (\hyperref[itm:F7]{F7}).
+The implementation of component visualization primarily stems from requirement \hyperref[itm:F1]{F1}, which mandates a 3D visualization of the configured product while employing realistic models. The solution is shaped by the chosen 3D technology (see \autoref{section:3Dvistech}), primarily \acrlong{r3f} library supported by Three.js, and the created data scheme described in the previous section. This also facilitates the open navigation requirement (\hyperref[itm:F7]{F7}).
 
 \begin{listing}[h!]
 \begin{minted}{typescript}
@@ -271,16 +271,16 @@ export const Component = ({ componentId }) => {
 \label{lisiting:impl-visulaization1}
 \end{listing}
 
-A simplified version of the implementation is illustrated in \autoref{lisiting:schema-componentspecification}. The group feature of R3F library is utilized for effective position and rotation composition. The component is primarily made up of this group, which integrates the model and the mounting points of the component.
+A simplified version of the implementation is illustrated in \autoref{lisiting:schema-componentspecification}. The group feature of \acrshort{r3f} library is utilized for effective position and rotation composition. The component is primarily made up of this group, which integrates the model and the mounting points of the component.
 
-Inside \texttt{ComponentModel}, the 3D model is loaded from a GLTF file, a format which can fully represent 3D objects widely used in web applications and greatly supported in the Three.js library. The position, rotation and scale of the model is adjusted by the values stored in the component specification, using a nested R3F group, which can be previewed in \autoref{lisiting:impl-modelcomposition}.
+Inside \texttt{ComponentModel}, the 3D model is loaded from a GLTF file, a format which can fully represent 3D objects widely used in web applications and greatly supported in the Three.js library. The position, rotation and scale of the model is adjusted by the values stored in the component specification, using a nested \acrshort{r3f} group, which can be previewed in \autoref{lisiting:impl-modelcomposition}.
 
 Considering that configured components (other than the base) are mounted on top of each other, a recursive approach is employed to manage this hierarchical structure and mapping between the data schema and the visualization. Therefore, for each mounting point defined in the component specification, a nested group is utilized to adjust the position and rotation according to the mounting point specification. If a component is attached to this mounting point, it is recursively inserted into the group; otherwise, a spatial button is displayed at this place to facilitate the addition of the component. 
 
 This recursive nesting ensures that each mounted component's position and rotation are automatically adjusted through the group composition, eliminating the need for direct calculation of these values. The simplification this offers significantly outweighs the minor performance impact introduced by recursion.
 
 Properties are managed through Valtio proxies using custom hook \texttt{useComponent}, therefore whenever the underlying state changes, the interface including the 3D elements immediately redraws.
-All components are placed within an R3F \texttt{canvas} element. The orbital camera controls needed by the requirement \hyperref[itm:F2]{F2} are done using \texttt{OrbitControls} Three.js element integrated using Drei library, which is placed within the canvas and offers standard orbital camera controls.
+All components are placed within an \acrshort{r3f} \texttt{canvas} element. The orbital camera controls needed by the requirement \hyperref[itm:F2]{F2} are done using \texttt{OrbitControls} Three.js element integrated using Drei library, which is placed within the canvas and offers standard orbital camera controls.
 
 
 %______________________________________________________________

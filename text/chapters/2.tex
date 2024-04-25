@@ -56,11 +56,11 @@ Three.js is considered an undisputed leader in this category, having the biggest
 
 Leveraging front-end frameworks significantly enhances the development of web applications by addressing common front-end challenges. These frameworks often provide a structured approach for creating maintainable and reusable components, optimizing data manipulations, employing common design patterns, and ensuring that the user interface remains in sync with the underlying state. Various frameworks and libraries are available, such as React, Vue.js, or Angular, each with different benefits and drawbacks. The choice of which framework to use often involves complex decision making, influenced by specific project needs, team skills, and the unique characteristics of each framework. \cite{Gimeno2018} \cite{Pekarsky2020}
 
-For this solution, the decision has been greatly influenced by the selection (see previous section) of WebGL framework, Three.js. The React Three Fiber (R3F) library offers a seamless integration of Three.js into the React ecosystem. R3F is a React renderer, enabling the direct use of Three.js components as React components. The integration is optimized, with the Three.js components rendered outside React's rendering process, therefore, having minimal overhead. Moreover, it is comprehensive, meaning that all Three.js features are exposed and accessible using this library. \cite{R3F}
+For this solution, the decision has been greatly influenced by the selection (see previous section) of WebGL framework, Three.js. The \acrfull{r3f} library offers a seamless integration of Three.js into the React ecosystem. \acrshort{r3f} is a React renderer, enabling the direct use of Three.js components as React components. The integration is optimized, with the Three.js components rendered outside React's rendering process, therefore, having minimal overhead. Moreover, it is comprehensive, meaning that all Three.js features are exposed and accessible using this library. \cite{R3F}
 
-In addition, the Drei library, built on top of R3F, introduces a collection of useful components, abstractions, and helpers. These additions streamline the development with Three.js and React even more. \cite{Drei}
+In addition, the Drei library, built on top of \acrshort{r3f}, introduces a collection of useful components, abstractions, and helpers. These additions streamline the development with Three.js and React even more. \cite{Drei}
 
-These libraries make React an attractive choice for this project. To see how the code differs when aiming to achieve similar objectives, refer to \autoref{listing:threejs} for the plain Three.js version and \autoref{lisiting:r3f} for the R3F version, both creating a simple 3D red cube.
+These libraries make React an attractive choice for this project. To see how the code differs when aiming to achieve similar objectives, refer to \autoref{listing:threejs} for the plain Three.js version and \autoref{lisiting:r3f} for the \acrshort{r3f} version, both creating a simple 3D red cube.
 
 React is a user interface library created at Facebook in 2011, but soon after became open source. React has gained widespread acclaim across many projects and has been continually developed since its inception. It emphasizes component-based architecture, where reactive components are written in JavaScript (or TypeScript) combined with HTML-like markup code, facilitating the creation of dynamic user interfaces. \cite{Banks2020}
 
@@ -68,11 +68,11 @@ React itself is just a user interface library that lacks more sophisticated func
 
 
 %______________________________________________________________
-\subsubsection{CSS Framework}
+\subsubsection{\glsentryshort{css} Framework}
 
-The development of a product configurator requires custom components. To define the styles of these custom designs, it will be necessary to utilize CSS (Cascading Style Sheets).
+The development of a product configurator requires custom components. To define the styles of these custom designs, it will be necessary to utilize \acrfull{css}.
 
-TailwindCSS is a utilitfy-first CSS framework. It enables the creation of custom designs using predefined CSS utility classes, directly applicable in the React markup language, eliminating the necessity of manually writing CSS. It is highly and simply customizable, has comprehensive and illustrative documentation, and makes it easy to create responsive designs. The framework allows for a fast development process, however, it needs to be integrated carefully, as the direct combination of style classes with the rest of the code of the component can make the codebase look very disorganized. \cite{TailwindCSS}
+TailwindCSS is a utilitfy-first \acrshort{css} framework. It enables the creation of custom designs using predefined \acrshort{css} utility classes, directly applicable in the React markup language, eliminating the necessity of manually writing \acrshort{css}. It is highly and simply customizable, has comprehensive and illustrative documentation, and makes it easy to create responsive designs. The framework allows for a fast development process, however, it needs to be integrated carefully, as the direct combination of style classes with the rest of the code of the component can make the codebase look very disorganized. \cite{TailwindCSS}
 
 It was chosen for this project as a good balance between a fully custom solution and predefined components, for its ability to accelerate the development process and to help fulfill the requirement \hyperref[itm:NF2]{NF2}.
 

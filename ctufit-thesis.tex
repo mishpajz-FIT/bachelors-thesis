@@ -93,7 +93,7 @@
 %%%%%%%%%%%%%%%%%%%%%%
 \usepackage{dirtree}
 \usepackage{lipsum,tikz}
-\usepackage[style=iso-numeric]{biblatex}
+\usepackage[sorting=none,backend=biber,bibencoding=utf8,style=iso-numeric]{biblatex}
 \addbibresource{text/bib-database.bib}
 \usepackage{listings}
 \usepackage{minted}
@@ -104,7 +104,8 @@
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{array}
-
+\usepackage[acronym,toc]{glossaries}
+\makeglossaries
 %%%%%%%%%%%%%%%%%%%%%%
 % DEMO CONTENTS SETTINGS END
 %%%%%%%%%%%%%%%%%%%%%%
@@ -114,6 +115,7 @@
 \frontmatter\frontmatterinit % do not remove these two commands
 
 \includepdf[pages={1-}]{dobesmic-assignment.pdf} % replace that file with your thesis assignment provided by study office
+\todo{Update latest assignment}
 
 \thispagestyle{empty}\cleardoublepage\maketitle % do not remove these three commands
 
@@ -203,20 +205,23 @@ I acknowledge that my thesis is subject to the rights and obligations stipulated
 % OR REMOVE ENTIRELY
 % List the abbreviations in lexicography order.
 %%%%%%%%%%%%%%%%%%%
-\chapter{Abbreviations}
-	
-\begin{tabular}{rl}
-AR & Augumented Reality\\
-SPA & Single-Page Application\\
-USDZ & Universal Scene Description Zip\\
-API & Application Programming Interface\\
-WebGL & Web Graphics Library\\
-HTML & HyperText Markup Language\\
-R3F & React Three Fiber\\
-CSS & Cascading Style Sheets\\
-\end{tabular}
 
-\todo{Copy all abbreviations from text here, sorted alphabetically}
+\newglossarystyle{tabular-style}{
+  \renewenvironment{theglossary}{\begin{tabular}{rl}}{\end{tabular}}
+  \renewcommand*{\glossaryheader}{}
+  \renewcommand*{\glossentry}[2]{\glsentryshort{##1} & \glsentrylong{##1} \\}
+  \renewcommand*{\glsgroupheading}[1]{}
+  \renewcommand*{\glsgroupskip}{\relax}
+}
+
+
+\newacronym{ar}{AR}{Augmented Reality}
+\newacronym{css}{CSS}{Cascading Style Sheets}
+\newacronym{r3f}{R3F}{React Three Fiber}
+
+\printglossary[type=\acronymtype, style=tabular-style, title=\thectufitabbreviationlabel]
+
+\todo{Copy abbreviations from text}
 %%%%%%%%%%%%%%%%%%%
 % ABBREVIATIONS END
 %%%%%%%%%%%%%%%%%%%
