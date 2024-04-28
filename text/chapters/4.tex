@@ -54,11 +54,13 @@ With this set, the application should be functional and available, albeit yet wi
 The following section describes the adaptation of the deployed application to meet the needs and correspond to the identity of the business. This is done by the administrator through modifications of the \texttt{appconfig.json} file.
 
 
+%______________________________________________________________
 \subsubsection{Localizations}
 
 To adjust the interface texts and provide different localization options, translation files should be created in the \texttt{locales/} directory. This functionality is described in more detail in \autoref{section:impl-languages}. These translations can be based on the English translation file included with the built application. Once the necessary language files are set up (note that supporting English is optional), they should be listed by their two-letter codes in the \texttt{appconfig.json} file under the \texttt{ui.languages.all} key. Additionally, a default language must be specified in \texttt{ui.languages.default}.
 
 
+%______________________________________________________________
 \subsubsection{Appearance}
 
 Following, the appearance of the interface can be tailored. Color scheme is customizable by updating the hex color codes in \texttt{ui.colors} and \texttt{spatialUi.selectionColors}. The logo displayed on the top left, as well as the favicon can be customized by setting the paths to the image files under \texttt{images} key. The web page to which the displayed logo links to can be configured using the \texttt{sources.homepageUrl} key. In addition, the title of the web page can be adjusted using the \texttt{title} key. The appearance customizations provide options for both dark and light modes of the interface.
@@ -66,11 +68,13 @@ Following, the appearance of the interface can be tailored. Color scheme is cust
 Moreover, the camera style and floor shadow in the 3D visualization can be adjusted, and the option whether to display the button to save the completed configuration in PDF to users is provided.
 
 
+%______________________________________________________________
 \subsubsection{Data source}
 
 Finally, the source from which the product catalog is fetched must be defined in \texttt{sources.catalogUrl}. Any accessible location which provides the files in the correct data scheme can be provided here. Creation of this catalog file is described in the following section.
 
 
+%______________________________________________________________
 \subsubsection{Example case}
 
 In the example case discussed in this chapter, the interface was customized according to the company's brand guidelines. The company logo, set to appear in the top left corner, links back to the company's original website. The catalog source was defined as a static file located on the web server at \texttt{products/catalog.json}.
@@ -95,7 +99,7 @@ The catalog is then created in the Catalog Composer screen of the admin applicat
 
 For updates of the created specifications, the existing files can be downloaded, updated, imported back into the admin tool, edited, and then uploaded back to their original locations.
 
-In the example company followed in this chapter, the 3D models were generated from CAD software used in manufacturing process of the company and stored as static files on the web server. Then, the admin application was utilized to create the product specifications and catalog, The created files were also transferred to the web server, from where they will be statically served. Given that the company utilizes an inquiry form on their website, the configurable products followed the same approach and had an inquiry form set as a confirmation action. A serverless function, hosted on Cloudflare Workers\footnote{https://workers.cloudflare.com}, was created to process the data. The function accepts the POST requests with the contact info and configuration created by the user sent from the inquiry form within the main application, and forwards these data to a company email. To enable this, the URL of this serverless function was set as the endpoint of the confirmation action in the Catalog Composer screen. A simplified illustration of the implementation of serverless functions can be seen in \autoref{listing:serverless}.
+In the example company followed in this chapter, the 3D models were generated from CAD software used in manufacturing process of the company and stored as static files on the web server. Then, the admin application was utilized to create the product specifications and catalog, The created files were also transferred to the web server, from where they will be statically served. Given that the company utilizes an inquiry form on their website, the configurable products followed the same approach and had an inquiry form set as a confirmation action. A serverless function, hosted on Cloudflare Workers\footnote{\url{https://workers.cloudflare.com}}, was created to process the data. The function accepts the POST requests with the contact info and configuration created by the user sent from the inquiry form within the main application, and forwards these data to a company email. To enable this, the URL of this serverless function was set as the endpoint of the confirmation action in the Catalog Composer screen. A simplified illustration of the implementation of serverless functions can be seen in \autoref{listing:serverless}.
 
 \begin{listing}[h!]
 \begin{minted}{typescript}
@@ -143,7 +147,9 @@ addEventListener("fetch", event => {
 This section explores the business aspects of deploying the configurator tool, examining the cost effectiveness as well as business process modifications within the company.
 
 
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 \subsection{Cost effectiveness}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 As this solution aims to cater to small businesses, this project has been conceptualized with cost effectiveness in mind, with the requirement of lightweight infrastructure needs (\hyperref[itm:NF4]{NF4}) and self-hostability (\hyperref[itm:NF3]{NF3}). These principles have been greatly reflected in the design and implementation.
 
@@ -164,7 +170,7 @@ AWS Lambda & 1 000 000 reqs/month & \$0,20 \\
 Google Cloud Functions & 2 000 000 reqs/month & \$0,40 \\
 \bottomrule
 \end{tabular}
-\captionsource{Summary of the pricing per requests for serverless providers}{Cloudflare \cite{CloudflareWorkers}, Amazon \cite{AWS}, Google \cite{GoogleCloud}}
+\captionsource{Overview of the pricing per requests (reqs) for serverless providers}{Cloudflare \cite{CloudflareWorkers}, Amazon \cite{AWS}, Google \cite{GoogleCloud}}
 \label{table:lambda-price}
 \end{table}
 
@@ -172,12 +178,15 @@ Google Cloud Functions & 2 000 000 reqs/month & \$0,40 \\
 In the example company described in this chapter, the only expense associated with the tool was the time spent preparing the content and deploying the application.
 
 
+%______________________________________________________________
 \subsubsection{Return on Investment}
 
 Consequently, the return on investment (ROI) for this solution is therefore projected to be hugely positive. While having minimal costs, the configurator not only acts as a sales assistance tool, allowing for detailed product visualization and customization, but also serves as a marketing tool that can enhance the company's market presence and appeal to a technically adequate consumer base. 
 
 
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 \subsection{Operational Impact}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 Evaulating the impact deployment of the solution brings to businesses and companies is a complex task. The toolkit is adaptable and product-agnostic, meaning it can be utilized by different companies across different industries or in different parts of a supply chain. Consequently, the impact on processes will differ in each scenario.
 
@@ -200,7 +209,16 @@ This solution deployed in the example company impacts the inquiry and order proc
 \end{figure}
 \end{landscape}
 
+
+%______________________________________________________________
+\subsubsection{Original Process}
+
+
 The UML activity diagram of the original process is illustrated in \autoref{fig:uml-originalactivity}. The inquiry and order process before deployment of the solution looks as follows. Initially, when customers wants to purchase a manufactured product, they visit the website of the company and fill out the inquiry form. Based on the information provided in the inquiry form, the employee creates a visualization, which is sent to the customer along with additional product customization informations. At this point, the customer decides if this is the product they want or if they want to stop the process there. If the customer likes the product and options presented by the employee, an iterative process begins between the customer and employee, where the employee tries to create an adequate quote for the product to the customer, while the customer sends back the proposed adjustments to the employee. When an agreement is reached, the order is placed and the product goes into production. 
+
+
+%______________________________________________________________
+\subsubsection{New Process}
 
 After deploying the solution in this company, as described in the previous sections, the inquiry and order process can change into the form illustrated in \autoref{fig:uml-newactivity}. With this change, the customer visits the company's website and directly creates the configuration of the product they desire. The steps where the employee would need to present product visualizations and options are bypassed, as these are now handled by the tool. If the customer is satisifed the configured product, they send an inquiry containing the configuration, and the employee can base the quote on this configuration. The process then follows the same way as in the original scenario.
 

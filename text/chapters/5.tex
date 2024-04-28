@@ -4,4 +4,63 @@
     Lorem ipsum dolor sit amet.
 \end{chapterabstract}
 
-\todo{testing}
+Testing is an integral part of the software development process. This chapter provides an overview of the tests conducted during the development of this solution, as well as an evaluation and discussion of the testing results.
+
+Software testing is essential for detecting malfunctions that may negatively affect the application's users and create further issues for the operator of the software. Testing is also necessary to confirm that the solution complies with the set specifications and helps to validate the design choices made. \cite{Homes2012}
+
+There are various types of software tests, which can be categorized in many different ways, such as automated versus manual, functional versus non-functional, black-box versus white-box, by their coverage (unit versus whole system) or by their scope (performance versus compatibility). The choice of tests is always context-dependent and needs to be aligned with the project goals and limitations. \cite{Krysik2023}
+
+Testing 3D applications presents unique challenges that differentiate it from testing standard web applications, with main differences in user interactions. The developed solution enables users to move within a 3D space and interact with spatial objects. All interactions therefore occur in a 3D environment projected onto a 2D viewport, significantly expanding the range of possible interactions compared to traditional 2D applications. The possible interactions also vary depending on the product that is being configured in the application, as the solution aims to be product-agnostic, as well as further complicating matters with the configurator's open navigation mechanism.
+
+Unlike 2D applications where layout and style are the focus, 3D applications require tests to confirm that objects appear correctly from various angles and under different conditions. This aspect is challenging, as it is less straightforward than verifying the DOM of a standard website, since in this scenario, the 3D preview is represented by a canvas element without an easy method for breakdown. In addition, loading 3D content is time and computationally consuming, which makes testing resource intensive. These complexities limit the applicability of certain types of tests, such as automated browser testing, which typically does not accommodate the nuances of working with 3D content.
+
+Given these constraints and the goals of the solution, three distinct kinds of tests were performed during the development lifecycle of the application: unit tests, system tests, and user acceptance tests. The tests performed are described in the following sections.
+
+
+\section{Unit Testing}
+
+Unit testing involves testing the smallest parts of the software, which are typically individual functions. The testing is performed in isolation from the rest of the system, with dependencies being mocked or stubbed to ensure that the tests are independent. These tests provide immediate feedback on the functionality of the written code and help detect bugs or regressions when the code undergoes changes during development. Since the resulting application is composed of these integrated parts, validating these parts helps with the validation of the whole software. \cite{Khorikov2020}
+
+\begin{listing}[h!]
+\begin{minted}{typescript}
+describe("CatalogActions.getCatalog", () => {
+  test(
+    "returns the existing catalog " 
+    + "if already present in the store",
+    async () => {
+      const existingCatalog = generateMock(CatalogSchema);
+      storeMock.catalog = existingCatalog;
+
+      const catalog = await CatalogActions.getCatalog(
+        "http://example.com/catalog",
+        storeMock);
+
+      expect(fetchCatalog).not.toHaveBeenCalled();
+      expect(catalog).toBe(existingCatalog);
+    }
+  );
+});
+\end{minted}
+\caption{Example unit test used to validate store action within the solution}
+\label{listing:unit-test}
+\end{listing}
+
+Due to the technologies chosen and the nature of the developed solution, the majority of the codebase is made up of code visualizing the products, written in markup language. This type of code is unsuitable for unit testing as it does not encompass any logic. However, parts of the solution that involve manipulation of data schemas in stores require logic, and therefore, these parts of the solution were subjected to unit testing.
+
+The tests are stored in the \texttt{src/\_\_tests\_\_} directory. For the purpose of unit testing, the Jest framework\footnote{\url{https://jestjs.io}} was used, which enables a streamlined definition and execution of the tests. These tests can be run by executing the command \mintinline{bash}{npm run test}. Although tests should be isolated, they still operate with some data; therefore, these data schemes need to be mocked. Because data schemas were defined using the Zod framework (see \autoref{section:data-schemas}), the zod-mock along with faker packages were used to easily generate fake data from the schemes to be used in these tests, which closely resemble the values that will be used in real-world scenarios. An example of a defined unit test can be seen in \autoref{listing:unit-test}. 
+
+These tests validate the logic within the application and were run to confirm the integrity of the changes made to the code during the development process.
+
+\section{System Testing}
+
+System testing verifies that all integrated components and subsystems of the solution work as expected. This type of testing verifies that the application behaves as expected from the perspective of the user and that it meets the specified requirements. \cite{Krysik2023}
+
+Due to the specifics of this solution outlined at the beginning of this chapter, this testing was not automated and was performed periodically manually during implementation. When defects were found, they were immediately addressed. Therefore, the evaluation of the fulfillment of the requirements, which should result from this testing, was done periodically and is described at the end of the implementation chapter (see \autoref{section:requirmenets-evaulation}).
+
+To streamline this manual testing process, automatic deployment of the development environment was enabled using the GitLab CI/CD pipeline, which was triggered after each change to the codebase. To assess various different functionalities of the application, several different products, such as shelves or PC configurations, were created to enable the system testing process. 
+
+To ensure the compatibility and responsiveness of the application across different browsers and operating systems, the LambdaTest platform\footnote{\url{https://www.lambdatest.com/}} was utilized. This platform enables the testing of web applications on thousands of combinations of the major browsers and operating systems. \cite{LambdaTest}
+
+Therefore, the application was tested on a relevant sample of browsers. The solution is designed to be compatible with all major browsers (Chrome, Firefox, Safari, Opera, Edge) with versions released from the year 2022 onward.
+
+\section{User Acceptance Testing}
