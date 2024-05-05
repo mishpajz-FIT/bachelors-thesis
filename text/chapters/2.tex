@@ -46,7 +46,7 @@ Currently, there are no significant alternatives to WebGL. WebGPU aims to be a s
 
 Direct WebGL programming is very powerful and offers fine-grain control, necessitating extensive code to be written in both JavaScript and its shader language. Fortunately, there are several frameworks built on top of WebGL that provide high-level abstractions and access. These frameworks can significantly reduce the amount of code required to achieve what would otherwise take hundreds of lines when using bare WebGL, often condensing it into just a few lines. \cite{Parisi2014}
 
-Three.js was selected from a range of frameworks, including Babylon.js and PixiJS, that are designed to streamline the process of developing in WebGL. This decision was made after considering several important factors. \cite{BabylonJs}\cite{PixiJS}
+Three.js was selected from a range of frameworks, including Babylon.js \cite{BabylonJs} and PixiJS \cite{PixiJS}, that are designed to streamline the process of developing in WebGL. This decision was made after considering several important factors.
 Three.js is considered an undisputed leader in this category, having the biggest community support, which can be evidenced by its popularity and the volume of contributions on GitHub.\footnote{Three.js GitHub: \url{https://github.com/mrdoob/three.js}} It is also open source, published under the MIT license, offering great freedom in development and distribution. Furthermore, Three.js uses the best practices of 3D graphics; it is lightweight, easy to use, cross-platform, and contains many prebuilt assets. \cite{ThreeJs}
 
 
@@ -54,7 +54,7 @@ Three.js is considered an undisputed leader in this category, having the biggest
 \subsection{Front-End Framework}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Leveraging front-end frameworks significantly enhances the development of web applications by addressing common front-end challenges. These frameworks often provide a structured approach for creating maintainable and reusable components, optimizing data manipulations, employing common design patterns, and ensuring that the user interface remains in sync with the underlying state. Various frameworks and libraries are available, such as React, Vue.js, or Angular, each with different benefits and drawbacks. The choice of which framework to use often involves complex decision making, influenced by specific project needs, team skills, and the unique characteristics of each framework. \cite{Gimeno2018} \cite{Pekarsky2020}
+Leveraging front-end frameworks significantly enhances the development of web applications by addressing common front-end challenges. These frameworks often provide a structured approach for creating maintainable and reusable components, optimizing data manipulations, employing common design patterns, and ensuring that the user interface remains in sync with the underlying state. Various frameworks and libraries are available, such as React, Vue.js, or Angular, each with different benefits and drawbacks. The choice of which framework to use often involves complex decision making, influenced by specific project needs, team skills, and the unique characteristics of each framework. \cite{Gimeno2018, Pekarsky2020}
 
 For this solution, the decision has been greatly influenced by the selection (see previous section) of WebGL framework, Three.js. The \acrfull{r3f} library offers a seamless integration of Three.js into the React ecosystem. \acrshort{r3f} is a React renderer, enabling the direct use of Three.js components as React components. The integration is optimized, with the Three.js components rendered outside React's rendering process, therefore, having minimal overhead. Moreover, it is comprehensive, meaning that all Three.js features are exposed and accessible using this library. \cite{R3F}
 
@@ -223,7 +223,32 @@ The design of the user interface plays an essential part in the development of s
 
 In this section, low-fidelity wireframes are used to depict the proposed user interface, highlighting the layout and architecture of the application. This approach captures the most important information at this stage, leaving the finer details to be refined as part of the implementation phase.
 
-The design is based on the analysis of existing solutions and respects the design principles of similar solutions that are most intuitive and the users may already feel familiar with.
+An article \cite{Leitner2014} used The Configurator Database Project to analyze common design elements of product configurators. The study identified several key design elements that were prevalent in the majority of configurators analyzed. The following key insights of commonly used designs from the article are relevant to this thesis:
+\begin{itemize}[label=\rectanglebullet]
+    \item At the end of the configuration process, a summary of selected options is presented.
+    \item To present the products that can be configured, detailed images are used.
+    \item Horizontally positioned navigation bar that is always visible.
+    \item Order button is clearly visible and available for completion purposes.
+    \item Prices of the components are accessible in all phases of the configuration.
+    \item Logo of the business is prominently displayed.
+    \item Users can navigate within their configurated product.
+\end{itemize}
+
+Furthemore, design guidelines from the Website Tools and Application with Flash report by Nielsen Norman Group \cite{Nielsen2013} were also considered. Although the report analyzed and offered guidelines for the design of Flash applications, it is still relevant to this thesis as many of the applications were 3D-based or featured product configuration. In particular, the following key principles were followed:
+\begin{itemize}[label=\rectanglebullet]
+    \item Core task must at center of the application.
+    \item Complex features that detract from the core task overwhelm users and increase learning time and should be avoided.
+    \item Interfaces must not be overcrowded and should prioritize presenting the most important information.
+    \item The interactions should be consistent within similar components of the application.
+    \item Design should respect and reuse good design principles of similar solutions that users may already feel familiar with.
+    \item Technical details of the solution should be hidden from the user.
+    \item Feedback to user's actions should be imminent.
+    \item If available, prices should always be displayed.
+    \item Visalization should match the input of users.
+    \item Popup windows should include close buttons.
+\end{itemize}
+
+The design is therefore based on the described key insights and respects the intuitive design principles of similar solutions that users may already be familiar with, ensuring an intuitive and efficient interface for users.
 
 The configurator as an application is specific in that it primarily centers around the configuration process, with this interface being the most important and all other interfaces being secondary. In this section, the design of this configuration screen will be introduced, as well as the introduction and confirmation screens.
 

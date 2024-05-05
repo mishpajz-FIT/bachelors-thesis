@@ -556,4 +556,6 @@
 
 \newcommand{\rectanglebullet}{\raisebox{2pt}{\tikz{\filldraw[fill=black] (0,0) rectangle (0.2,0.05);}}}
 
+\newcommand{\trianglebullet}{\raisebox{2pt}{\tikz{\filldraw[fill=black, rounded corners=0.1pt] (0,0) -- (0.15,0.075) -- (0,0.15) -- cycle;}}}
+
 % bullet points end
