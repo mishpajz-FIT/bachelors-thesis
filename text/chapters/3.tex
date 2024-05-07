@@ -286,7 +286,7 @@ All components are placed within an \acrshort{r3f} \texttt{canvas} element. The 
 %______________________________________________________________
 \subsubsection{Component Interactivity}
 
-To meet the requirement \hyperref[itm:F4]{F4}, which enables users to select components directly within the visualization, an \texttt{onClick} event is utilized on the group containing the model. Upon clicking a component, a side panel is presented that displays detailed information about the selected component. To visually highlight the selected component in the visualization, an outline of the model is created using the \texttt{Edges} element from the Drei library, which is included within the same group as the model. The color of the outline can be configured by the application administrator. Additionally, an \texttt{ onPointerMissed} event employed on the canvas allows to deselect the component by clicking on the background.
+To meet the requirement \hyperref[itm:F4]{F4}, which enables users to select components directly within the visualization, an \texttt{onClick} event is utilized on the group containing the model. Upon clicking a component, a side panel is presented that displays detailed information about the selected component. To visually highlight the selected component in the visualization, an outline of the model is created using the \texttt{Outlines} element from the Drei library, which is included within the same group as the model. The color of the outline can be configured by the application administrator. Additionally, an \texttt{onPointerMissed} event employed on the canvas allows to deselect the component by clicking on the background.
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -707,6 +707,8 @@ The implemented versatile toolkit provides robust solutions for both user and ad
     No \\
 \hyperref[itm:F20]{F20} & Parametric configuration mechanism &
     No \\
+\hyperref[itm:F21]{F21} & Real dimensions visualization &
+    No \\
 \bottomrule
 \end{tabular}
 \caption{Summary of implemented functional requirements}
@@ -716,9 +718,51 @@ The implemented versatile toolkit provides robust solutions for both user and ad
 
 The implemented functional requirements are summarized in \autoref{table:summary-implementation}, providing a clear overview of the project's achievements and the functionality of the toolkit. As shown, the majority of the requirements have been implemented.
 
-Notably, the requirements concerning the configuration local saving and retrieval (\hyperref[itm:F12]{F12}), real-time price calculation (\hyperref[itm:F18]{F18}), augmented reality (AR) viewing capabilities (\hyperref[itm:F19]{F19}) and parametric configuration mechanism (\hyperref[itm:F20]{F20}) have not been implemented. These areas represent potential opportunities for further development. The omission of these functionalities was due to prioritization based on project scope and resource availability. Current technological constraints also played a role in the lack of implementation of the AR viewing capabilities requirement.
+Notably, the requirements concerning the configuration local saving and retrieval (\hyperref[itm:F12]{F12}), real-time price calculation (\hyperref[itm:F18]{F18}), augmented reality (AR) viewing capabilities (\hyperref[itm:F19]{F19}), parametric configuration mechanism (\hyperref[itm:F20]{F20}) and real dimensions visualization (\hyperref[itm:F21]{F21}) have not been implemented. These areas represent potential opportunities for further development. The omission of these functionalities was due to prioritization based on the scope of the project and the availability of resources. Current technological constraints also played a role in the lack of implementation of the AR viewing capabilities requirement.
 
 The requirement for interface appearance customization has (\hyperref[itm:F14]{F14}) has been partially satisfied, as the application allows to change the color scheme by changing the config file, but elements such as button style are customizable only by changing the direct CSS code.
+
+Complementing the functional requirements summary is a comprehensive overview of the implemented set of features in the solution, presented in \autoref{table:summary-implementation-comparison}. The summary follows the same structure as used in the analysis of existing product configurators, which can be seen in \autoref{table:summary-analysis}. However, compared to the existing configurators, it is important to keep in mind that the tool developed here is different in two ways: it is meant to be adaptable and product-agnostic, therefore it comprises of an admin application that allows different types of products to be set up. In addition, it focuses on cost effectiveness and simplicity. Despite this, the tool still provides features comparable to those of existing solutions deployed by companies.
+
+\begin{table}[htb!]
+\centering
+\begin{tabular}{lc} 
+\toprule
+\textbf{Features} &
+\textbf{Implemented solution} \\ 
+\midrule
+Platform
+    & Web \\ 
+Navigation
+    & Open \\ 
+Visualization
+    & Realistic \\ 
+Placement options
+    & Fixed points \\ 
+Camera movement
+    & Orbital \\
+Impossible configurations
+    & No\footnotemark \\
+Responsiveness
+    & Yes \\
+Price calculation
+    & No \\
+Purchase option
+    & Webhook; Inquiry form; Redirection \\
+Save option
+    & PDF only \\
+Version history
+    & Undo \& redo \\
+VR or AR
+    & No \\
+Real dimensions
+    & No \\
+\bottomrule
+\end{tabular}
+\caption{Summary of features implemented in the application}
+\label{table:summary-implementation-comparison}
+\end{table}
+\footnotetext{Also depends on the setup of the configurable product}
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Possible Future Improvements} \label{section:improvements}

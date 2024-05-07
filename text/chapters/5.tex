@@ -1,7 +1,7 @@
 \chapter{Testing}
 
 \begin{chapterabstract}
-    Lorem ipsum dolor sit amet.
+    Unit testing, system testing, usability testing and gained insights.
 \end{chapterabstract}
 
 Testing is an integral part of the software development process. This chapter provides an overview of the tests conducted during the development of this solution, as well as an evaluation and discussion of the testing results.
@@ -221,13 +221,14 @@ However, as the configured product grew more complex, the addition of more compo
 
 Another observed pain point, which the majority of participants have also reported afterwards, was aggressive camera zooming. Whenever a component is selected, the camera tries to center the chosen component on screen. Almost all participants have reported that this movement is either too jarring and fast or that the zoom effect is too strong and that the 3D object should not be zoomed so much. 
 
-\begin{wrapfigure}{r}{0.4\textwidth}   
+\begin{wrapfigure}{r}{0.4\textwidth}
     \centering
     \includegraphics[width=0.35\textwidth]{images/image_magicmouse.jpg}
     \captionsource{Apple Magic Mouse}{Apple \cite{MagicMouse}}
+    \label{fig:magic-mouse}
 \end{wrapfigure}
 
-Participant C, who used an Apple Magic Mouse with an unconventional button layout and gestures, experienced particular difficulties. When trying to compensate for unwanted camera centering, the participant accidentally performed a gesture on the mouse to navigate away from the application, restarting the whole configuration.
+Participant C, who used an Apple Magic Mouse with an unconventional button layout and gestures (see \autoref{fig:magic-mouse}), experienced particular difficulties. When trying to compensate for unwanted camera centering, the participant accidentally performed a gesture on the mouse to navigate away from the application, restarting the whole configuration.
 
 In addition to the selectable components in the 3D view, as a supporting element, there is also a small button symbolizing the component that also allows users to select it. This button is positioned at the point where the component is mounted. This has caused small issues for Participant C and Participant E. The post-test discussion revealed that the problem was caused by two things: the base component does not have a mounting point, therefore, the application does not have a button for this component, and at the same time the position of the button on the mounting point caused confusion as it was unclear to which component the button belongs to. The participants implied that it would be more intuitive if the button was placed in the center of the component.
 
@@ -263,28 +264,41 @@ The average SUS score for all participants was 77 which is considered good and a
 
 A trend appears to indicate that the tool is more suitable for younger users. However, given the small sample size, this does not provide enough evidence to draw statistically significant conclusions in this regard.
 
-\subsubsection{Insights}
+\subsubsection{Insights} \label{section:insights}
 
 The following section summarizes the issues identified during usability testing along with potential improvements, describes how fixes could be implemented, and reports the current status of these implementations. In addition, the severity of each issue is estimated based on the difficulties observed during usability testing. The estimated severity was classified as high, medium, or low. The priority for implementing fixes was based on the estimated severity.
 
 \begin{enumerate}[label=\textbf{I\arabic*:}, leftmargin=*]
     \item Unclear scrolling pattern in component addition menu
         \vspace{2pt}
-        \\Horizontal scrolling in the menu is not apparent, leading users to believe that there are fewer available components than there really are.
+        \\Horizontal scrolling in the menu is not apparent (see \autoref{fig:screenshot-add-before}), leading users to believe that there are fewer available components than there really are.
         \begin{itemize}[noitemsep, label=\trianglebullet]
             \item \textbf{Severity:} High
-            \item \textbf{Proposed fix:} Arrow buttons should be added as an additional obvious scrolling mechanism
-            \item \textbf{Implemented:} No
+            \item \textbf{Proposed fix:} Arrow buttons should be added as an additional apparent scrolling mechanism
+            \item \textbf{Implemented:} Yes, see \autoref{fig:screenshot-add-after}
         \end{itemize}
         \vspace{4pt}
 
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\linewidth]{images/screenshot_add-before.png}
+        \caption{Component addition menu before implemented fix}
+        \label{fig:screenshot-add-before}
+        \end{figure}
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\linewidth]{images/screenshot_add-after.png}
+        \caption{Component addition menu with implemented arrows for scrolling}
+        \label{fig:screenshot-add-after}
+        \end{figure}
+    
     \item Jarring camera movement
         \vspace{2pt}
         \\The camera moves too abruptly and zooms in too much on component selection, causing discomfort and confusion among users.
         \begin{itemize}[noitemsep, label=\trianglebullet]
             \item \textbf{Severity:} High
             \item \textbf{Proposed fix:} The camera speed should be slowed down and limited to rotation only, avoiding zoom on component selection
-            \item \textbf{Implemented:} No
+            \item \textbf{Implemented:} Yes
         \end{itemize}
         \vspace{4pt}
 
@@ -294,7 +308,7 @@ The following section summarizes the issues identified during usability testing 
         \begin{itemize}[noitemsep, label=\trianglebullet]
             \item \textbf{Severity:} Medium
             \item \textbf{Proposed fix:} The button representing the component should be centered within the 3D object and added also to the base component
-            \item \textbf{Implemented:} No
+            \item \textbf{Implemented:} Yes
         \end{itemize}
         \vspace{4pt}
 
@@ -304,7 +318,7 @@ The following section summarizes the issues identified during usability testing 
         \begin{itemize}[noitemsep, label=\trianglebullet]
             \item \textbf{Severity:} Medium
             \item \textbf{Proposed fix:} The width of the outline should be reduced or made transparent
-            \item \textbf{Implemented:} No
+            \item \textbf{Implemented:} Yes
         \end{itemize}
         \vspace{4pt}
 
@@ -379,4 +393,4 @@ The following section summarizes the issues identified during usability testing 
         \vspace{4pt}
 \end{enumerate}
 
-Unimplemented usability improvements complement the section on future improvements (see \autoref{section:improvements}) and may be the subject of further development of the tool.  
+Since only the most critical usability improvements were implemented, the remaining unimplemented usability enhancements could be the subject of further development of the tool and complement \autoref{section:improvements} on future improvements.
