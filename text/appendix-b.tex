@@ -1,4 +1,4 @@
-\chapter{Additional Code Listings} 
+\chapter{Additional Code Listings} \label{appendix-b}
 
 \begin{listing}
 \begin{minted}{typescript}
@@ -53,6 +53,6 @@ const customSchema = z.number();
 
 type CustomType = z.infer<typeof customSchema>;
 \end{minted}
-\caption{Conversion from Zod schema to TypeScript type}
+\captionsource{Conversion from Zod schema to TypeScript type}{Adapted from~\cite{Wycliffe2023}}
 \label{listing:zod}
 \end{listing}

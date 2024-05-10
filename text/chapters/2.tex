@@ -16,11 +16,11 @@ Choosing the appropriate technologies is crucial and will have a significant imp
 \subsection{Platform}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-In considering the foundation for the modular product configurator, given the multiplatform requirement (\hyperref[itm:NF1]{NF1}), two distinct development approaches were evaluated: applications specifically designed for desktop and mobile platforms and a web application.
+In considering the foundation for the 3D modular product configurator, given the multiplatform requirement (\hyperref[itm:NF1]{NF1}), two distinct development approaches were evaluated: applications specifically designed for desktop and mobile platforms or a web application.
 
-Desktop and mobile applications can provide a better overall experience tailored to the specific platform and potentially be more performant as they can utilize the hardware better; however, in this case, they come with serious drawbacks. Having multiple applications that are designed for different devices would increase the amount of maintenance and development work required because each version would need to be managed (at least partially) separately. Furthermore, accessibility for users would be dramatically diminished since they would need to download and install the application prior to using it and subsequently manage any updates that may arise.
+Desktop and mobile applications can provide a better overall experience tailored to the specific platform and potentially be more performant as they can utilize the hardware better; however, in this case, they come with serious drawbacks. Having multiple applications that are designed for different devices would increase the amount of maintenance and development work required because each version would need to be managed (at least in some capacity) separately. Furthermore, accessibility for users would be dramatically diminished since they would need to download and install the application prior to using it and subsequently manage any updates that may arise.
 
-Developing separate desktop and mobile applications presents such significant challenges that the disadvantages far outweigh the advantages; therefore, a web application was selected for its better alignment with the project's requirements (this is also consistent with the norm in this space, as the majority of existing solutions that were analyzed in the previous chapter are web-based). There are also several key factors in favor of this solution: it can be accessed from any device with an internet connection and web browser, it is cost-effective as it possibly utilizes existing website infrastructure, and it has streamlined maintenance needs. The application will be client-side and focused on the front-end, as that is where the configuration process will be happening.
+Developing separate desktop and mobile applications presents such significant challenges that the disadvantages far outweigh the advantages; therefore, a web application was selected for its better alignment with the project's requirements (this is also consistent with the norm in this space, as the majority of existing solutions that were analyzed in the previous chapter are web-based). There are also several key factors in favor of this solution: it can be accessed from almost any device with an internet connection and web browser, it is cost-effective as it possibly utilizes existing website infrastructure, and it has streamlined maintenance needs. The application will be focused on the front-end, as that is where the configuration process will be happening.
 
 Choosing a front-end-only architecture offers several advantages that align closely with the objective of the project. The nature of modular product offerings usually does not demand frequent updates, which makes serving static content feasible and efficient. While there are some aspects of the solution's requirements that might require back-end interaction, such as more complex final processing of configuration or saving of configurations, these can, however, be in some way be handled through external API calls or a lightweight serverless architecture. These aspects do not represent the highest priority requirements, and the core functionality can be accomplished using just front-end technologies.
 
@@ -32,49 +32,49 @@ This architectural choice significantly simplifies the development process. Sinc
 \subsection{3D Visualization Technology} \label{section:3Dvistech}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-To fulfill the requirement of 3D visualization (\hyperref[itm:F1]{F1}), a library will have to be used that will allow 3D graphics to be rendered in the browser. However, the range of options for this particular technology is quite restricted.
+To fulfill the requirement of 3D visualization (\hyperref[itm:F1]{F1}), a library that will allow 3D graphics to be rendered in the browser will have to be used. However, the range of options for this particular technology is quite restricted.
 
-Historically, the integration of 3D graphics required the use of external plugins, primarily Adobe Flash Player. The evolution of web standards, particularly the introduction of HTML5, has revolutionized this aspect, and it is now possible to render 3D graphics directly in the browser, eliminating the necessity for any plugin. \cite{Parisi2014}
+Historically, the integration of 3D graphics required the use of external plugins, primarily Adobe Flash Player. The evolution of web standards, particularly the introduction of \noborderacrshort{html}5, has revolutionized this aspect, and it is now possible to render 3D graphics directly in the browser, eliminating the necessity for any plugin.~\cite{Parisi2014}
 
-WebGL (Web Graphics Library) is a standard 3D graphics API for web browsers. It is based on OpenGL ES and can be used inside the HTML canvas element. WebGL is supported in all major desktop and mobile browsers.\footnote{WebGL browser support details: \url{https://caniuse.com/webgl}} It is utilized using C-like shading language (OpenGL Shading Language) and JavaScript. \cite{Parisi2012}
+\noborderacrfull{webgl} is a standard 3D graphics \noborderacrshort{api} for web browsers. It is based on OpenGL ES and can be used inside the \noborderacrshort{html} canvas element. \noborderacrshort{webgl} is supported in all major desktop and mobile browsers.\footnote{\noborderacrshort{webgl} browser support details: \url{https://caniuse.com/webgl}} It is utilized using C-like shading language (OpenGL Shading Language) and JavaScript.~\cite{Parisi2012}
 
-Currently, there are no significant alternatives to WebGL. WebGPU aims to be a successor to WebGL; however, as of February 2024, it is in a state of ongoing development and has not yet been finalized or supported in web browsers.\footnote{WebGPU browser support details: \url{https://caniuse.com/webgpu}} \cite{WebGPU}
+Currently, there are no significant alternatives to \noborderacrshort{webgl}. WebGPU aims to be a successor to \noborderacrshort{webgl}; however, as of February 2024, it is in a state of ongoing development and has not yet been finalized or supported in web browsers.\footnote{WebGPU browser support details: \url{https://caniuse.com/webgpu}}~\cite{WebGPU}
 
 
 %______________________________________________________________
-\subsubsection{WebGL Framework} \label{section:WebGL}
+\subsubsection{\glsentryshort{webgl} Framework} \label{section:WebGL}
 
-Direct WebGL programming is very powerful and offers fine-grain control, necessitating extensive code to be written in both JavaScript and its shader language. Fortunately, there are several frameworks built on top of WebGL that provide high-level abstractions and access. These frameworks can significantly reduce the amount of code required to achieve what would otherwise take hundreds of lines when using bare WebGL, often condensing it into just a few lines. \cite{Parisi2014}
+Direct \noborderacrshort{webgl} programming is very powerful and offers fine-grain control, necessitating extensive code to be written in both JavaScript and its shader language. Fortunately, there are several frameworks built on top of \noborderacrshort{webgl} that provide high-level abstractions and access. These frameworks can significantly reduce the amount of code required to achieve what would otherwise take hundreds of lines when using bare \noborderacrshort{webgl}, often condensing it into just a few lines.~\cite{Parisi2014}
 
-Three.js was selected from a range of frameworks, including Babylon.js \cite{BabylonJs} and PixiJS \cite{PixiJS}, that are designed to streamline the process of developing in WebGL. This decision was made after considering several important factors.
-Three.js is considered an undisputed leader in this category, having the biggest community support, which can be evidenced by its popularity and the volume of contributions on GitHub.\footnote{Three.js GitHub: \url{https://github.com/mrdoob/three.js}} It is also open source, published under the MIT license, offering great freedom in development and distribution. Furthermore, Three.js uses the best practices of 3D graphics; it is lightweight, easy to use, cross-platform, and contains many prebuilt assets. \cite{ThreeJs}
+Three.js was selected from a range of frameworks, including Babylon.js~\cite{BabylonJs} and PixiJS~\cite{PixiJS}, that are designed to streamline the process of developing in \noborderacrshort{webgl}. This decision was made after considering several important factors.
+Three.js is considered an undisputed leader in this category, having the biggest community support, which can be evidenced by its popularity and the volume of contributions on GitHub.\footnote{Three.js GitHub: \url{https://github.com/mrdoob/three.js}} It is also open source, published under the MIT~license, offering great freedom in development and distribution. Furthermore, Three.js uses the best practices of 3D graphics; it is lightweight, easy to use, cross-platform, and contains many prebuilt assets.~\cite{ThreeJs}
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Front-End Framework}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Leveraging front-end frameworks significantly enhances the development of web applications by addressing common front-end challenges. These frameworks often provide a structured approach for creating maintainable and reusable components, optimizing data manipulations, employing common design patterns, and ensuring that the user interface remains in sync with the underlying state. Various frameworks and libraries are available, such as React, Vue.js, or Angular, each with different benefits and drawbacks. The choice of which framework to use often involves complex decision making, influenced by specific project needs, team skills, and the unique characteristics of each framework. \cite{Gimeno2018, Pekarsky2020}
+Leveraging front-end frameworks significantly enhances the development of web applications by addressing common front-end challenges. These frameworks often provide a structured approach for creating maintainable and reusable components, optimizing data manipulations, employing common design patterns, and ensuring that the user interface remains in sync with the underlying state. Various frameworks and libraries are available, such as React, Vue.js, or Angular, each with different benefits and drawbacks. The choice of which framework to use often involves complex decision making, influenced by specific project needs, team skills, and the unique characteristics of each framework.~\cite{Gimeno2018, Pekarsky2020}
 
-For this solution, the decision has been greatly influenced by the selection (see previous section) of WebGL framework, Three.js. The \acrfull{r3f} library offers a seamless integration of Three.js into the React ecosystem. \acrshort{r3f} is a React renderer, enabling the direct use of Three.js components as React components. The integration is optimized, with the Three.js components rendered outside React's rendering process, therefore, having minimal overhead. Moreover, it is comprehensive, meaning that all Three.js features are exposed and accessible using this library. \cite{R3F}
+For this solution, the decision has been greatly influenced by the selection of \noborderacrshort{webgl} framework, which is Three.js (see previous section). That is because of the \noborderacrfull{r3f} library, which offers a seamless integration of Three.js into the React ecosystem. \noborderacrshort{r3f} is a React renderer, enabling the direct use of Three.js components as React components. The integration is optimized, with the Three.js components rendered outside React's rendering process, therefore, having minimal overhead. Moreover, it is comprehensive, meaning that all Three.js features are exposed and accessible using this library.~\cite{R3F}
 
-In addition, the Drei library, built on top of \acrshort{r3f}, introduces a collection of useful components, abstractions, and helpers. These additions streamline the development with Three.js and React even more. \cite{Drei}
+In addition, the Drei library, built on top of \noborderacrshort{r3f}, introduces a collection of useful components, abstractions, and helpers. These additions streamline the development with Three.js and React even more.~\cite{Drei}
 
-These libraries make React an attractive choice for this project. To see how the code differs when aiming to achieve similar objectives, refer to \autoref{listing:threejs} for the plain Three.js version and \autoref{lisiting:r3f} for the \acrshort{r3f} version, both creating a simple 3D red cube.
+These libraries make React an attractive choice for this project. To see how the code differs when aiming to achieve similar objectives, refer to \autoref{listing:threejs} in \autoref{appendix-b} for the plain Three.js version and \autoref{lisiting:r3f} in \autoref{appendix-b} for the \noborderacrshort{r3f} version, both creating a simple 3D red cube.
 
-React is a user interface library created at Facebook in 2011, but soon after became open source. React has gained widespread acclaim across many projects and has been continually developed since its inception. It emphasizes component-based architecture, where reactive components are written in JavaScript (or TypeScript) combined with HTML-like markup code, facilitating the creation of dynamic user interfaces. \cite{Banks2020}
+React is a user interface library created at Facebook in 2011, but soon after became open source. React has gained widespread acclaim across many projects and has been continually developed since its inception. It emphasizes component-based architecture, where reactive components are written in JavaScript (or TypeScript) combined with \noborderacrshort{html}-like markup code, facilitating the creation of dynamic user interfaces.~\cite{Banks2020}
 
-React itself is just a user interface library that lacks more sophisticated functionalities, such as routing. There are several frameworks compatible with React, such as Next.js or Gatsby.js, which offer advanced features like caching, routing, server-side rendering, search engine optimization, and more. However, because the dynamic content of this web application is highly influenced by user interactions, the solution would not benefit from these frameworks. \cite{Eze2023} Therefore, the decision was made to maintain simplicity, opting for the utilization of select libraries for advanced features rather than complex frameworks. Prioritizing speed, simplicity, and minimal configuration requirements, Vite.js has been chosen as the build tool and development server. \cite{Said2023}
+React itself is just a user interface library that lacks more sophisticated functionalities, such as routing. There are several frameworks compatible with React, such as Next.js or Gatsby.js, which offer advanced features like caching, routing, server-side rendering, search engine optimization, and more.~\cite{Eze2023} However, because the dynamic content of this web application is highly influenced by user interactions, the solution would not benefit from these frameworks. Therefore, the decision was made to maintain simplicity, opting for the utilization of select libraries for advanced features rather than complex frameworks. Prioritizing speed, simplicity, and minimal configuration requirements, Vite.js has been chosen as the build tool and development server.~\cite{Said2023}
 
 
 %______________________________________________________________
 \subsubsection{\glsentryshort{css} Framework}
 
-The development of a product configurator requires custom components. To define the styles of these custom designs, it will be necessary to utilize \acrfull{css}.
+The development of a product configurator requires custom components. To define the styles of these custom designs, it will be necessary to utilize \noborderacrfull{css}.
 
-TailwindCSS is a utilitfy-first \acrshort{css} framework. It enables the creation of custom designs using predefined \acrshort{css} utility classes, directly applicable in the React markup language, eliminating the necessity of manually writing \acrshort{css}. It is highly and simply customizable, has comprehensive and illustrative documentation, and makes it easy to create responsive designs. The framework allows for a fast development process, however, it needs to be integrated carefully, as the direct combination of style classes with the rest of the code of the component can make the codebase look very disorganized. \cite{TailwindCSS}
+TailwindCSS is a utilitfy-first \noborderacrshort{css} framework. It enables the creation of custom designs using predefined \noborderacrshort{css} utility classes, directly applicable in the React markup language, eliminating the necessity of directly writing \noborderacrshort{css}. It is highly customizable, has comprehensive and illustrative documentation, and makes it easy to create responsive designs. The framework allows for a fast development process, however, it needs to be integrated carefully, as the direct combination of style classes with the rest of the code of the component can make the codebase look very disorganized.~\cite{TailwindCSS}
 
-It was chosen for this project as a good balance between a fully custom solution and predefined components, for its ability to accelerate the development process and to help fulfill the requirement \hyperref[itm:NF2]{NF2}.
+It was chosen for this project for its ability to accelerate the development process and to help meet the responsiveness requirement (\hyperref[itm:NF2]{NF2}).
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -83,9 +83,9 @@ It was chosen for this project as a good balance between a fully custom solution
 
 The selection of programming language is predetermined by the already chosen technologies and libraries, necessitating the use of React markup and JavaScript in some form.
 
-Fortunately, with Vite.js's ability to transpile TypeScript to JavaScript, and given that type declarations are exported from the chosen JavaScript libraries, TypeScript can also be used. \cite{Said2023}
+Fortunately, with Vite.js's ability to transpile TypeScript to JavaScript, and given that type declarations are exported from the chosen JavaScript libraries, TypeScript can also be used.~\cite{Said2023}
 
-TypeScript is a programming language created by Microsoft that extends JavaScript by implementing strong typing. Strong typing helps detect bugs during development, reduce runtime errors, and improve overall code quality. It also allows for tighter integration with code editors, enabling features such as autocompletion or inline documentation. All code written in TypeScript is transpilable to JavaScript, which means that it is compatible with existing libraries and frameworks. \cite{TypeScript}
+TypeScript is a programming language created by Microsoft that extends JavaScript by implementing strong typing. Strong typing helps detect bugs during development, reduce errors, and improve overall code quality. It also allows for tighter integration with code editors, enabling features such as autocompletion or inline documentation. All code written in TypeScript is transpilable to JavaScript, which means that it is compatible with existing libraries and frameworks.~\cite{TypeScript}
 
 Given these advantages, TypeScript will be used in this project in place of JavaScript, ensuring a maintainable, high-quality codebase.
 
@@ -99,24 +99,30 @@ To enhance the functionality in a way that the frameworks described above do not
 %______________________________________________________________
 \subsubsection{Routing} \label{section:react-router}
 
-To improve the application's user experience with navigable URLs, allowing redirection, linking, or bookmarking pages, the use of a routing library is essential, as in an SPA, all content is served on a single address by default. For React, the leading library for routing is React-Router, which will be utilized for this purpose in this solution. This library has been chosen for its widespread use and robustness. Its use promises that the application supports dynamic and user-friendly navigation. \cite{Ganatra2018}
+To improve the application's user experience with navigable \noborderacrshort{url}s, allowing redirection, linking, or bookmarking pages, the use of a routing library is essential, as in a \noborderacrshort{spa}, all content is served on a single address by default.
+
+For React, the leading library for routing is React-Router, which will be utilized for this purpose in this solution. This library has been chosen for its widespread use and robustness. Its use promises that the application supports dynamic and user-friendly navigation.~\cite{Ganatra2018}
 
 %______________________________________________________________
 \subsubsection{Language Support} \label{section:i18n}
 
-To address the requirement of user interface text customization (\hyperref[itm:F15]{F15}) and multilingual support (\hyperref[itm:NF8]{NF8}), an internationalization and localization library is essential. Such a library enables the dynamic sourcing of user-interface texts from separate files according to the application's current settings. Consequently, on the basis of the extensive set of features and extensions offered, the i18next internationalization framework was chosen for this project. \cite{Krukowski2023}
+To address the requirement of user interface text customization (\hyperref[itm:F15]{F15}) and multilingual support (\hyperref[itm:NF8]{NF8}), an internationalization and localization library is essential. Such library enables the dynamic sourcing of user-interface texts from separate files according to the application's current settings. Consequently, on the basis of the extensive set of features and extensions offered, the i18next internationalization framework was chosen for this project.~\cite{Krukowski2023}
 
 %______________________________________________________________
 \subsubsection{State Management}
 
-State management is a critical element of React applications that links the internal state directly to the user interface. Although React offers a basic mechanism by default, complex applications highly profit from a sophisticated state management library that manages state updates and interface redraws in a comprehensive manner. \cite{Ceddia2021}
+State management is a critical element of React applications that links the internal state directly to the user interface. Although React offers a basic mechanism by default, complex applications highly profit from a sophisticated state management library that manages state updates and interface redraws in a comprehensive manner.~\cite{Ceddia2021}
 
-Although there are numerous different state management libraries, each with its advantages and disadvantages (such as Zustand, Redux, MobX, etc.), for this project, Valtio has been chosen. Valtio stands out for its extremely minimalistic API, while being very flexible with data structures. It uses proxies and allows direct mutations, making the handling of state as intuitive as working with regular JavaScript (or TypeScript) objects. This makes Valtio highly beneficial for this application, as it will simplify mapping the changing state to 3D objects, which will be necessary to fulfill the 3D preview requirement \hyperref[itm:F1]{F1}). \cite{Adepoju2023}
+Although there are numerous different state management libraries, each with its advantages and disadvantages (such as Zustand, Redux, MobX, etc.), for this project, Valtio has been chosen. Valtio stands out for its extremely minimalistic \noborderacrshort{api}, while being very flexible with data structures. It uses proxies and allows for direct mutations, making the handling of state as intuitive as working with regular JavaScript (or TypeScript) objects.~\cite{Adepoju2023}
+
+These characteristics make Valtio highly beneficial for this application, as it will simplify mapping the underlying state to 3D objects, which will be necessary to fulfill the 3D preview requirement (\hyperref[itm:F1]{F1}).
 
 %______________________________________________________________
 \subsubsection{Validation} \label{section:zod}
 
-To guarantee the integrity and structure of the loaded data, together with values that adhere to specified constraints, validation is crucial. Validation libraries have been designed for this purpose, and in this project, Zod has been chosen as the data validation library. Zod allows the inference of TypeScript types directly from the created data schemas, meaning a single schema definition can be used for parsing as well as type checking. Furthermore, Zod's is also very lightweight, and its powerful yet straitforward API for schema definition makes it an excellent choice for this task. \cite{Bhimani2023}
+To guarantee the integrity and structure of the loaded data with values that adhere to specified constraints, validation is crucial. Validation libraries have been designed for this purpose, and in this project, Zod has been chosen as the data validation library.
+
+Zod allows the inference of TypeScript types directly from the created data schemas, meaning a single schema definition can be used for parsing as well as type checking. Furthermore, Zod is also very lightweight, and its powerful yet straightforward \noborderacrshort{api} for schema definition makes it a compelling choice for this task.~\cite{Bhimani2023}
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -128,13 +134,13 @@ The effectiveness and resilience of the development process depends on the selec
 %______________________________________________________________
 \subsubsection{Version Control}
 
-Version control plays a crucial role in modern software development, allowing developers to track changes to source code over time. For this project, Git has been chosen as the version control system due to its widespread adoption and robust feature set. Git is a distributed system that allows for easy collaboration with other developers, as well as the creation of independent adaptations of the codebase through forking, all while preserving a connection to the original repository for future updates or integrations. In this way, a unique version of the application codebase can be tailored to meet specific business needs effectively.  \cite{Ponuthorai2022}
+Version control plays a crucial role in modern software development, allowing developers to track changes to source code over time. For this project, Git has been chosen as the version control system due to its widespread adoption and robust feature set. Git is a distributed system that allows for easy collaboration with other developers, as well as the creation of independent adaptations of the codebase through forking, all while preserving a connection to the original repository for future updates or integrations. In this way, a unique version of the application codebase can be tailored, in case it is required to meet specific custom business needs.~\cite{Ponuthorai2022}
 
-GitLab is a DevOps platform that is used to host Git repositories, offering a wide range of features. The primary benefit for this project lies in its CI/CD pipelines, which can be used for automated testing, linting, and building of the project. This automation speeds up the development process. \cite{GitLab}
+GitLab is a DevOps platform that is used to host Git repositories, offering a wide range of features. The primary benefit for this project lies in its \noborderacrshort{ci}/\noborderacrshort{cd} pipelines, which can be used for automated testing, linting, and building of the project. This automation speeds up the development process.~\cite{GitLab}
 
-Conventional Commits is a convention for naming Git commit messages in a descriptive form, creating rules that communicate the scope of changes and allow the creation of further automations on top of them. This convention will be used to ensure order and clarity in the Git repository. \cite{ConventionalCommits}
+Conventional Commits is a convention for naming Git commit messages in a descriptive form, creating rules that communicate the scope of changes and allow the creation of further automations on top of them. This convention will be used to ensure order and clarity in the Git repository.~\cite{ConventionalCommits}
 
-To enforce the use of conventions in commits, Husky, a tool for utilizing Git hooks, will be integrated into the development workflow. Husky allows for the setup of actions that are triggered at specific points in the Git lifecycle. This way, the project can automatically lint commit messages to ensure that they follow the Conventional Commits format, as well as check contents of the commits. \cite{Husky}
+To enforce the use of conventions in commits, Husky, a tool for utilizing Git hooks, will be integrated into the development workflow. Husky allows for the setup of actions that are triggered at specific points in the Git lifecycle. This way, the project can automatically lint commit messages to ensure that they follow the Conventional Commits format, as well as check contents of the commits.~\cite{Husky}
 
 %______________________________________________________________
 \subsubsection{Package Manager}
@@ -155,17 +161,36 @@ Prettier will automatically format the code to meet style guidelines, making it 
 \section{Domain Model} \label{section:domain-model}
 %---------------------------------------------------------------
 
-Before implementation, an important part of the design process is the description of the domain model. This outlines the concepts the tool will work with and defines the interactions of entities, establishing an important context that serves as a foundation for building the toolkit. A Unified Modeling Language (UML) diagram can easily represent the domain model. \cite{Wlaschin2018}
+Before implementation, an important part of the design process is the description of a domain model. This outlines the concepts the tool will work with and defines the interactions of entities, establishing an important context that serves as a foundation for building the toolkit. 
 
-The UML diagram that illustrates the domain model of the entities related to the proposed toolkit is presented in \autoref{fig:domain-model}. This model serves as a blueprint for the architecture of the system, outlining a coherent structure that aligns with the project objectives described in the previous chapters. 
+The domain of the solution is based on the basic functionality of product configurators, which is illustrated in \autoref{fig:core-functionality}. At the core of the tool are two actors: the customer and the configurator, as well as two models: the product specification, which defines the possible configuration options, and the configured product, which stores the options the customer has chosen. The flow is then as follows:~\cite{Hansen2003}
+\begin{enumerate}
+    \item The product specification, which stores the product options, is loaded into the configurator.
+    \item The configurator presents the customer with the product options.
+    \item The customer expresses their desired values of the product options to the configurator.
+    \item The configurator stores the desired values of the product options as a configured product.
+\end{enumerate}
+The domain model for this solution is based on these concepts; however, it is more detailed, as more complex relationships and objects are necessary.
 
-The domain model presents a structure of product specifications contained in a catalog, the dependencies between different entities, and illustrates the progression from generic specifications to concrete user configurations. This model aims to offer a clear insight into the design rationale behind the tool, highlighting the transition from abstract specifications to customized user-driven outcomes.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/diagram_communication.png}
+\captionsource{Diagram of core functionality of product configurators}{Adapted from~\cite{Hansen2003}}
+\label{fig:core-functionality}
+\end{figure}
+
+
+\noborderacrfull{uml} diagram can easily represent the domain model.~\cite{Wlaschin2018}
+
+The \noborderacrshort{uml} diagram that illustrates the domain model of the entities related to the proposed toolkit is presented in \autoref{fig:domain-model}. This model serves as a blueprint for the architecture of the system, outlining a coherent structure that aligns with the project objectives described in the previous chapters. 
+
+The domain model presents a structure of product specifications contained in a catalog, the dependencies between different entities, and illustrates the progression from generic specifications to concrete user configurations. This model aims to offer a clear insight into the design rationale behind the tool.
 
 \begin{landscape}
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{images/uml_domainmodel.png}
-\caption{Domain model as a UML diagram}
+\caption{Domain model as \glsentryshort{uml} diagram}
 \label{fig:domain-model}
 \end{figure}
 \end{landscape}
@@ -175,7 +200,7 @@ The domain model presents a structure of product specifications contained in a c
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 The catalog forms the backbone of the proposed toolkit and defines the blueprint for customizable products. It encompasses a variety of product specifications, each defining a configurable product along with all its potential customizations. This section looks at how these specifications lay the foundation for user-driven product configuration.
-The entities discussed in this section are as follows:
+The entities from the diagram in \autoref{fig:domain-model} discussed in this section are as follows:
 \begin{itemize}[label=\rectanglebullet]
     \item Catalog
     \item Product Specification
@@ -188,15 +213,15 @@ The entities discussed in this section are as follows:
     \item Administrator
 \end{itemize}
 
-A Product Specification acts as an overreaching comprehensive concept that encompasses all aspects of a given product. The entity may be associated with Confirmation, an action to finalize the configuration of the product, fulfilling the need for the processing of the configuration (see requirement \hyperref[itm:F10]{F10}). Given that the tool focuses on the handling of modular products (see requirement \hyperref[itm:F3]{F3}), it is imperative that each product consists of various components. Therefore, the Product Specification is made up of Component Specifications, which represent all the various possible components that the product can have.
+Product specification acts as an overreaching comprehensive concept that encompasses all aspects of a given product. The entity may be associated with confirmation, an action to finalize the configuration of the product, fulfilling the need for processing of the configuration (see requirement \hyperref[itm:F10]{F10}). Given that the tool focuses on the handling of modular products (see requirement \hyperref[itm:F3]{F3}), it is imperative that each product consists of various components. Therefore, the product specification is made up of component specifications, which represent all the various possible components that the product can have.
 
-To meet the requirement of 3D visualization (see requirement \hyperref[itm:F3]{F3}), Component Specifications must be linked to a Model featuring 3D meshes. This Model acts as a representation of the component that will be presented to the User during the configuration process. In addition to this, the Component Specification is composed of Material Specifications and Mounting Point Specifications.
+To meet the requirement of 3D visualization (see requirement \hyperref[itm:F3]{F3}), component specifications must be linked to a model featuring 3D meshes. This model acts as a representation of the component that will be presented during the configuration process. In addition to this, the component specification is composed of material specifications and mounting point specifications.
 
-Material Specification is needed with respect to the requirement of material color configuration (see requirement \hyperref[itm:F8]{F8}). It describes the materials of a given component that the User can customize, with each Material Specification providing mesh information, specifying which part of the component this material influences, thereby enabling preview updates as the User makes selections. In addition, the Material Specification consists of Color Specifications that define the possible colors this material can take on in the configuration process.
+The material specification is needed with respect to the requirement of material color configuration (see requirement \hyperref[itm:F8]{F8}). It describes the materials of a given component that the user can customize, with each material specification specifying which part of the component this material influences, thereby enabling preview updates as the user makes selections. In addition, the material specification consists of color specifications that define the possible colors that this material can take on in the configuration process.
 
-Mounting Point Specifications are introduced to address the requirement of fixed point component placement (see requirement \hyperref[itm:F6]{F6}). They represent points on a component to which other modular components can be attached. Mounting Point Specification includes the relative position and rotation of the point, the requirement for a component's presence at this point, and possible Component Specifications that can be mounted on the point.
+Mounting point specifications are introduced to address the requirement of fixed point component placement (see requirement \hyperref[itm:F6]{F6}). They represent points on a component to which other modular components can be attached. The mounting point specification includes the relative position and rotation of the point on the component specification, the requirement for a component's presence at this point, and possible component specifications that can be mounted on the point.
 
-All these specifications are maintained in the catalog by the Administrator, who has the authority to modify any properties. The tool then utilizes these specifications to enable the configuration of tangible products.
+All these specifications are maintained in the catalog by the administrator, who has the authority to modify any properties. The tool then utilizes these specifications to enable the configuration of customized products.
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -204,15 +229,15 @@ All these specifications are maintained in the catalog by the Administrator, who
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Transitioning from specifications to actual configurations, the configuration section describes how users bring customizable products to life through the toolkit.
-It illustrates how configured components are the building blocks of user-generated configurations, embodying the transformation from a generic template into a product uniquely tailored to individual preferences.
-The entities covered in this section include:
+It illustrates how configured components are the building blocks of user-generated configurations, realizing the transformation from a generic template into a product uniquely tailored to individual preferences.
+The entities from the diagram in \autoref{fig:domain-model} covered in this section include:
 \begin{itemize}[label=\rectanglebullet]
     \item Configuration
     \item Configured Component
     \item User
 \end{itemize}
 
-Users of the application create Configurations, which configure products. The cornerstone of a Configuration lies in its Configured Components. The specifications described in the previous section serve as templates for these Configured Components. While the specifications outline all the configuration options, a Configured Component indicates a particular set of options selected by the User. Beyond the Component Specification the Configure Component customizes, it also stores the Mounting Point Specification to which it is attached, as well as the selected Color Specifications of its Material Specifications. Thus, a Configuration is composed entirely of these individual Configured Components.
+Users of the application create configurations that represent configured products. The cornerstone of the configuration lies in its configured components. The specifications described in the previous section serve as templates for these configured components. While the specifications outline all the configuration options, the configured component indicates a particular set of options selected by the user. Beyond storing the component specification the configured component customizes, it also stores the mounting point specification to which it is attached, as well as the selected color specifications of its material specifications. Thus, a configuration is composed entirely of these individual configured components.
 
 
 %______________________________________________________________
@@ -227,7 +252,7 @@ An article \cite{Leitner2014} used The Configurator Database Project to analyze 
 \begin{itemize}[label=\rectanglebullet]
     \item At the end of the configuration process, a summary of selected options is presented.
     \item To present the products that can be configured, detailed images are used.
-    \item Horizontally positioned navigation bar that is always visible.
+    \item Horizontally positioned navigation bar is always visible.
     \item Order button is clearly visible and available for completion purposes.
     \item Prices of the components are accessible in all phases of the configuration.
     \item Logo of the business is prominently displayed.
@@ -238,9 +263,9 @@ Furthemore, design guidelines from the Website Tools and Application with Flash 
 \begin{itemize}[label=\rectanglebullet]
     \item Core task must at center of the application.
     \item Complex features that detract from the core task overwhelm users and increase learning time and should be avoided.
-    \item Interfaces must not be overcrowded and should prioritize presenting the most important information.
+    \item The interfaces must not be overcrowded and should prioritize presenting the most important information.
     \item The interactions should be consistent within similar components of the application.
-    \item Design should respect and reuse good design principles of similar solutions that users may already feel familiar with.
+    \item The design should respect and reuse good design principles of similar solutions that users may already feel familiar with.
     \item Technical details of the solution should be hidden from the user.
     \item Feedback to user's actions should be imminent.
     \item If available, prices should always be displayed.
@@ -248,17 +273,15 @@ Furthemore, design guidelines from the Website Tools and Application with Flash 
     \item Popup windows should include close buttons.
 \end{itemize}
 
-The design is therefore based on the described key insights and respects the intuitive design principles of similar solutions that users may already be familiar with, ensuring an intuitive and efficient interface for users.
+The design is therefore based on the described insights and respects the intuitive design principles of similar solutions that users may already be familiar with, ensuring an intuitive and efficient interface for users.
 
 The configurator as an application is specific in that it primarily centers around the configuration process, with this interface being the most important and all other interfaces being secondary. In this section, the design of this configuration screen will be introduced, as well as the introduction and confirmation screens.
 
-The common element of all screens is the top bar with the logo of the business that operates the configurator, which should redirect the user to the main website of the company when clicked. All of this should be customizable in the admin settings of the application.
+The common element of all screens is a top bar with the logo of the business that operates the configurator, which should redirect the user to the main website of the company when clicked. All of this should be customizable in the admin settings of the toolkit.
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Configuration Screen}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-The configuration screen is presented to the user during the configuration process. The screen is dominated by the 3D preview of the configured product, featuring interactable components and spatial buttons for the addition of components into the configuration. This design follows the requirement of open navigation (see requirement \hyperref[itm:F5]{F5}). Control buttons are placed in the upper left corner within the 3D preview, symbolizing their direct relation to the preview, yet maintaining their distinctiveness as a separate element. At the bottom of the screen, there is another bar, this one containing buttons that allow users to go back or to finalize the configuration. The wireframe of the configuration screen in its default state is shown in  \autoref{fig:wireframe-configuration}, where the 3D preview of the product is represented by a blueish cube.
 
 \begin{figure}[h]
 \centering
@@ -266,6 +289,9 @@ The configuration screen is presented to the user during the configuration proce
 \caption{Wireframe of configuration screen}
 \label{fig:wireframe-configuration}
 \end{figure}
+
+
+The configuration screen is presented to the user during the configuration process. The screen is dominated by the 3D preview of the configured product, featuring interactable components and spatial buttons for the addition of components into the configuration. This design follows the requirement of open navigation (see requirement \hyperref[itm:F5]{F5}). Control buttons are placed in the upper left corner within the 3D preview, symbolizing their direct relation to the preview, yet maintaining their distinctiveness as a separate element. At the bottom of the screen, there is another bar, this one containing buttons that allow users to go back or to finalize the configuration. The wireframe of the configuration screen in its default state is shown in \autoref{fig:wireframe-configuration}, where the 3D preview of the product is represented by a blueish cube.
 
 \begin{figure}[h]
 \centering
@@ -294,9 +320,9 @@ This default view, as outlined in the previous paragraph, maximizes the viewport
 
 To ensure responsiveness, a mobile version of the interface should also be outlined. The prioritization of the 3D preview in the default state makes this simple, as this means that on smaller viewports the elements are presented in the same way, with the preview being in different aspect ratio, which is easily compensated for by the 3D preview taking on different zoom level. The outline of this wireframe is presented in \autoref{fig:wireframe-configuration-mobile}.
 
-The wireframe for the mobile version of the interface with the presented detail side panel is shown in \autoref{fig:wireframe-configuration-panel-mobile}. At this reduced viewport size, the side panel can maintain the same internal layout but to be usable it needs to occupy the whole 3D preview. This will need to be kept in mind when utilizing interactions with the 3D preview, as it may not always be fully visible when the panels are active. 
+The wireframe for the mobile version of the interface with the presented side panel is shown in \autoref{fig:wireframe-configuration-panel-mobile}. At this reduced viewport size, the side panel can maintain the same internal layout but to be usable it needs to occupy the whole 3D preview. This will need to be kept in mind when utilizing interactions with the 3D preview, as it may not always be fully visible when the panels are active. 
 
-The design remains mostly consistent on both small and large viewports, while still being adaptive and responsive. This ensures that the familiarity with the tool is maintained for all viewport sizes.
+The design remains mostly consistent on both small and large viewports while still being adaptive and responsive. This ensures that the familiarity with the tool is maintained for all viewport sizes.
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Introduction Screen}
@@ -322,7 +348,7 @@ The introduction screen is the first screen presented to the user when launching
 \label{fig:wireframe-confirmation}
 \end{figure}
 
-The confirmation screen is presented to the user at the end of the configuration and satisfies the configuration review requirement (see requirement \hyperref[itm:F9]{F9}). The wireframe of the configuration screen is shown in \autoref{fig:wireframe-confirmation}. On the left side, the confirmation screen presents the selected and configured components in a comprehensive list and allows the user to review their choices. The right side of the screen contains two buttons, one to confirm the configuration, which can initiate a confirmation action, and another to return to the configuration process for any adjustments. 
+The confirmation screen is presented to the user at the end of the configuration process and satisfies the configuration review requirement (see requirement \hyperref[itm:F9]{F9}). The wireframe of the configuration screen is shown in \autoref{fig:wireframe-confirmation}. On the left side, the confirmation screen presents the selected and configured components in a comprehensive list and allows the user to review their choices. The right side of the screen contains two buttons, one to confirm the configuration, which can initiate a confirmation action, and another to return to the configuration process for any adjustments. 
 
 \begin{figure}[htb]
 \centering

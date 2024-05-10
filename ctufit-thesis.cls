@@ -559,3 +559,11 @@
 \newcommand{\trianglebullet}{\raisebox{2pt}{\tikz{\filldraw[fill=black, rounded corners=0.1pt] (0,0) -- (0.15,0.075) -- (0,0.15) -- cycle;}}}
 
 % bullet points end
+
+% borders of acronym links
+
+\newcommand{\noborderacrfull}[1]{\hypersetup{pdfborder={0 0 0}}\acrfull{#1}\hypersetup{pdfborder={0 0 1}}}
+\newcommand{\noborderacrlong}[1]{\hypersetup{pdfborder={0 0 0}}\acrlong{#1}\hypersetup{pdfborder={0 0 1}}}
+\newcommand{\noborderacrshort}[1]{\hypersetup{pdfborder={0 0 0}}\acrshort{#1}\hypersetup{pdfborder={0 0 1}}}
+
+% borders of acronym links end

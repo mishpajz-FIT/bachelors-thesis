@@ -22,7 +22,7 @@ This section describes the necessary steps to utilize the implemented solution, 
 \subsection{Building and Launching the Application}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-If the code of the application has been modified in any way, the installation of Node.js and npm is a prerequisite for building the application. The configurator application can then be built by executing \mintinline{bash}{npm install} followed by \mintinline{bash}{npm run build --workspace main}, which will generate the files in \texttt{apps/main/dist/} directory. If no modifications have been made, pre-built files may be utilized directly.
+If the code of the application has been modified in any way, the installation of Node.js and npm is a prerequisite for building the application. The configurator application can then be built by executing \mintinline[bgcolor=backgroundgray]{bash}{npm install} followed by \mintinline[bgcolor=backgroundgray]{bash}{npm run build --workspace main}, which will generate the files in \texttt{apps/main/dist/} directory. If no modifications have been made, pre-built files may be utilized directly.
 
 In the example case, the company already operates a website; therefore, the newly implemented configurator tool will be deployed to the appropriate subdomain of the website (e.g. \texttt{configurator.example.com}). This approach requires proper configuration of DNS settings for the new subdomain and appropriate adjustments to the web server, but otherwise utilizes the already existing web hosting infrastructure. If this were not the case, it would be necessary to facilitate an HTTP server through web hosting.
 
@@ -63,19 +63,19 @@ To adjust the interface texts and provide different localization options, transl
 %______________________________________________________________
 \subsubsection{Appearance}
 
-Following, the appearance of the interface can be tailored. Color scheme is customizable by updating the hex color codes in \texttt{ui.colors} and \texttt{spatialUi.selectionColors}. The logo displayed on the top left, as well as the favicon can be customized by setting the paths to the image files under \texttt{images} key. The web page to which the displayed logo links to can be configured using the \texttt{sources.homepageUrl} key. In addition, the title of the web page can be adjusted using the \texttt{title} key. The appearance customizations provide options for both dark and light modes of the interface.
+Following, the appearance of the interface can be tailored. Color scheme is customizable by updating the hex color codes in \texttt{ui.colors} and for the outlines within the 3D preview in \texttt{spatialUi.selectionColors}. The logo displayed on the top left, as well as the favicon can be customized by setting the paths to the image files under \texttt{images} key. The web page to which the displayed logo links to can be configured using the \texttt{sources.homepageUrl} key. In addition, the title of the web page can be adjusted using the \texttt{title} key. The appearance customizations provide options for both dark and light modes of the interface.
 
 Moreover, the camera style and floor shadow in the 3D visualization can be adjusted, and the option whether to display the button to save the completed configuration in PDF to users is provided.
 
 
 %______________________________________________________________
-\subsubsection{Data source}
+\subsubsection{Data Source}
 
 Finally, the source from which the product catalog is fetched must be defined in \texttt{sources.catalogUrl}. Any accessible location which provides the files in the correct data scheme can be provided here. Creation of this catalog file is described in the following section.
 
 
 %______________________________________________________________
-\subsubsection{Example case}
+\subsubsection{Example Case}
 
 In the example case discussed in this chapter, the interface was customized according to the company's brand guidelines. The company logo, set to appear in the top left corner, links back to the company's original website. The catalog source was defined as a static file located on the web server at \texttt{products/catalog.json}.
 
@@ -91,7 +91,9 @@ The first step needed to create catalog of product is the preparation of 3D mode
 
 It is necessary to store the files in an accessible location so that they can be fetched from their paths by the configurator application. It should be kept in mind that the size of the file and the complexity of the models correspond to the performance of the configurator application; therefore, it is beneficial to have simplified models with compressed textures to achieve the greatest possible performance. For easier of specification creation, the center of the model should also align with the center of the 3D scene in the file.
 
-To create the configurable products, the administrative application needs to be launched. With the same prerequisites and dependencies as the main application, the admin tool can be built using the command \mintinline{bash}{npm run build --workspace admin}. The resulting files will be created in \texttt{apps/admin/dist}. These built files can be again uploaded to a web server (perhaps within the company intranet) or be served locally for the duration needed to create the specifications by executing \mintinline{bash}{npm run preview --workspace admin}.
+To create the configurable products, the administrative application needs to be launched. With the same prerequisites and dependencies as the main application, the admin tool can be built using the following command: \linebreak\mintinline[bgcolor=backgroundgray]{bash}{npm run build --workspace admin}
+
+The resulting files will be created in \texttt{apps/admin/dist}. These built files can be again uploaded to a web server (perhaps within the company intranet) or be served locally for the duration needed to create the specifications by executing the command: \mintinline[bgcolor=backgroundgray]{bash}{npm run preview --workspace admin}
 
 Within the administrator's application Product Composer screen, product specification can be now created, by creating component specifications along with their materials, mounting points and specified base components. It should be kept in mind that the 3D models of the components (and images) in the admin application are loaded from the same paths as they will be in the main application during configuration, and it is therefore crucial for these models to be accessible in both applications on the same paths. When product specifications are created, they can each be exported to JSON files, and again, need to be stored in accessible locations from the main application.
 
@@ -148,7 +150,7 @@ This section explores the business aspects of deploying the configurator tool, e
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-\subsection{Cost effectiveness}
+\subsection{Cost-Effectiveness}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 As this solution aims to cater to small businesses, this project has been conceptualized with cost effectiveness in mind, with the requirement of lightweight infrastructure needs (\hyperref[itm:NF4]{NF4}) and self-hostability (\hyperref[itm:NF3]{NF3}). These principles have been greatly reflected in the design and implementation.
@@ -161,7 +163,7 @@ For functionalities the require additional processing of the product data or the
 
 \begin{table}[htb]
 \centering
-\begin{tabular}{>{\raggedright\arraybackslash}p{4.1cm} >{\raggedright\arraybackslash}p{4cm} >{\centering\arraybackslash}p{3cm}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.1cm} >{\raggedright\arraybackslash}p{4cm} >{\centering\arraybackslash}p{3.3cm}}
 \toprule
 \textbf{Provider} & \textbf{Free plan limits} & \multrow{c}{\textbf{Cost over limit} \\ \textbf{(per million reqs)}}\\ 
 \midrule
@@ -197,13 +199,13 @@ This solution deployed in the example company impacts the inquiry and order proc
 \begin{landscape}
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.78\linewidth]{images/uml_originalactivity.png}
+\includegraphics[width=0.67\linewidth]{images/uml_originalactivity.png}
 \caption{Original order process as a UML activity diagram.}
 \label{fig:uml-originalactivity}
 \end{figure}
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.78\linewidth]{images/uml_newactivity.png}
+\includegraphics[width=0.67\linewidth]{images/uml_newactivity.png}
 \caption{Order process with implemented solution as a UML activity diagram.}
 \label{fig:uml-newactivity}
 \end{figure}
@@ -214,13 +216,13 @@ This solution deployed in the example company impacts the inquiry and order proc
 \subsubsection{Original Process}
 
 
-The UML activity diagram of the original process is illustrated in \autoref{fig:uml-originalactivity}. The inquiry and order process before deployment of the solution looks as follows. Initially, when customers wants to purchase a manufactured product, they visit the website of the company and fill out the inquiry form. Based on the information provided in the inquiry form, the employee creates a visualization, which is sent to the customer along with additional product customization informations. At this point, the customer decides if this is the product they want or if they want to stop the process there. If the customer likes the product and options presented by the employee, an iterative process begins between the customer and employee, where the employee tries to create an adequate quote for the product to the customer, while the customer sends back the proposed adjustments to the employee. When an agreement is reached, the order is placed and the product goes into production. 
+The UML activity diagram of the original process is illustrated in \autoref{fig:uml-originalactivity}. The inquiry and order process before deployment of the solution looks as follows. Initially, when customers wants to purchase a manufactured product, they visit the website of the company and fill out the inquiry form. Based on the information provided in the inquiry form, the employee creates a visualization, which is sent to the customer along with additional product customization informations. At this point, the customer decides if this is the product they want or if they want to stop the process there. If the customer likes the product and options presented by the employee, an iterative process begins between the customer and employee, where the employee tries to create an adequate quote for the product to the customer, while the customer sends back the proposed adjustments to the employee, who tries to process and incorporate them. When an agreement is reached, the order is placed and the product goes into production. 
 
 
 %______________________________________________________________
 \subsubsection{New Process}
 
-After deploying the solution in this company, as described in the previous sections, the inquiry and order process can change into the form illustrated in \autoref{fig:uml-newactivity}. With this change, the customer visits the company's website and directly creates the configuration of the product they desire. The steps where the employee would need to present product visualizations and options are bypassed, as these are now handled by the tool. If the customer is satisifed the configured product, they send an inquiry containing the configuration, and the employee can base the quote on this configuration. The process then follows the same way as in the original scenario.
+After deploying the solution in the example company, as described in the previous sections, the inquiry and order process can change into the form illustrated in \autoref{fig:uml-newactivity}. With this change, the customer visits the company's website and directly creates the configuration of the product they desire. The steps where the employee would need to present product visualizations and options are bypassed, as these are now handled by the tool. If the customer is satisfied with the configured product, they send an inquiry containing the product configuration, and the employee can process it and base the quote on this configuration. The process then follows in the same way as in the original scenario.
 
 This demonstrates the power of the developed tool to simplify the initial step of the process, saving the employees time that would otherwise be spent on communicating with the customer. It also allows the customers to clearly express their preferences using the tool, reducing the friction of the inquiry process and potentially leading to more conversions into orders.
 

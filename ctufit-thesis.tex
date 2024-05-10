@@ -52,7 +52,7 @@
 \ctufitdeclarationdate{\today} % replace with the date of signature of the declaration
 \ctufitabstractCZE{Tato bakalářská práce se zabývá návrhem a vývojem webové aplikace pro 3D online konfiguraci modulárních produktů. Práce analyzuje existující srovnatelné aplikace a implementuje produktově nezávislý, pouze front-endový a přizpůsobitelný webový konfigurátor koncipovaný pro použití v malých podnicích. Konfigurátor umožňuje přímočarou definici konfigurovatelných produktů a funguje výhradně pomocí webového serveru. Implementace využívá moderní technologie a kombinuje Three.js s Reactem. Práce dále popisuje nasazení vyvinutého řešení na příkladném scénáři v reálném prostředí a jsou diskutovány byznysové aspekty aplikace. Výsledkem této bakalářské práce je nástroj, který mohou podniky využít k zavedení modulární konfigurace produktů na svých webových stránkách.}
 \ctufitabstractENG{This bachelor's thesis focuses on the design and development of a web application for the 3D online configuration of modular products. The thesis examines comparable existing applications and implements a product-agnostic, front-end-only, customizable web configurator conceived for use by small businesses. The configurator provides a straightforward definition of configurable products and operates solely using a web server. The implementation leverages modern technologies, combining Three.js with React. The thesis furthermore describes an example deployment of the created solution in a real-world scenario and discusses the business aspects of the application. The result of this bachelor's thesis is a tool businesses can use to introduce modular product configuration on their websites.}
-\ctufitkeywordsCZE{masová kustomizace, 3D konfigurátor, webová aplikace, modulární produkt, Three.js, React, vývoj front-endu}
+\ctufitkeywordsCZE{masová kustomizace, 3D konfigurátor, webová aplikace,\linebreak modulární produkt, Three.js, React, vývoj front-endu}
 \ctufitkeywordsENG{mass customization, 3D configurator, web application, modular product, Three.js, React, front-end development}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % END FILL IN
@@ -106,6 +106,7 @@
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{microtype}
 \usepackage[acronym,toc]{glossaries}
 \makeglossaries
 %%%%%%%%%%%%%%%%%%%%%%
@@ -122,6 +123,7 @@
 
 \imprintpage % do not remove this command
 
+\microtypesetup{protrusion=false}
 \tableofcontents % do not remove this command
 %%%%%%%%%%%%%%%%%%%%%%
 % list of other contents: figures, tables, code listings, algorithms, etc.
@@ -133,6 +135,7 @@
 \listoftables % list of tables
 \thectufitlistingscommand
 \endgroup
+\microtypesetup{protrusion=true}
 %%%%%%%%%%%%%%%%%%%%%%
 % list of other contents END
 %%%%%%%%%%%%%%%%%%%%%%
@@ -145,13 +148,13 @@
 \begin{acknowledgmentpage}
 I want to express my heartfelt gratitude to my supervisor, Ing.~Jiří~Hunka, for enabling me to create a bachelor's thesis on this topic and for providing invaluable advice throughout the entire process.
 
-I am also profoundly thankful to the testers for their time and effort in the usability testing of the solution.
+\vspace{1em}
 
-Last but not least, I want to thank my family and friends for their inexhaustible moral and material support, which enabled my bachelor's study at the university.
+I am also profoundly thankful to the testers for their time and feedback in the usability testing of the solution.
 
 \vspace{1em}
 
-Thank you all for your outstanding support and encouragement.
+Last but not least, I want to thank my family and friends for their inexhaustible moral and material support, which enabled my bachelor's study at the university.
 \end{acknowledgmentpage}
 %%%%%%%%%%%%%%%%%%%
 % ACKNOWLEDGMENT END
@@ -226,6 +229,18 @@ I acknowledge that my thesis is subject to the rights and obligations stipulated
 \newacronym{ar}{AR}{Augmented Reality}
 \newacronym{css}{CSS}{Cascading Style Sheets}
 \newacronym{r3f}{R3F}{React Three Fiber}
+\newacronym{webgl}{WebGL}{Web Graphics Library}
+\newacronym{vr}{VR}{Virtual Reality}
+\newacronym{spa}{SPA}{Single-Page Application}
+\newacronym{url}{URL}{Uniform Resource Locator}
+\newacronym{usdz}{USDZ}{Universal Scene Description Zip}
+\newacronym{pdf}{PDF}{Portable Document Format}
+\newacronym{api}{API}{Application Programming Interface}
+\newacronym{erp}{ERP}{Enterprise Resource Planning}
+\newacronym{html}{HTML}{Hypertext Markup Language}
+\newacronym{ci}{CI}{Continuous Integration}
+\newacronym{cd}{CD}{Continuous Deployment}
+\newacronym{uml}{UML}{Unified Modeling Language}
 
 \printglossary[type=\acronymtype, style=tabular-style, title=\thectufitabbreviationlabel]
 

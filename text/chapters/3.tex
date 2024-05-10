@@ -12,65 +12,76 @@ Implementation focuses primarily on the requirements outlined in \autoref{sectio
 \section{Structure of the Toolkit}
 %______________________________________________________________
 
-The application is designed as a front-end only solution. Given it's front-end nature, the configuration's administration can be done through reading from static configuration files rather than relying on data from a backend API. This way, operators of the application can easily adjust the application's behavior and offerings without the need for complex back-end processing, which is not needed in this case as the data are not sensitive or time specific and have a predefined structure. 
+The application is designed as a front-end only solution. Given it's front-end nature, the configuration's administration can be done through reading from static configuration files rather than relying on data from a backend \noborderacrshort{api}. This way, operators of the application can easily adjust the application's behavior and offerings without the need for complex back-end processing, which is not needed in this case as the data are not sensitive or time specific and have a predefined structure. 
 
-Consequently, the toolkit is divided into two main applications: the configurator component and the administrator component. The configurator is the user-facing part that businesses deploy or embed on their webservers, offering the ability to configure products based on the supplied configuration files. The administrator application, on the other hand, is used by the toolkit operators to generate and edit these configuration files.
+Consequently, the toolkit is divided into two main applications: the configurator application and the administrator application. The configurator is the user-facing part that businesses deploy or embed on their webservers, offering the ability to configure products based on the supplied configuration files. The administrator application, on the other hand, is used by the toolkit administrators to generate and edit these configuration files.
 
-It should be noted that with this architecture, deploying the administrator application is not a prerequisite for every instance of the configurator; it can be used across various configurators of the same version or even run for the necessary short while in development mode. This flexibility ensures that businesses can manage and update their configurator setups without the need to deploy an instance of the administrator application.
+It should be noted that with this architecture, deploying the administrator application is not a prerequisite for every instance of the configurator; it can be used across various configurators of the same version or even run for the necessary short moment in development mode. This flexibility ensures that businesses can manage and update their configurator setups without the need to deploy an instance of the administrator application.
 
 This architecture not only enhances the toolkit's scalability and ease of use, but also ensures that it can be easily integrated into a wide range of business environments, addressing different customization needs without the complexities and overheads associated with traditional back-end-dependent applications.
 
-This structure is also implemented in such a way that if the need for a back-end develops one day, it will be very easy to modify the application for that change.
+This structure is also implemented in such a way that if the need for a back-end develops at some point, it will be very easy to modify the application for that change.
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Project Directory Tree}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-\dirtree{%
-.1 /.
-    .2 apps/.
-        .3 admin/.
-            .4 src/.
-            .4 index.html.
-            .4 vite.config.ts.
-            .4 package.json.
-        .3 main/.
-            .4 src/.
-            .4 index.html.
-            .4 vite.config.ts.
-            .4 package.json.
-    .2 packages/.
-        .3 shared/.
-            .4 src/.
-            .4 package.json.
-    .2 package.json.
-}
-\vspace{16pt}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.4\textwidth}
+    \dirtree{%
+    .1 /.
+        .2 apps/.
+            .3 admin/.
+                .4 src/.
+                .4 index.html.
+                .4 vite.config.ts.
+                .4 package.json.
+            .3 main/.
+                .4 src/.
+                .4 index.html.
+                .4 vite.config.ts.
+                .4 package.json.
+        .2 packages/.
+            .3 shared/.
+                .4 src/.
+                .4 package.json.
+        .2 package.json.
+    }
+    \end{minipage}
+    \caption{Directory structure of the project}
+    \label{fig:directory-tree}
+\end{figure}
 
-Given the separation of the toolkit into the configurator and administrator components, the project is split into two subprojects in the \texttt{apps} directory. The configurator application is located in the main directory, while the admin directory contains the source files for the administrator application. Consequently, each of the subprojects has its own Vite configuration, among their \texttt{index.html} files, \texttt{src} directories for code and \texttt{package.json} for managing the subproject-specific dependencies. 
+Given the separation of the toolkit into the configurator and administrator components, the project is split into two subprojects in the \texttt{apps} directory. The configurator application is located in the \texttt{main} directory, while the \texttt{admin} directory contains the source files for the administrator application. Consequently, each of the subprojects has its own Vite.js configuration, among their \texttt{index.html} files, \texttt{src} directories for code and \texttt{package.json} for managing the subproject-specific dependencies. 
 
-To minimize code duplication, the \texttt{shared} library is located in the \texttt{packages} directory. This shared library contains common elements imported by both applications, such as data schemes, generic React components, custom React hooks, types and interfaces, CSS styles, or other utility functions. Using this shared package in the configurator and administrator applications ensures consistency and reduces redundancy across the toolkit.
+To minimize code duplication, a shared library is located in the \texttt{packages} directory. This shared library contains common elements imported by both applications, such as data schemes, generic React components, custom React hooks, types and interfaces, \noborderacrshort{css} styles, or other utility functions. Using this shared package in the configurator and administrator applications ensures consistency and reduces redundancy across the toolkit.
 
 Most dependencies are managed centrally in the root \texttt{package.json} file, with dependencies specific to the subprojects being handled in their corresponding package files. This approach optimizes dependency management across the entire project.
 
 It is important to note that the presented directory tree focuses on illustrating the separation of the project into subprojects: configurator and administrator applications, and the shared library. It is not exhaustive, as the actual project contains various other config and dot files.
 
-The following is a brief overview of the \texttt{src} directories, which organize the source code into logical sections. The directories have the same layout across all subprojects.
+\autoref{fig:src-tree} presents a brief overview of the \texttt{src} directories, which organize the source code into logical sections. The directories have the same layout across all subprojects.
 
-\vspace{12pt}
-\dirtree{%
-.1 src/.
-    .2 components/\DTcomment{UI elements, React components}.
-    .2 configurations/\DTcomment{configuration of the application}.
-    .2 hooks/\DTcomment{custom React hooks}.
-    .2 interfaces/\DTcomment{object interfaces}.
-    .2 schemas/\DTcomment{data schemas}.
-    .2 stores/\DTcomment{data stores and actions}.
-    .2 styles/\DTcomment{CSS styles}.
-    .2 toasts/\DTcomment{presets for toasts (notifications on top of screen)}.
-    .2 utilities/\DTcomment{helper functions and classes}.
-}
-\vspace{16pt}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{\textwidth}
+    \dirtree{%
+    .1 src/.
+        .2 components/\DTcomment{UI elements; React components}.
+        .2 configurations/\DTcomment{configuration of the application}.
+        .2 hooks/\DTcomment{custom React hooks}.
+        .2 interfaces/\DTcomment{object interfaces}.
+        .2 schemas/\DTcomment{Zod data schemas}.
+        .2 stores/\DTcomment{Valtio data stores and actions}.
+        .2 styles/\DTcomment{CSS styles}.
+        .2 toasts/\DTcomment{presets for notifications}.
+        .2 utilities/\DTcomment{helper functions and classes}.
+    }
+    \end{minipage}
+    \caption{Structure of \texttt{src} directories}
+    \label{fig:src-tree}
+\end{figure}
 
 %______________________________________________________________
 \section{Data Schemas} \label{section:data-schemas}
@@ -78,22 +89,24 @@ The following is a brief overview of the \texttt{src} directories, which organiz
 
 The data schemas are derived from the domain model discussed in \autoref{section:domain-model}. These schemas define the shape of the objects that are used to transfer and store information within the tool. 
 
-To visualize these schemas, a UML diagram is provided in \autoref{fig:data-schema}. The diagram provides a general overview of utilized the structures and associations, but the implementation requires slight adjustments.
+To visualize these schemas, UML diagram is provided in \autoref{fig:data-schema}. The diagram provides a general overview of utilized structures and associations; however, the implementation requires slight adjustments.
 
-Data schemas are stored in the shared library discussed in the previous section. This ensures consistency, as they are used in both the main and admin applications. 
+Data schemas are stored in the shared library discussed in the previous section. This ensures consistency, as they are used in both the configurator and administrator applications. 
 
-The schemas are organized into three separate parts: Catalog, product specification, and user creation. Each of these parts corresponds to a separate file in the shared library, in addition to their different roles within the application. The parts are discussed in the following sections, and the UML diagram in \autoref{fig:data-schema} provides color coding to differentiate them.
+The schemas are organized into three separate parts: catalog, product specification, and user creation. Each of these parts corresponds to a separate file in the shared library, in addition to their different roles within the application.
+
+The parts are discussed in the following sections, and the UML diagram in \autoref{fig:data-schema} provides color coding to differentiate them.
+
+As discussed in \autoref{section:zod}, the implementation of data schemas utilizes the Zod validation library, which allows straightforward validation of the shape and values of the data during parsing. TypeScript types are then easily created from these Zod schemas, which is illustrated in \autoref{listing:zod} in \autoref{appendix-b}.~\cite{Wycliffe2023} 
 
 \begin{landscape}
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{images/uml_dataschema.png}
-\caption{Data schemas as a UML diagram}
+\caption{Data schemas as UML diagram}
 \label{fig:data-schema}
 \end{figure}
 \end{landscape}
-
-As discussed in \autoref{section:zod}, the implementation of data schemas utilizes the Zod validation library, which allows straightforward validation of the shape and values of the data during parsing. TypeScript types are then easily created from these Zod schemas, which is illustrated in \autoref{listing:zod}. \cite{Wycliffe2023} 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Catalog}
@@ -279,7 +292,7 @@ Considering that configured components (other than the base) are mounted on top 
 
 This recursive nesting ensures that each mounted component's position and rotation are automatically adjusted through the group composition, eliminating the need for direct calculation of these values. The simplification this offers significantly outweighs the minor performance impact introduced by recursion.
 
-Properties are managed through Valtio proxies using custom hook \texttt{useComponent}, therefore whenever the underlying state changes, the interface including the 3D elements immediately redraws.
+Properties are managed through Valtio proxies using a custom React hook \texttt{useComponent}, therefore whenever the underlying state changes, the interface including the 3D elements immediately redraws.
 All components are placed within an \acrshort{r3f} \texttt{canvas} element. The orbital camera controls needed by the requirement \hyperref[itm:F2]{F2} are done using \texttt{OrbitControls} Three.js element integrated using Drei library, which is placed within the canvas and offers standard orbital camera controls.
 
 
