@@ -17,7 +17,9 @@ Unlike 2D applications where layout and style are the focus, 3D applications req
 Given these constraints and the goals of the solution, three distinct kinds of tests were performed during the development lifecycle of the application: unit tests, system tests, and usability tests. The tests performed are described in the following sections.
 
 
+%______________________________________________________________
 \section{Unit Testing}
+%______________________________________________________________
 
 Unit testing involves testing the smallest parts of the software, which are typically individual functions. The testing is performed in isolation from the rest of the system, with dependencies being mocked or stubbed to ensure that the tests are independent. These tests provide immediate feedback on the functionality of the written code and help detect bugs or regressions when the code undergoes changes during development. Since the resulting application is composed of these integrated parts, validating these parts helps with the validation of the whole software.~\cite{Khorikov2020}
 
@@ -53,7 +55,10 @@ Although tests should be isolated, they still operate with some data; therefore,
 
 These tests validate the logic within the application and were run when committing changes to confirm the integrity of the updates made to the code during the development process.
 
+
+%______________________________________________________________
 \section{System Testing}
+%______________________________________________________________
 
 System testing verifies that all integrated components and subsystems of the solution work as expected. This type of testing verifies that the application behaves as expected from the perspective of the user and that it meets the specified requirements.~\cite{Stephens2023}
 
@@ -66,13 +71,18 @@ To ensure the compatibility and responsiveness of the application across differe
 Therefore, the application was tested on a relevant sample of browsers. The solution is designed to be compatible with all major browsers (Chrome, Firefox, Safari, Opera, Edge) with versions released from the year 2022 onward.
 
 
+%______________________________________________________________
 \section{Usability Testing}
+%______________________________________________________________
 
 Usability testing evaluates the functionality of the web application. In contrast with the system testing described in the previous section, usability tests employ real users. They are carried out by a facilitator, along with a selected sample of users, who perform tasks representative of actual usage situations. The facilitator observes the users as they complete the tasks, noting their interactions with the system and their reactions. This allows to measure effectiveness, efficiency, and satisfaction of using the software. Usability testing is important, as it validates the proposed design from a fresh point of view, as the perception of the developed solution is different between the developer, who already knows every detail of the application, and the user, who has to learn how to work with the application.~\cite{Barnum2021}
 
 Various categories of usability tests can be performed to assess different aspects of usability. Quantitative testing focuses on gathering numerical data about user experience, while qualitative testing collects observations and subjective feedback. In moderated testing, the user is led by the facilitator, compared to unmoderated testing, where the user is acting independently. Testing can be done remotely or in person, depending on available resources.~\cite{Moran2019}
 
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 \subsection{Test Plan}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 Before the actual testing process takes place, it is necessary to establish what is tested, in what manner, who are the test participants, and how is the testing conducted and evaluated. The following section discusses these aspects of the solution's usability testing.
 
@@ -88,6 +98,8 @@ Based on analysis of performed usability testing, research has revealed that, on
 
 During testing, standard approaches were followed. These include recording the sessions to enable for more objective processing afterward. The testing process was clearly explained, making it known to the participant that the solution is being tested, not the user, and therefore they are free to express themselves and will not be judged. In addition, the facilitator aimed to conduct the test in a way that does not lead or influence the test participant by helping in any way or asking suggestive questions during the testing process.~\cite{Moran2019}
 
+
+%______________________________________________________________
 \subsubsection{Evaluation Methods}
 
 Usability testing was performed using both qualitative and quantitative methods.
@@ -149,6 +161,8 @@ Research of 500 usability studies has shown that the average \noborderacrshort{s
 
 The time to complete the tasks was not measured, as product configuration is a creative process where speed does not necessarily mean better performance. 
 
+
+%______________________________________________________________
 \subsubsection{Scenario}
 
 For usability testing purposes, a mock product, a modular kitchen countertop, was prepared for configuration within the tool, with configurable components such as drawers, sinks, cabinets, corners and smooth edges.
@@ -165,10 +179,15 @@ In the scenario presented to the users, the background context involved them ren
 
 These product features and subtasks were selected to ensure that the majority of functionalities of the configurator application were tested by the users in a single, comprehensive test case, which represented the expected regular use. 
 
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 \subsection{Testing Process}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 The following section describes the selection of participants for the usability test and provides a summary of the transcription from the testing process itself. 
 
+
+%______________________________________________________________
 \subsubsection{Participants}
 
 As mentioned in the previous section, five participants were selected, which should be sufficient to uncover most usability issues. The participants were deliberately chosen to be heterogeneous, representing a range of different age groups, to ensure that the testing provided as much information as possible.
@@ -208,6 +227,8 @@ The participants, along with the contextual information gathered from them and t
 \end{enumerate}
 All participants expressed a positive sentiment towards using a configurator tool instead of a direct inquiry process.
 
+
+%______________________________________________________________
 \subsubsection{Execution and Observations}
 
 The testing process began by preparing the tested application on the device and ensuring that there would be no interruptions during the testing.
@@ -249,7 +270,10 @@ When asked about their initial feeling, three participants expressed that they w
 
 All of the participants regarded the 3D product representation to be clear and understandable and all expressed that they would use this application in a real scenario.
 
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 \subsection{Test Results}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 The following section provides evaluation results and a summary of insights gained from the testing process, as detailed in the previous section.
 
@@ -267,6 +291,8 @@ The average \noborderacrshort{sus} score for all participants was 77 which is co
 
 A trend appears to indicate that the tool is more suitable for younger users. However, given the small sample size, this does not provide enough evidence to draw statistically significant conclusions in this regard.
 
+
+%______________________________________________________________
 \subsubsection{Insights} \label{section:insights}
 
 The following section summarizes the issues identified during usability testing along with potential improvements, describes how fixes could be implemented, and reports the current status of these implementations. In addition, the severity of each issue is estimated based on the difficulties observed during usability testing. The estimated severity was classified as high, medium, or low. The priority for implementing fixes was based on the estimated severity.

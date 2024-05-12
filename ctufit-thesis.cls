@@ -562,8 +562,8 @@
 
 % borders of acronym links
 
-\newcommand{\noborderacrfull}[1]{\hypersetup{pdfborder={0 0 0}}\acrfull{#1}\hypersetup{pdfborder={0 0 1}}}
-\newcommand{\noborderacrlong}[1]{\hypersetup{pdfborder={0 0 0}}\acrlong{#1}\hypersetup{pdfborder={0 0 1}}}
-\newcommand{\noborderacrshort}[1]{\hypersetup{pdfborder={0 0 0}}\acrshort{#1}\hypersetup{pdfborder={0 0 1}}}
+\newcommand{\noborderacrfull}[1]{\hypersetup{pdfborder={0 0 0}}\acrfull{#1}\hypersetup{pdfborder={0 0 0.1}}}
+\newcommand{\noborderacrlong}[1]{\hypersetup{pdfborder={0 0 0}}\acrlong{#1}\hypersetup{pdfborder={0 0 0.1}}}
+\newcommand{\noborderacrshort}[1]{\hypersetup{pdfborder={0 0 0}}\acrshort{#1}\hypersetup{pdfborder={0 0 0.1}}}
 
 % borders of acronym links end
