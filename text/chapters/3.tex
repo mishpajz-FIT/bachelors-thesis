@@ -18,7 +18,7 @@ Consequently, the toolkit is divided into two main applications: the configurato
 
 It should be noted that with this architecture, deploying the administrator application is not a prerequisite for every instance of the configurator; it can be used across various configurators of the same version or even run for the necessary short moment in development mode. This flexibility ensures that businesses can manage and update their configurator setups without the need to deploy an instance of the administrator application.
 
-This architecture not only enhances the toolkit's scalability and ease of use, but also ensures that it can be easily integrated into a wide range of business environments, addressing different customization needs without the complexities and overheads associated with traditional back-end-dependent applications.
+This architecture not only ensures the toolkit's scalability and ease of use, but also allows to be easily integrated into a wide range of business environments, addressing different customization needs without the complexities and maintenance overheads associated with traditional back-end-dependent applications, avoiding incurring additional costs or technical challenges.
 
 This structure is also implemented in such a way that if the need for a back-end develops at some point, it will be very easy to modify the application for that change.
 
@@ -89,7 +89,7 @@ It is important to note that the presented directory tree focuses on illustratin
 
 The data schemas are derived from the domain model discussed in \autoref{section:domain-model}. These schemas define the shape of the objects that are used to transfer and store information within the tool. 
 
-To visualize these schemas, UML diagram is provided in \autoref{fig:data-schema}. The diagram provides a general overview of utilized structures and associations; however, the implementation requires slight adjustments.
+To visualize these schemas, \noborderacrshort{uml} diagram is provided in \autoref{fig:data-schema}. The diagram provides a general overview of utilized structures and associations; however, the implementation requires slight adjustments.
 
 Data schemas are stored in the shared library discussed in the previous section. This ensures consistency, as they are used in both the configurator and administrator applications. 
 
@@ -136,7 +136,7 @@ export const CatalogSchema = z.object({
 \label{lisiting:schema-catalog}
 \end{listing}
 
-Building upon the domain model, the catalog is created by the administrator of the tool and covers all product specifications. However, compared to the domain model, there is an additional level of abstraction in the form of \texttt{CatalogProduct}, which contains the most important information about the product specification, such as the name and the preview image. The catalog is separated from the product specifications, which are stored elsewhere. One reason for this is that the catalog will first be fetched when the configuration application is launched, and this information must be presented to the user as soon as possible. The specification of the product, which contains the information needed for the configuration process, can then be fetched from a \noborderacrshort{url} stored inside this object after the user decides which product to configure, which is represented by the stereotype \texttt{urlLink} in the \noborderacrshort{uml} diagram.
+Building upon the domain model, the catalog is created by the administrator of the tool and covers all product specifications. However, compared to the domain model, there is an additional level of abstraction in the form of~\texttt{CatalogProduct}, which contains the most important information about the product specification, such as the name and the preview image. The catalog is separated from the product specifications, which are stored elsewhere. One reason for this is that the catalog will first be fetched when the configuration application is launched, and this information must be presented to the user as soon as possible. The specification of the product, which contains the information needed for the configuration process, can then be fetched from a~\noborderacrshort{url} stored inside this object after the user decides which product to configure, which is represented by the stereotype \texttt{urlLink} in the \noborderacrshort{uml} diagram.
 
 In addition, information about the confirmation action is stored for each product in the form of \texttt{SubmissionOption}, which specifies the type of action and the endpoint to which the application potentially sends the confirmed configuration.
 
@@ -188,9 +188,9 @@ The schemas are also derived from the domain model, although with some modificat
 
 Most of the concepts in this part are identical to the domain model; however, the new concept of \texttt{base} component is introduced here. Due to the modularity principle, each component is in some way mounted on another component. Base components are such components that can initiate the configuration, as they are not mounted to other components. They represent the potentially first component of a configuration. These base components are defined in the product specification.
 
-In the data schema, the model is directly included in the component specification, with the \texttt{modelUrl} attribute pointing to a location with the 3D model file. To compensate for this coupling, attributes that modify the position, rotation, and scale of the model are added to the component specification. The component specification, as well as the color specification, include the \texttt{sortIndex} attribute, which determines the presentation order to the user, with lower numbers having higher priority. Further attributes are also present, such as description or the option to ignore collisions for this component.
+In the data schema, the model is directly included in the component specification, with the \texttt{modelUrl} attribute pointing to a location with the 3D~model file. To compensate for this coupling, attributes that modify the position, rotation, and scale of the model are added to the component specification. The component specification, as well as the color specification, include the~\texttt{sortIndex} attribute, which determines the presentation order to the user, with lower numbers having higher priority. Further attributes are also present, such as description or the option to ignore collisions for this component.
 
-The material specification includes the names of the model's meshes in the attribute \texttt{modelMaterials}, and the color specification includes the color value.
+The material specification includes the names of the affected meshes in the attribute \texttt{modelMaterials}, and the color specification includes the color value.
 
 In TypeScript, the aggregations depicted in the \noborderacrshort{uml} diagram are implemented as records, with the IDs serving as keys and the objects as values. Other associations are implemented using solely IDs. Color values are represented using hex codes. The implementation of the product and component specifications can be viewed in \autoref{lisiting:schema-componentspecification}. Other entities in this section are implemented similarly and, therefore, do not require detailed code previews within the text of the thesis.
 
@@ -217,7 +217,7 @@ export const UserCreationSchema = z.object({
 \label{lisiting:schema-usercreation}
 \end{listing}
 
-\texttt{UserCreation} corresponds to the configuration entity of the domain model but has been renamed in the implementation, as \textquote{configuration} is an ambiguous term that can mean several things in application development (e.g. configuration of the application itself). This makes the naming of what this data schema is representing cleaner.
+\texttt{UserCreation} corresponds to the configuration entity of the domain model but has been renamed in the implementation, as \textquote{configuration} is an ambiguous term that can mean several things in application development (e.g. configuration of the application itself). This naming clarifies what this data schema represents.
 
 The user creation is utilized by the configurator application for storing chosen options of the user, and is tinted blue in the \noborderacrshort{uml} diagram.
 
@@ -283,7 +283,7 @@ export const Component = ({ componentId }) => {
 \label{lisiting:impl-visulaization1}
 \end{listing}
 
-A simplified version of the implementation is illustrated in \autoref{lisiting:impl-visulaization1}. The group feature of the \noborderacrshort{r3f} library is utilized for effective position and rotation composition. The component is primarily made up of this group, which integrates the model and the mounting points of the component.
+A simplified version of the implementation is illustrated in \autoref{lisiting:impl-visulaization1}. The group feature of the Three.js library is utilized for effective position and rotation composition. The component is primarily made up of this group, which integrates the model and the mounting points of the component.
 
 Inside \texttt{ComponentModel}, the 3D model is loaded from a \noborderacrshort{gltf} file, a format which can fully represent 3D objects widely used in web applications and greatly supported in the Three.js library. The position, rotation and scale of the model is adjusted by the values stored in the component specification, using a nested \noborderacrshort{r3f} group, which can be previewed in \autoref{lisiting:impl-modelcomposition}.
 
@@ -292,13 +292,13 @@ Considering that configured components (other than the base component) are mount
 This recursive nesting ensures that each mounted component's position and rotation are automatically adjusted through the group composition, eliminating the need for direct calculation of these values. The simplification this offers significantly outweighs the minor performance impact introduced by recursion.
 
 Properties of components are managed through Valtio proxies using a custom React hook \texttt{useComponent}, therefore, whenever the underlying state changes, the interface, including the 3D elements, immediately redraws.
-All 3D elements are placed within a \noborderacrshort{r3f} \texttt{canvas} element. The orbital camera controls needed by the requirement \hyperref[itm:F2]{F2} are accomplished using the \texttt{OrbitControls} Three.js element, integrated using the Drei library, which is placed within the canvas and offers standard orbital camera controls.
+All 3D~elements are placed within a \noborderacrshort{r3f} \texttt{canvas} element. The orbital camera controls needed by the requirement \hyperref[itm:F2]{F2} are accomplished using the \texttt{OrbitControls} Three.js element, integrated using the Drei library, which is placed within the canvas and offers standard orbital camera controls.
 
 
 %______________________________________________________________
 \subsubsection{Component Interactivity}
 
-To meet the requirement \hyperref[itm:F4]{F4}, which enables users to select components directly within the visualization, an \texttt{onClick} event is utilized on the group containing the model. Upon clicking on a model, a side panel is presented that displays detailed information about the selected component. To visually highlight the selected component in the visualization, an outline of the model is created using the \texttt{Outlines} element from the Drei library, which is included within the same group as the model. The color of the outline can be configured by the application administrator. Additionally, an \texttt{onPointerMissed} event employed on the canvas allows to deselect the component by clicking on the background.
+To meet the requirement \hyperref[itm:F4]{F4}, which enables users to select components directly within the visualization, an \texttt{onClick} event is utilized on the group containing the model. Upon clicking on the model, a side panel is presented that displays detailed information about the selected component. To visually highlight the selected component in the visualization, an outline of the model is created using the \texttt{Outlines} element from the Drei library, which is included within the same group as the model. The color of the outline can be configured by the application administrator. Additionally, an \texttt{onPointerMissed} event employed on the canvas allows to deselect the component by clicking on the background.
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -411,7 +411,7 @@ export function collisionDetection(
 \subsection{Configuration Processing}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-For the implemented tool to be useful, there needs to be a mechanism that will facilitate performing further actions with the user's configuration when the configuration process finishes. This is in accordance with the requirement \hyperref[itm:F10]{F10}.
+For the implemented tool to be useful, there needs to be a mechanism that will facilitate performing further actions with the user's creation when the configuration process finishes. This is in accordance with the requirement \hyperref[itm:F10]{F10}.
 
 As needed by requirement \hyperref[itm:F9]{F9} and discussed previously, after completion of the product configuration, users are presented with a summary screen that details the selected options. To save the configuration for future reference in a readable way, a button has been introduced that enables saving this summary to \noborderacrshort{pdf}. Implementation of this button action needed to be done on the front-end and utilizes the \noborderacrshort{html} print \noborderacrshort{api}.
 
@@ -433,7 +433,7 @@ The administrator of the tool can define the confirmation action in the catalog.
 \begin{enumerate}
     \item \textbf{Preview}: This is the default behavior if no confirmation action is defined. In this case, the confirmation button is not presented to the user at all, and the configurator serves only as a preview tool. The \noborderacrshort{url} of the endpoint is also not defined.
     \item \textbf{Redirect}: This action allows for a simple flow where clicking the confirmation button redirects the user to the chosen \noborderacrshort{url}.
-    \item \textbf{Webhook}: Upon clicking the confirmation button, the user configuration, in the form of the \texttt{UserCreation} data schema presented in the previous sections, is sent using a POST request to the defined endpoint \noborderacrshort{url}. The user creation is sent as a \noborderacrshort{json} in the body of the request. In order to present the result of this action as a success to the user, the response must return OK. Optionally, the response can contain a \noborderacrshort{json} body with valid \noborderacrshort{url} in the \texttt{redirectUrl} field. If this is the case, and the request has been successful, users will be redirected to this returned \noborderacrshort{url}, otherwise, the tool returns to the initial view. This mechanic facilitates possible integration with back-end systems or serverless functions for further processing.
+    \item \textbf{Webhook}: Upon clicking the confirmation button, the user configuration, in the form of the \texttt{UserCreation} data schema presented in the previous sections, is sent using a POST request to the defined endpoint \noborderacrshort{url}. The user creation is sent as a \noborderacrshort{json} in the body of the request. In order to present the result of this action as a success to the user, the response must return OK. Optionally, the response can contain a \noborderacrshort{json} body with valid \noborderacrshort{url} in the \texttt{redirectUrl} field. If this is the case, and the request has been successful, users will be redirected to this returned \noborderacrshort{url}, otherwise, the tool returns to the initial view. This mechanic facilitates possible integration with other systems or serverless functions for further processing.
     \item \textbf{Inquiry form}: This action presents the user with an inquiry form asking for their contact information, such as name, email, phone number, and additional notes. This fulfills the requirement \hyperref[itm:F11]{F11}. When the form is sent, the process is identical to the webhook case, with the difference that the request contains the user contact details in the \noborderacrshort{json} payload under the field \texttt{contact}. This allows for direct creation of inquiries without the need for users to navigate away from the application. The structure of the contact data schema is detailed in \autoref{listing:schema-contactinformation}.
 \end{enumerate}
 
@@ -559,7 +559,7 @@ The administrator application is used when administrators need to update product
 
 This section presents the visual aspect of the implemented views and screens, which are based on the wireframes described in \autoref{section:wireframes}. The implemented interfaces are shown using screenshots, providing a visual confirmation of the design's adherence to the designed wireframes and demonstrating the application of the design concepts discussed earlier.
 
-The choice of technologies (such as TailwindCSS) was paramount to this task, as it greatly facilitated the straightforward implementation of responsive design, making sure that the application performs well across a variety of device sizes and resolutions, as well as the accessibility features, such as automatic support for dark mode.
+The choice of technologies (such as TailwindCSS) was paramount to this task, as it greatly facilitated the straightforward implementation of responsive design, making sure that the application performs well across a variety of device sizes and resolutions, and supports accessibility features such as automatic support of dark mode.
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -568,7 +568,7 @@ The choice of technologies (such as TailwindCSS) was paramount to this task, as 
 
 In the following section, screenshots of the three screens that were described using the wireframes are displayed. The interface is shown only in its light-mode version, given that the dark mode is identical, only with an inverted color scheme.
 
-For demonstration purposes, the screenshots feature a sample product loaded from the catalog. The top bar displays a fictional logo of a business, which is clickable and leads to a homepage of the business, adjustible in the application settings.  
+For demonstration purposes, the screenshots feature a sample product loaded from the catalog. The top bar displays a fictional logo of a business, which is clickable and leads to a homepage of the business, adjustable in the application's settings.  
 
 
 %______________________________________________________________
@@ -579,7 +579,7 @@ Screenshot of the implemented configuration screen is presented in \autoref{fig:
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/screenshot_configuration.png}
-\captionsource{Screenshot of configuration screen}{The 3D assets used within the interface are adapted from~\cite{3dModel}}
+\captionsource{Screenshot of configuration screen}{3D assets used within the interface are adapted from~\cite{3dModel}}
 \label{fig:screenshot-configuration}
 \end{figure}
 
@@ -600,7 +600,7 @@ The implemented introduction screen is presented in \autoref{fig:screenshot-intr
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/screenshot_introduction.png}
-\captionsource{Screenshot of introduction screen}{The 3D assets used within the interface are adapted from~\cite{3dModel}}
+\captionsource{Screenshot of introduction screen}{3D assets used within the interface are adapted from~\cite{3dModel}}
 \label{fig:screenshot-introduction}
 \end{figure}
 
@@ -616,7 +616,7 @@ The panel on the right side, which contains the different buttons, is floating; 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/screenshot_confirmation.png}
-\captionsource{Screenshot of confirmation screen}{The 3D assets used within the interface are adapted from~\cite{3dModel}}
+\captionsource{Screenshot of confirmation screen}{3D assets used within the interface are adapted from~\cite{3dModel}}
 \label{fig:screenshot-confirmation}
 \end{figure}
 
@@ -658,7 +658,7 @@ The catalog can be downloaded as a \noborderacrshort{json} file using an export 
 \label{fig:screenshot-productcomposer}
 \end{figure}
 
-The product composer screen, visible in \autoref{fig:screenshot-productcomposer}, copies the layout of the configuration screen of the user-facing application, but has an additional side panel on the left. This panel is used to add and remove component specifications or to select the potential base component specifications of the product specification. Bottom of this panel also contains the import, export, and clear buttons, which serve to download or upload product specifications in a \noborderacrshort{json} file. Selecting a component specification within this panel displays its model in the 3D preview area, while the right side panel, used during the configuration process to present detailed information, allows for the adjustment of all component specification attributes, such as position, rotation, scale, mounting points, and materials.
+The product composer screen, visible in \autoref{fig:screenshot-productcomposer}, copies the layout of the configuration screen of the user-facing application, but has an additional side panel on the left. This panel is used to add and remove component specifications or to select the potential base component specifications of the product specification. Bottom of this panel also contains the clear, import and export buttons, which serve to download or upload product specifications in a \noborderacrshort{json} file. Selecting a component specification within this panel displays its model in the 3D preview area, while the right side panel, used during the configuration process to present detailed information, allows for the adjustment of all component specification attributes, such as model file, name, position, rotation, scale, mounting points, and materials.
 
 The 3D preview also includes helpful features, such as a navigation gizmo indicating the current orientation of the camera, or grid that serves as a reference plane under the model.
 

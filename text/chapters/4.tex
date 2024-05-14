@@ -15,7 +15,7 @@ By the end of this chapter, a comprehensive understanding of the deployment proc
 \section{Application Setup and Configuration}
 %______________________________________________________________
 
-This section describes the necessary steps to utilize the implemented solution, from the perspective of a person designated by the business to operate the toolkit.
+This section describes the necessary steps needed to utilize the implemented solution, from the perspective of a person designated by the business to operate the toolkit.
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -24,7 +24,7 @@ This section describes the necessary steps to utilize the implemented solution, 
 
 If the code of the application has been modified in any way, the installation of Node.js and npm is a prerequisite for building the application. The configurator application can then be built by executing \mintinline[bgcolor=backgroundgray]{bash}{npm install} followed by \mintinline[bgcolor=backgroundgray]{bash}{npm run build --workspace main}, which will generate the files in \texttt{apps/main/dist/} directory. If no modifications have been made, pre-built files may be utilized directly.
 
-In the example case, the company already operates a website; therefore, the newly implemented configurator tool will be deployed to the appropriate subdomain of the website (e.g. \texttt{configurator.example.com}). This approach requires proper configuration of \noborderacrshort{dns} settings for the new subdomain and appropriate adjustments to the web server, but otherwise utilizes the already existing web hosting infrastructure. If this were not the case, it would be necessary to facilitate an \noborderacrshort{http} server through web hosting.
+In the example case, the company already operates a website; therefore, the newly implemented configurator tool will be deployed to the appropriate subdomain of the website (e.g. \texttt{configurator.example.com}). This approach requires proper configuration of \noborderacrshort{dns} settings for the new subdomain and appropriate adjustments to the web server, but otherwise utilizes the already existing web hosting infrastructure. If this were not the case, it would be necessary to facilitate web hosting through an \noborderacrshort{http} server.
 
 To deploy the application, the built files need to be copied to the web server, ensuring that they are statically served. The \texttt{index.html} file loads and initializes that application on access.
 
@@ -51,7 +51,7 @@ With this set, the application should be functional and available, albeit yet wi
 \subsection{Customizing the Application}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-The following section describes the adaptation of the deployed application to meet the needs and correspond to the identity of the business. This is done by the administrator through modifications of the \texttt{appconfig.json} file.
+The following section describes the adaptation of the deployed application to correspond to the identity and meet the needs of the business. This is done by the administrator through modifications of the \texttt{appconfig.json} file.
 
 
 %______________________________________________________________
@@ -193,7 +193,7 @@ Consequently, the \noborderacrfull{roi} for this solution is therefore projected
 \subsection{Operational Impact}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-Evaulating the impact deployment of the solution brings to businesses and companies is a complex task. The toolkit is adaptable and product-agnostic, meaning it can be utilized by different companies across different industries or in different parts of a supply chain. Consequently, the impact on processes will differ in each scenario.
+Evaluating the impact that the deployment of the solution brings to businesses and companies is a complex task. The toolkit is adaptable and product-agnostic, meaning it can be utilized by different companies across different industries or in different parts of a supply chain. Consequently, the impact on processes will differ in each scenario.
 
 Therefore, this section will describe the change in processes after the tool's deployment in the example company examined in this chapter, as this should serve as an illustration of one of the common effects this tool can have.
 

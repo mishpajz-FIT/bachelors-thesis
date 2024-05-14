@@ -10,9 +10,9 @@ Software testing is essential for detecting malfunctions that may negatively aff
 
 There are various types of software tests, which can be categorized in many different ways, such as automated versus manual, functional versus non-functional, black-box versus white-box, by their coverage (unit versus whole system) or by their scope (performance versus compatibility). The choice of tests is always context-dependent and needs to be aligned with the project goals and limitations.~\cite{Krysik2023}
 
-Testing 3D applications presents unique challenges that differentiate it from testing standard web applications, with main differences in user interactions. The developed solution enables users to move within a 3D space and interact with spatial objects. All interactions therefore occur in a 3D environment projected onto a 2D viewport, significantly expanding the range of possible interactions compared to traditional 2D applications. The potential interactions also vary depending on the product being configured in the application, as the solution aims to be product-agnostic, as well as further complicating matters with the configurator's open navigation mechanism.
+Testing 3D applications presents unique challenges that differentiate it from testing standard web applications, with main differences in user interactions. The developed solution enables users to move within a 3D space and interact with spatial objects. Interactions therefore occur in a 3D environment projected onto a 2D viewport, significantly expanding the range of possible interactions compared to traditional 2D applications. The potential interactions also vary depending on the product being configured in the application, as the solution aims to be product-agnostic, as well as further complicating matters with the configurator's open navigation mechanism.
 
-Unlike 2D applications where layout and style are the focus, 3D applications require tests to confirm that objects appear correctly from various angles and under different conditions. This aspect is challenging, as it is less straightforward than verifying the \noborderacrshort{dom} of a standard website, since in this scenario, the 3D preview is represented by a canvas element without an easy method for breakdown. In addition, loading 3D content is time and computationally consuming, which makes testing resource intensive. These complexities limit the applicability of certain types of tests, such as automated browser testing, which typically does not accommodate the nuances of working with 3D content.
+Unlike 2D applications where layout and style are the focus, 3D applications require tests to confirm that objects appear correctly from various angles and under different conditions. This aspect is challenging, as it is less straightforward than verifying the \noborderacrshort{dom} of a standard website, since in this scenario, the 3D preview is represented by a canvas element without a straightforward method for breakdown. In addition, loading 3D content is time and computationally consuming, which makes testing resource intensive. These complexities limit the applicability of certain types of tests, such as automated browser testing, which typically does not accommodate the nuances of working with 3D content.
 
 Given these constraints and the goals of the solution, three distinct kinds of tests were performed during the development lifecycle of the application: unit tests, system tests, and usability tests. The tests performed are described in the following sections.
 
@@ -64,9 +64,9 @@ System testing verifies that all integrated components and subsystems of the sol
 
 Due to the specifics of this solution outlined at the beginning of this chapter, this testing was not automated and was performed periodically manually during implementation. When defects were found, they were immediately addressed. Therefore, the evaluation of the fulfillment of the requirements, which should result from this testing, was done periodically and is described at the end of the implementation chapter (see \autoref{section:requirmenets-evaulation}).
 
-To streamline this manual testing process, automatic deployment of the development environment was enabled using the GitLab \noborderacrshort{ci}/\noborderacrshort{cd} pipeline, which was triggered after each change to the codebase. To assess various different functionalities of the application, several different products, such as computer or shelves configurations, were created to enable the system testing process. 
+To streamline this manual testing process, automatic deployment of the development environment was enabled using the GitLab \noborderacrshort{ci}/\noborderacrshort{cd} pipeline, which was triggered after each change to the codebase. To assess various different functionalities of the application, several different sample products, such as computer or shelves configurations, were created to enable the system testing process. 
 
-To ensure the compatibility and responsiveness of the application across different browsers and operating systems, the LambdaTest platform\footnote{\url{https://www.lambdatest.com/}} was utilized. This platform enables the testing of web applications on thousands of combinations of the major browsers and operating systems.~\cite{LambdaTest}
+To ensure the compatibility and responsiveness of the application across different browsers and operating systems, the LambdaTest platform\footnote{\url{https://www.lambdatest.com/}} was utilized. This platform enables the testing of web applications on thousands of combinations of major browsers and operating systems.~\cite{LambdaTest}
 
 Therefore, the application was tested on a relevant sample of browsers. The solution is designed to be compatible with all major browsers (Chrome, Firefox, Safari, Opera, Edge) with versions released from the year 2022 onward.
 
@@ -94,7 +94,7 @@ Usability testing was performed in person and in locations that are natural to t
 
 The comfort of the test participant is important during the testing process, as anxious users can skew the results by not reacting the same way as they would naturally when using the tool outside of a testing context.~\cite{Nielsen1994}
 
-Based on analysis of performed usability testing, research has revealed that, on average, five test participants are enough to reveal around 85\% of usability flaws, with additional participants providing diminishing returns in terms of unique feedback.~\cite{Nielsen2000} For this reason, the usability test was performed with five different users to efficiently gather as much comprehensive information as possible without overly intensive testing.  
+Based on analysis of performed usability testing, research has revealed that, on average, five test participants are enough to reveal around 85\% of usability flaws, with additional participants providing diminishing returns in terms of unique feedback~\cite{Nielsen2000}. For this reason, the usability test was performed with five different users to efficiently gather as much comprehensive information as possible without overly intensive testing.  
 
 During testing, standard approaches were followed. These include recording the sessions to enable for more objective processing afterward. The testing process was clearly explained, making it known to the participant that the solution is being tested, not the user, and therefore they are free to express themselves and will not be judged. In addition, the facilitator aimed to conduct the test in a way that does not lead or influence the test participant by helping in any way or asking suggestive questions during the testing process.~\cite{Moran2019}
 
@@ -128,7 +128,7 @@ After the test, a qualitative evaluation was done by conducting an interview wit
 
 For quantitative evaluation, the \noborderacrfull{sus} questionnaire was used.
 
-The \noborderacrshort{sus} is an industry standard for quickly evaluating the usability of a system. It consists of 10 questions, each with a numerical response on a scale from one to five, one representing \textquote{strongly disagree} and five being \textquote{strongy agree}. The questions are presented in \autoref{table:sus}.~\cite{Sus}
+The \noborderacrshort{sus} is an industry standard for quickly evaluating the usability of a system. It consists of 10 questions, each with a numerical response on a scale from one to five, one representing \textquote{strongly disagree} and five being \textquote{strongly agree}. The questions are presented in \autoref{table:sus}.~\cite{Sus}
 
 \begin{table}[htb]
 \centering
@@ -150,7 +150,7 @@ The \noborderacrshort{sus} is an industry standard for quickly evaluating the us
 \label{table:sus}
 \end{table}
 
-A score is then calculated from the \noborderacrshort{sus} questionnaire in as follows:
+A score is then calculated from the \noborderacrshort{sus} questionnaire as follows:
 \begin{itemize}[label=\rectanglebullet]
     \item The response values for odd-numbered questions are subtracted by one.
     \item The response values for even-numbered questions are subtracted from five.
@@ -287,7 +287,7 @@ The general sentiment regarding the usability of the tool was positive among all
 \end{figure}
 
 
-The average \noborderacrshort{sus} score for all participants was 77 which is considered good and above average when compared to other systems. The lowest \noborderacrshort{sus} score was 65, recorded for Participant \hyperref[itm:D]{D}, and the highest was 92.5, recorded for Participant \hyperref[itm:B]{B}. The scores for all participants are plotted on the chart shown in~\autoref{fig:sus-scores}.
+The average \noborderacrshort{sus} score for all participants was 77 which is considered good and above average when compared to other systems. The lowest \noborderacrshort{sus} score was 65, recorded by Participant \hyperref[itm:D]{D}, and the highest was 92.5, recorded by Participant \hyperref[itm:B]{B}. The scores for all participants are plotted on the chart shown in~\autoref{fig:sus-scores}.
 
 A trend appears to indicate that the tool is more suitable for younger users. However, given the small sample size, this does not provide enough evidence to draw statistically significant conclusions in this regard.
 
@@ -297,7 +297,7 @@ A trend appears to indicate that the tool is more suitable for younger users. Ho
 
 The following section summarizes the issues identified during usability testing along with potential improvements, describes how fixes could be implemented, and reports the current status of these implementations. In addition, the severity of each issue is estimated based on the difficulties observed during usability testing. The estimated severity was classified as high, medium, or low. The priority for implementing fixes was based on the estimated severity.
 
-\begin{enumerate}[label=\textbf{I\arabic*:}, leftmargin=*]
+\begin{enumerate}[label=\textbf{I\arabic*:}, leftmargin=27pt]
     \item Unclear scrolling pattern in component addition menu
         \vspace{2pt}
         \\Horizontal scrolling in the menu is not apparent (see \autoref{fig:screenshot-add-before}), leading users to believe that there are fewer available components than there really are.

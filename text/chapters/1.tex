@@ -4,7 +4,7 @@
 A comprehensive evaluation of existing solutions, identification of key features and limitations, and outlining of the specifications for the proposed solution.
 \end{chapterabstract}
 
-Product configurators can be implemented in various ways, and the design of the tool itself determines the types of products that can be customized using the tool later on. The number of unique configurations of a product that the tool can create is called the solution space. The size of the solution space is determined by the count of customizable attributes and the achievable values of each attribute.~\cite{Huiwen2018} A relevant study examined the solution spaces of these toolkits and proposed an evaluation model that enables the categorization and assessment of various implementation approaches. Based on the target outcome and the guidance provided by the tool, the following mechanisms are defined:~\cite{Hermans2012}
+Product configurators can be implemented in various ways, and the design of the tool itself determines the types of products that can be customized using the tool later on. The number of unique configurations of a product that the tool can create is called the solution space. The size of the solution space is determined by the count of customizable attributes and the achievable values of each attribute~\cite{Huiwen2018}. A relevant study~\cite{Hermans2012} examined the solution spaces of these toolkits and proposed an evaluation model that enables the categorization and assessment of various implementation approaches. Based on the target outcome and the guidance provided by the tool, the following mechanisms are defined:
 
 \begin{definition}[Veneer]
 Customization by adding a visual decorative layer. (e.g., printing, engraving, etching)
@@ -33,10 +33,10 @@ Many companies across multiple industries, such as automotive, fashion, furnitur
 
 The Configurator Database Project by cyLEDGE MEDIA aims to catalog these web-based configuration tools. The 2017/2018 report tracked 1250 deployments of these tools; however, the true count will be significantly higher since the database only includes the most frequently visited applications.~\cite{cyLEDGE2018}
 
-An analysis of the 100 most viewed configurators from May 2020 to May 2021 in the Configurator Database Project was performed in a study that examined the shared characteristics of these configurators.~\cite{Blazek2023} The summary of some of the relevant characteristics and design choices that the study has analyzed are presented in this section:
+An analysis of the 100 most viewed configurators from May~2020 to May~2021 in the Configurator Database Project was performed in a study~\cite{Blazek2023} that examined the shared characteristics of these configurators. The summary of some of the relevant characteristics and design choices that the study has analyzed are presented in this section:
 \begin{description}
     \item[Responsive design:] 75.3\% of examined tools had responsive design (the design adapted to the viewport of the device).
-    \item[Navigation:] 17.5\% of configurators had linear predefined navigation (meaning the configuration had to follow a specified sequence), whereas the 82.5\% majority of tools had open navigation (meaning the user has the flexibility to configure the product in any order).
+    \item[Navigation:] 17.5\% of configurators had linear predefined navigation (meaning the configuration had to follow a specified sequence), whereas the 82.5\%~majority of tools had open navigation (meaning the user has the flexibility to configure the product in any order).
     \item[Visualization:] 79.4\% of tools utilized photorealistic visualization (as opposed to illustrations or no visualization); however, the study acknowledges that there were significant variations depending on the industries in which the configurator is utilized.
     \item[Data transfer:] The mean network data size transferred for 3D configurator was 35.6~MB.
     \item[Configuration options:] 60.8\% of configurators offered more than ten customizable attributes.
@@ -44,7 +44,7 @@ An analysis of the 100 most viewed configurators from May 2020 to May 2021 in th
     \item[Price calculation:] 56.7\% of the configurators were able to instantly reflect the changes made to the configuration in the displayed price.
 \end{description}
 
-The previous paragraphs discussed general trends among all product configurators of all kinds. As part of the analysis in this chapter, it is essential also to examine existing modular 3D product configurators. 
+The previous paragraphs discussed general trends among all product configurators of all kinds. As part of the analysis in this chapter, it is essential also to examine existing particular modular 3D product configurators. 
 
 Due to the large number of existing applications, it is not within the scope of this work to perform an exhaustive analysis. Instead, this section will focus on a select group of three applications. These have been selected based on a combination of factors such as their popularity, functionality, and importance in the context of a modular product configuration. This selection is intended to provide insightful examples that highlight different approaches, rather than being representative of the entire domain.
 
@@ -55,7 +55,7 @@ Due to the large number of existing applications, it is not within the scope of 
     \item \textbf{Visualization style:} How is the product visualized within the configuration process?
     \item \textbf{Placement options:} Can the modular components be freely placed, or are they restricted to fixed points?
     \item \textbf{Camera movement:} From which angles can the product be visualized, and how can it switch between them? In the context of the tool, camera refers to a virtual camera in a 3D graphical environment that simulates the viewpoint and perspective from which the 3D scene is viewed.
-    \item \textbf{Impossible configurations:} Is it possible to create configurations that are not feasible in reality?
+    \item \textbf{Impossible configurations:}Is it possible to create configurations that are not feasible in reality, such as physically overlapping components?
     \item \textbf{Responsiveness:} How does the application adapt to different device viewports?
     \item \textbf{Price calculation:} Is the price of the configured product calculated in real-time?
     \item \textbf{Purchase option:} Is there an option to finalize and purchase the configured product within the application?
@@ -122,12 +122,12 @@ The tool can display real dimensions and can reverse the performed changes using
 
 Furthermore, the designed configuration can be quickly shared with other users using email, or it can be downloaded in several file formats containing the 3D model itself. The application makes it possible to view the product in \noborderacrshort{ar}, directly in a web browser, albeit only on Apple devices using the \noborderacrfull{usdz} format and \noborderacrshort{ar}~Quick Look.~\cite{Jackson2018}
 
-The application has multiple URL schemes that depend on the configuration phase, but they are not determined by the current product. 
+The application has multiple \noborderacrshort{url} schemes that depend on the configuration phase, but they are not determined by the current product. 
 
 %______________________________________________________________
 \subsubsection{LD Seating Nido Configurator}
 
-LD Seating is a company based in the Czech Republic that specializes in the production of chairs, armchairs, and sofas.~\cite{LDSeating}
+LD Seating is company based in the Czech Republic that specializes in the production of chairs, armchairs, and sofas.~\cite{LDSeating}
 
 The company uses a 3D web-based configurator to market the Nido modular seating system, which consists of elements that are designed to be combined in various ways.\footnote{Available at: \url{https://nido.ldseating.com/en/configurator}}~\cite{NidoConfigurator}
 
@@ -141,7 +141,7 @@ The configurator consists of one large view, covering the whole application, whi
 
 The flow of the application also includes selecting a starting point. The product configuration process itself uses open navigation. The tool assesses whether a component can fit into a space and, if not, prevents its placement, thereby restricting impossible configurations. At the completion of the configuration, a confirmation summary is presented; however, in this case, the price is not calculated live. The configurator cannot directly place an order for the product, but instead confirming results in the display of an inquiry form.
 
-The resulting configuration can be downloaded as a file containing the 3D models. The configuration can also be saved server-side, which generates a unique link at which the configuration is accessible. The tool features a version history that stores each saved configuration for future access. Users can revisit these versions, while undo and redo buttons are also available. The resulting configuration can also be exported to a \noborderacrshort{pdf} file containing a list of components. The tool also has the ability to display real dimensions.
+The resulting configuration can be downloaded as a file containing the 3D~models. The configuration can also be saved server-side, which generates a unique link at which the configuration is accessible. The tool features a version history that stores each saved configuration for future access. Users can revisit these versions, while undo and redo buttons are also available. The resulting configuration can also be exported to a \noborderacrshort{pdf} file containing a list of components. The tool also has the ability to display real dimensions.
 
 The application is a \noborderacrshort{spa}, maintaining a consistent \noborderacrshort{url} and changing it to reflect the location of a saved configuration (if one exists).
 
@@ -177,7 +177,7 @@ The offered solution is still partially tailored to the client, which is the rea
 %______________________________________________________________
 \subsubsection{Roomle}
 
-Roomle is an Austrian company focused on pioneering visual product configuration. They provide solutions for product visualization, room design, and product configurators. Roomle's solution, called Rubens, is described as a \enquote{Open Full Logic 3D-Configurator}. The tool utilizes both parametric and modular configuration mechanisms. The software allows integration with third parties through the use of an \noborderacrshort{api}. In addition, it supports integration with other front-end technologies on web and mobile platforms and has a built-in \noborderacrshort{ar} experience.~\cite{RoomleAbout}
+Roomle is an Austrian company focused on pioneering visual product configuration. They provide solutions for product visualization, room design, and product configuration. Roomle's solution, called Rubens, is described as a \enquote{Open Full Logic 3D-Configurator}. The tool utilizes both parametric and modular configuration mechanisms. The software allows integration with third parties through the use of an \noborderacrshort{api}. In addition, it supports integration with other front-end technologies on web and mobile platforms and has a built-in \noborderacrshort{ar} experience.~\cite{RoomleAbout}
 
 A web application, Rubens Admin, is used to set up the configurator application. To add a product that can then be configured by customers, 3D models, and materials are uploaded to the admin application. Components are defined using RoomleScript language, which is loosely based on the JavaScript language. The design of the configurator itself can be tuned in the admin application as well. Multiple language variants can be defined for product names and descriptions. The configurator application (see \autoref{fig:roomle} in \autoref{appendix-a}) runs on the client-side and can be simply embedded into a website. Additionally, a JavaScript library that can subscribe to events or modify the configurator can be utilized. A framework is also provided to utilize the configurator within an iOS application.~\cite{RoomleDocumentation}
 
@@ -284,20 +284,20 @@ The process of requirement engineering for software products involves gathering,
 
 There are many ways to categorize software requirements, such as audience-oriented categorization or using the FURPS method, which classifies requirements based on functionality, usability, reliability, performance, or supportability.~\cite{Stephens2023}
 
-Given that the majority of requirements for the solution fall either into the functionality or usability category, the requirements in this section are separated only into the following two main categories:~\cite{Aurum2005}
+Given that the majority of requirements for the solution fall either into the functionality or usability category, the requirements in this section are separated only into the following common~\cite{Aurum2005} two main categories:
 \begin{enumerate}
     \item Functional requirements: These requirements describe what the system should be able to do. They specifically outline the system's behavior and its interactions in specific situations.
     \item Non-functional requirements: These requirements put constraints on the solution that meets the functional requirements, rather than being focused on specific behaviors of the system. They are often, among others, focused on performance, security, accessibility, and compatibility.
 \end{enumerate}
 
-To manage and prioritize these requirements, each is assigned an approximate priority level using the MoSCoW method. This approach classifies the requirements into four distinct categories:~\cite{Stephens2023}
+To manage and prioritize these requirements, each is assigned an approximate priority level using the MoSCoW method. This approach classifies the requirements into four distinct categories:
 \begin{enumerate}
     \item Must: Requirements crucial for the final solution.
     \item Should: Requirements to be implemented if feasible.
     \item Could: Requirements that are desirable but not essential.
     \item Won't: Nice-to-have requirements that most likely will not be implemented in this solution.
 \end{enumerate}
-This method helps to plan and allocate resources throughout the implementation phase.
+This method helps to plan and allocate resources throughout the implementation phase.~\cite{Stephens2023}
 
 \break
 Additionally, each requirement is given a rough estimate of the implementation difficulty, separated into three categories: \nopagebreak
@@ -311,7 +311,7 @@ This preliminary assessment aims to classify the requirements without relying on
 \subsubsection{Functional Requirements}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-\begin{enumerate}[label=\textbf{F\arabic*:}, leftmargin=*]
+\begin{enumerate}[label=\textbf{F\arabic*:}, leftmargin=30pt]
 \item \label{itm:F1} 3D product visualization
 \vspace{2pt}
 \\The tool shall offer users 3D visualization of their configured product, employing realistic models to accurately represent the components used and their characteristics.
@@ -368,7 +368,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F7} Component collision detection
 \vspace{2pt}
-\\The tool should incorporate a collision detection system to prevent components from being positioned in such a way that would result in physical overlaps during configuration. This feature is essential to maintain \phantom{the realism and feasibility of the configured product.}\newpage the realism and feasibility of the configured product.
+\\The tool should incorporate a collision detection system to prevent components from being positioned in such a way that would result in physical overlaps during configuration. This feature is essential to maintain the realism and feasibility of the configured product.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Should
     \item \textbf{Difficulty:} Complex
@@ -440,7 +440,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F15} Interface texts customization
 \vspace{2pt}
-\\The toolkit should provide a way for the administrator to change the textual contents of the configurator's interface, ensuring that the language, tone, and terminology used are perfectly aligned with the business's needs and reflect the business's terminology and branding.
+\\The toolkit should provide a way for the administrator to change the textual contents of the configurator's interface, ensuring that the language, tone, and terminology used are perfectly aligned with the business's needs \phantom{and reflect the business's terminology and branding.}\newpage and reflect the business's terminology and branding.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Could
     \item \textbf{Difficulty:} Intermediate
@@ -477,7 +477,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F19} \noborderacrshort{ar} viewing capabilities
 \vspace{2pt}
-\\The configurator should extend its visualization features (see requirement \hyperref[itm:F1]{F1}) to include \noborderacrshort{ar} viewing capabilities, enabling users to project their configured products into their real-world environment through their device's camera. In case the device they are using does not have \noborderacrshort{ar} capability, the tool should provide a seamless way for the user to open the configuration in \noborderacrshort{ar} on another device that does have such capability.
+\\The configurator should extend its visualization features (see requirement \hyperref[itm:F1]{F1}) to include \noborderacrshort{ar} viewing capabilities, enabling users to project their configured products into their real-world environment through their device's camera. In case the device they are using does not have \noborderacrshort{ar} capability, the tool should provide a seamless way for the user to open \phantom{the configuration in \noborderacrshort{ar} on another device that does have such capability.}\newpage the configuration in \noborderacrshort{ar} on another device that does have such capability.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Won't
     \item \textbf{Difficulty:} Complex
@@ -528,7 +528,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:NF3} Self-hostable architecture
 \vspace{2pt}
-\\The toolkit should be designed with the intent of being deployed and hosted on a business's preferred infrastructure, whether on-premises or in a private cloud. This facilitates greater control over the data and security according to the operator's policy, as well as flexibility for \phantom{possible modifications.}\newpage possible modifications.
+\\The toolkit should be designed with the intent of being deployed and hosted on a business's preferred infrastructure, whether on-premises or in a private cloud. This facilitates greater control over the data and security according to the operator's policy, as well as flexibility for possible modifications.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Must
 \end{itemize}
