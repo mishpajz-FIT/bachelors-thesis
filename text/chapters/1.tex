@@ -4,7 +4,7 @@
 A comprehensive evaluation of existing solutions, identification of key features and limitations, and outlining of the specifications for the proposed solution.
 \end{chapterabstract}
 
-Product configurators can be implemented in various ways, and the design of the tool itself determines the types of products that can be customized using the tool later on. The number of unique configurations of a product that the tool can create is called the solution space. The size of the solution space is determined by the count of customizable attributes and the achievable values of each attribute~\cite{Huiwen2018}. A relevant study~\cite{Hermans2012} examined the solution spaces of these toolkits and proposed an evaluation model that enables the categorization and assessment of various implementation approaches. Based on the target outcome and the guidance provided by the tool, the following mechanisms are defined:
+Product configurators can be implemented in various ways, and the design of the tool itself determines the types of products that can be customized using the tool later on. The number of unique configurations of a product that the~tool can create is called the solution space. The size of the solution space is determined by the count of customizable attributes and the achievable values of each attribute~\cite{Huiwen2018}. A relevant study~\cite{Hermans2012} examined the solution spaces of these toolkits and proposed an evaluation model that enables the categorization and assessment of various implementation approaches. Based on the target outcome and the guidance provided by the tool, the following mechanisms are defined:
 
 \begin{definition}[Veneer]
 Customization by adding a visual decorative layer. (e.g., printing, engraving, etching)
@@ -31,13 +31,13 @@ There are often some common characteristics among configuration tools with diffe
 
 Many companies across multiple industries, such as automotive, fashion, furniture, housing, are integrating product configurators into their sales strategies. These configurators serve as the main or supplementary sales tools for these businesses.
 
-The Configurator Database Project by cyLEDGE MEDIA aims to catalog these web-based configuration tools. The 2017/2018 report tracked 1250 deployments of these tools; however, the true count will be significantly higher since the database only includes the most frequently visited applications.~\cite{cyLEDGE2018}
+The Configurator Database Project by cyLEDGE MEDIA aims to catalog these web-based configuration tools. The 2017/2018 report tracked 1250~deployments of these tools; however, the true count will be significantly higher since the database only includes the most frequently visited applications.~\cite{cyLEDGE2018}
 
-An analysis of the 100 most viewed configurators from May~2020 to May~2021 in the Configurator Database Project was performed in a study~\cite{Blazek2023} that examined the shared characteristics of these configurators. The summary of some of the relevant characteristics and design choices that the study has analyzed are presented in this section:
+An analysis of the 100 most viewed configurators from May~2020 to May~2021 in the Configurator Database Project was performed in a study~\cite{Blazek2023} that examined the shared characteristics of these configurators. The summary of some of the~relevant characteristics and design choices that the study has analyzed are presented in this section:
 \begin{description}
-    \item[Responsive design:] 75.3\% of examined tools had responsive design (the design adapted to the viewport of the device).
+    \item[Responsive design:] 75.3\% of examined tools had responsive design (the~design adapted to the viewport of the device).
     \item[Navigation:] 17.5\% of configurators had linear predefined navigation (meaning the configuration had to follow a specified sequence), whereas the 82.5\%~majority of tools had open navigation (meaning the user has the flexibility to configure the product in any order).
-    \item[Visualization:] 79.4\% of tools utilized photorealistic visualization (as opposed to illustrations or no visualization); however, the study acknowledges that there were significant variations depending on the industries in which the configurator is utilized.
+    \item[Visualization:] 79.4\% of tools utilized photorealistic visualization (as opposed to illustrations or no visualization); however, the study acknowledges that there were significant variations depending on the industries in which the~configurator is utilized.
     \item[Data transfer:] The mean network data size transferred for 3D configurator was 35.6~MB.
     \item[Configuration options:] 60.8\% of configurators offered more than ten customizable attributes.
     \item[Purchase capability:] Given that car brands typically do not directly sell their cars online, they were excluded from the analysis of this particular characteristic. Without vehicle configurators, 70.5\% of the configurators could complete an online purchase of the configured product.
@@ -46,15 +46,15 @@ An analysis of the 100 most viewed configurators from May~2020 to May~2021 in th
 
 The previous paragraphs discussed general trends among all product configurators of all kinds. As part of the analysis in this chapter, it is essential also to examine existing particular modular 3D product configurators. 
 
-Due to the large number of existing applications, it is not within the scope of this work to perform an exhaustive analysis. Instead, this section will focus on a select group of three applications. These have been selected based on a combination of factors such as their popularity, functionality, and importance in the context of a modular product configuration. This selection is intended to provide insightful examples that highlight different approaches, rather than being representative of the entire domain.
+Due to the large number of existing applications, it is not within the scope of this work to perform an exhaustive analysis. Instead, this section will focus on a select group of three applications. These have been selected based on a~combination of factors such as their popularity, functionality, and importance in the context of a modular product configuration. This selection is intended to provide insightful examples that highlight different approaches, rather than being representative of the entire domain.
 
 \noindent The main aspects under consideration are as follows:\nopagebreak
 \begin{itemize}[label=\rectanglebullet]
     \item \textbf{Platform:} How is the application accessible?
-    \item \textbf{Navigation:} How does the user navigate in the application during the configuration process?
+    \item \textbf{Navigation:} How does the user navigate in the application during the~configuration process?
     \item \textbf{Visualization style:} How is the product visualized within the configuration process?
     \item \textbf{Placement options:} Can the modular components be freely placed, or are they restricted to fixed points?
-    \item \textbf{Camera movement:} From which angles can the product be visualized, and how can it switch between them? In the context of the tool, camera refers to a virtual camera in a 3D graphical environment that simulates the viewpoint and perspective from which the 3D scene is viewed.
+    \item \textbf{Camera movement:} From which angles can the product be visualized, and how can it switch between them? In the context of the tool, camera refers to a virtual camera in a 3D graphical environment that simulates the~viewpoint and perspective from which the 3D scene is viewed.
     \item \textbf{Impossible configurations:}Is it possible to create configurations that are not feasible in reality, such as physically overlapping components?
     \item \textbf{Responsiveness:} How does the application adapt to different device viewports?
     \item \textbf{Price calculation:} Is the price of the configured product calculated in real-time?
@@ -62,7 +62,7 @@ Due to the large number of existing applications, it is not within the scope of 
     \item \textbf{Save option:} Can users save their configurations to return to them later?
     \item \textbf{Version history:} Does the configurator provide an accessible history of configuration changes?
     \item \textbf{\noborderacrshort{vr} or \noborderacrshort{ar}:} Can the configured product be visualized in \noborderacrlong{vr} or \noborderacrlong{ar}?
-    \item \textbf{Real dimensions}: Can the configurator display information about the real dimensions of the configured products? 
+    \item \textbf{Real dimensions}: Can the configurator display information about the~real dimensions of the configured products? 
 \end{itemize}
 \break
 \noindent Furthermore, the design decisions are also discussed:\nopagebreak
@@ -88,13 +88,13 @@ To accomplish this, they utilize the PAX Planner web tool.\footnote{Available at
 \captionsource{Screenshot of IKEA PAX Planner Tool with example configuration}{IKEA~\cite{IkeaPAX}}
 \end{figure}
 
-The tool consists mainly of two views. The primary view on the left contains a 3D preview of the configured product, allowing users to observe objects from different viewpoints by moving along an orbital trajectory in a 180-degree half-circle. The components displayed in the 3D view are both realistic and interactive. Users can adjust their position by dragging, and selecting a component offers additional information along with real-life images of the item. All modular options that can be added to the current configuration are found in the secondary smaller view on the right side and can be added by clicking or dragging them into the 3D preview. The application is responsive, and on mobile devices, the secondary view moves from the right side to a bottom sliding panel. The navigation bar is located at the top of the secondary view, and other buttons are located around the edges of the primary view.
+The tool consists mainly of two views. The primary view on the left contains a 3D preview of the configured product, allowing users to observe objects from different viewpoints by moving along an orbital trajectory in a~180-degree half-circle. The components displayed in the 3D view are both realistic and interactive. Users can adjust their position by dragging, and selecting a~component offers additional information along with real-life images of the item. All modular options that can be added to the current configuration are found in the secondary smaller view on the right side and can be added by clicking or dragging them into the 3D preview. The application is responsive, and on mobile devices, the secondary view moves from the right side to a~bottom sliding panel. The navigation bar is located at the top of the secondary view, and other buttons are located around the edges of the primary view.
 
-At the beginning of the configuration process, the application prompts the user to select the starting point of the configuration. The configurator has open navigation, meaning that the components can then be configured in any order. Components can be placed anywhere along a specified axis with certain restrictions, effectively preventing the creation of impossible configurations.
+At the beginning of the configuration process, the application prompts the~user to select the starting point of the configuration. The configurator has open navigation, meaning that the components can then be configured in any order. Components can be placed anywhere along a specified axis with certain restrictions, effectively preventing the creation of impossible configurations.
 
 The tool performs live price calculations and contains a final summary confirmation screen from which it is possible to order the configured product in the e-shop. The configurator maintains a history of recent changes, accessible through undo and redo buttons. It also features the ability to save configurations on the server, which can be retrieved later using a generated code.
 
-The configurator also provides a range of innovative features, such as the ability to change the visibility of some elements using a button (e.g. hiding the doors of a wardrobe to reveal the contents inside) or the ability to display dimensions directly in the 3D preview.
+The configurator also provides a range of innovative features, such as the~ability to change the visibility of some elements using a button (e.g. hiding the doors of a wardrobe to reveal the contents inside) or the ability to display dimensions directly in the 3D preview.
 
 The application is a \noborderacrfull{spa} and does not update the \noborderacrshort{url} based on the selected product or phase of the configuration.
 
@@ -114,11 +114,11 @@ The company provides Product Planner, a 3D web-based configurator, which allows 
 \captionsource{Screenshot of Muuto Product Planner tool with example configuration}{Muuto~\cite{MuutoPlanner}}
 \end{figure}
 
-The design of the configurator is similar to that in the previous case. The configurator also consists of two views. The primary view on the left provides full realistic 3D visualization, while the smaller secondary view on the right side allows users to add components by dragging them into the main view. Selecting a component in the primary view enables users to remove it or alter its materials. As the design is responsive, on smaller devices, the secondary view transforms into a bottom slide panel. Depending on the configured product, the tool offers a preview either from a single angle or a preview from any point on an orbital trajectory. The main view is also surrounded by buttons along its edges. The navigation bar is positioned at the bottom across the entire application, while the company logo is displayed on the top left.
+The design of the configurator is similar to that in the previous case. The~configurator also consists of two views. The primary view on the left provides full realistic 3D visualization, while the smaller secondary view on the right side allows users to add components by dragging them into the main view. Selecting a component in the primary view enables users to remove it or alter its materials. As the design is responsive, on smaller devices, the secondary view transforms into a bottom slide panel. Depending on the configured product, the tool offers a preview either from a single angle or a preview from any point on an orbital trajectory. The main view is also surrounded by buttons along its edges. The navigation bar is positioned at the bottom across the entire application, while the company logo is displayed on the top left.
 
 The tool follows a similar flow, starting with the selection of the starting point and then moving to the configurator process, which has open navigation. Components can be placed anywhere, unless their position is dependent on another component. Due to this flexibility and also the wide variety of products that it supports, the configurator is not restricted to generating configurations that are feasible to produce and can create impossible configurations.
 
-The tool can display real dimensions and can reverse the performed changes using the undo and redo buttons. The configuration can also be saved on the server-side and later accessed using a unique code. Live price calculation is also performed, and there is a summary page, but it is not possible to order the configured product; instead, the user is redirected to a physical store locator.
+The tool can display real dimensions and can reverse the performed changes using the undo and redo buttons. The configuration can also be saved on the~server-side and later accessed using a unique code. Live price calculation is also performed, and there is a summary page, but it is not possible to order the~configured product; instead, the user is redirected to a physical store locator.
 
 Furthermore, the designed configuration can be quickly shared with other users using email, or it can be downloaded in several file formats containing the 3D model itself. The application makes it possible to view the product in \noborderacrshort{ar}, directly in a web browser, albeit only on Apple devices using the \noborderacrfull{usdz} format and \noborderacrshort{ar}~Quick Look.~\cite{Jackson2018}
 
@@ -127,7 +127,7 @@ The application has multiple \noborderacrshort{url} schemes that depend on the c
 %______________________________________________________________
 \subsubsection{LD Seating Nido Configurator}
 
-LD Seating is company based in the Czech Republic that specializes in the production of chairs, armchairs, and sofas.~\cite{LDSeating}
+LD Seating is company based in the Czech Republic that specializes in the~production of chairs, armchairs, and sofas.~\cite{LDSeating}
 
 The company uses a 3D web-based configurator to market the Nido modular seating system, which consists of elements that are designed to be combined in various ways.\footnote{Available at: \url{https://nido.ldseating.com/en/configurator}}~\cite{NidoConfigurator}
 
@@ -137,11 +137,11 @@ The company uses a 3D web-based configurator to market the Nido modular seating 
 \captionsource{Screenshot of LD Seating Nido Configurator with example configuration}{LD Seating~\cite{NidoConfigurator}}
 \end{figure}
 
-The configurator consists of one large view, covering the whole application, which displays high-definition 3D models of the configured components. The buttons are placed around the entire view, on the top right, bottom center, and top left, where the company logo is also displayed.  The controls for adding components and modifying properties are embedded directly in the 3D scene. When necessary, a panel opens to the right, allowing users to select components to add, adjust component properties, or change materials. The application is partially responsive, as the side panel opens fullscreen on smaller viewports; however, there are some issues with image and text overflows on mobile devices. The main view allows the user to observe the configuration from all angles along an orbital trajectory.
+The configurator consists of one large view, covering the whole application, which displays high-definition 3D models of the configured components. The~buttons are placed around the entire view, on the top right, bottom center, and top left, where the company logo is also displayed.  The controls for adding components and modifying properties are embedded directly in the 3D scene. When necessary, a panel opens to the right, allowing users to select components to add, adjust component properties, or change materials. The application is partially responsive, as the side panel opens fullscreen on smaller viewports; however, there are some issues with image and text overflows on mobile devices. The main view allows the user to observe the configuration from all angles along an orbital trajectory.
 
-The flow of the application also includes selecting a starting point. The product configuration process itself uses open navigation. The tool assesses whether a component can fit into a space and, if not, prevents its placement, thereby restricting impossible configurations. At the completion of the configuration, a confirmation summary is presented; however, in this case, the price is not calculated live. The configurator cannot directly place an order for the product, but instead confirming results in the display of an inquiry form.
+The flow of the application also includes selecting a starting point. The~product configuration process itself uses open navigation. The tool assesses whether a component can fit into a space and, if not, prevents its placement, thereby restricting impossible configurations. At the completion of the configuration, a confirmation summary is presented; however, in this case, the price is not calculated live. The configurator cannot directly place an order for the~product, but instead confirming results in the display of an inquiry form.
 
-The resulting configuration can be downloaded as a file containing the 3D~models. The configuration can also be saved server-side, which generates a unique link at which the configuration is accessible. The tool features a version history that stores each saved configuration for future access. Users can revisit these versions, while undo and redo buttons are also available. The resulting configuration can also be exported to a \noborderacrshort{pdf} file containing a list of components. The tool also has the ability to display real dimensions.
+The resulting configuration can be downloaded as a file containing the~3D models. The configuration can also be saved server-side, which generates a~unique link at which the configuration is accessible. The tool features a~version history that stores each saved configuration for future access. Users can revisit these versions, while undo and redo buttons are also available. The~resulting configuration can also be exported to a \noborderacrshort{pdf} file containing a list of components. The tool also has the ability to display real dimensions.
 
 The application is a \noborderacrshort{spa}, maintaining a consistent \noborderacrshort{url} and changing it to reflect the location of a saved configuration (if one exists).
 
@@ -171,13 +171,13 @@ Threekit is a leading global company in visual commerce technologies that specia
 
 The platform is very complex with many distinct features. At its core, it uses a catalog for storing all product data (the products themselves, materials used, configurable parts, etc.). The items in the catalog can then be loaded into The Treekit Player, which will display the models in 3D, with the option for users to change attributes (models and materials) that are tied to the item. The behavior of the configurator can be set up using item rules and logic that support conditions, queries, and even custom scripts. The platform also offers a data tables feature that is similar to spreadsheets and is designed to handle extensive configuration data and logic. The application also has a built-in asset editor for refining 2D and 3D assets and configuration options (see \autoref{fig:threekit-editor} in \autoref{appendix-a}). Models of the products can be uploaded in various 3D formats. The platform provides \noborderacrshort{api} integration with the leading e-commerce and \noborderacrshort{erp} systems.~\cite{ThreeKitPlatformDocumentation}
 
-The offered solution is still partially tailored to the client, which is the reason why the service does not have standardized pricing. Instead, the price is determined through a personalized quote. It is important to note that the analysis of Threekit presented here is based on the publicly available documentation of the platform. Direct access to the full suite of Threekit's tools is typically available only after formalizing a business agreement with the company.
+The offered solution is still partially tailored to the client, which is the~reason why the service does not have standardized pricing. Instead, the price is determined through a personalized quote. It is important to note that the analysis of Threekit presented here is based on the publicly available documentation of the platform. Direct access to the full suite of Threekit's tools is typically available only after formalizing a business agreement with the~company.
 
 
 %______________________________________________________________
 \subsubsection{Roomle}
 
-Roomle is an Austrian company focused on pioneering visual product configuration. They provide solutions for product visualization, room design, and product configuration. Roomle's solution, called Rubens, is described as a \enquote{Open Full Logic 3D-Configurator}. The tool utilizes both parametric and modular configuration mechanisms. The software allows integration with third parties through the use of an \noborderacrshort{api}. In addition, it supports integration with other front-end technologies on web and mobile platforms and has a built-in \noborderacrshort{ar} experience.~\cite{RoomleAbout}
+Roomle is an Austrian company focused on pioneering visual product configuration. They provide solutions for product visualization, room design, and product configuration. Roomle's solution, called Rubens, is described as \enquote{Open Full Logic 3D-Configurator}. The tool utilizes both parametric and modular configuration mechanisms. The software allows integration with third parties through the use of an \noborderacrshort{api}. In addition, it supports integration with other front-end technologies on web and mobile platforms and has a built-in \noborderacrshort{ar} experience.~\cite{RoomleAbout}
 
 A web application, Rubens Admin, is used to set up the configurator application. To add a product that can then be configured by customers, 3D models, and materials are uploaded to the admin application. Components are defined using RoomleScript language, which is loosely based on the JavaScript language. The design of the configurator itself can be tuned in the admin application as well. Multiple language variants can be defined for product names and descriptions. The configurator application (see \autoref{fig:roomle} in \autoref{appendix-a}) runs on the client-side and can be simply embedded into a website. Additionally, a JavaScript library that can subscribe to events or modify the configurator can be utilized. A framework is also provided to utilize the configurator within an iOS application.~\cite{RoomleDocumentation}
 
@@ -253,12 +253,12 @@ In terms of pricing, Roomle's Rubens configurator with the listed capabilities i
 \label{table:summary-analysis}
 \end{table}
 
-All the product configurators analyzed have common characteristics, especially in terms of navigation and visualization styles, which remain consistent across different tools. Despite this, certain trade-offs were observed between them, especially regarding placement options. While some solutions offer users the freedom to position components anywhere, others restricted placement to fixed points. This variance stems from implementation complexity, as the fixed-point system is simpler, furthermore offering a better way to restrict impossible configurations.
+All the product configurators analyzed have common characteristics, especially in terms of navigation and visualization styles, which remain consistent across different tools. Despite this, certain trade-offs were observed between them, especially regarding placement options. While some solutions offer users the freedom to position components anywhere, others restrict placement to fixed points. This variance stems from implementation complexity, as the~fixed-point system is simpler, furthermore offering a better way to restrict impossible configurations.
 Another significant distinction was observed in the product finalization process, which ranged from the ability to place an order to being directed to a physical store.
 
 The key points discussed in the analysis of modular product configurators are summarized in \autoref{table:summary-analysis}.
 
-The user interface design of the analyzed configurations also displayed similarities, particularly in layout style, featuring a primary 3D preview on the left, a secondary view on the right, and buttons surrounding the primary view.
+The user interface design of the analyzed configurations also displayed similarities, particularly in layout style, featuring a primary 3D preview on the~left, a secondary view on the right, and buttons surrounding the primary view.
 
 Analyzing the offered toolkit solutions proved challenging due to the information being closely guarded, as it is in the financial interest of the providers. However, the examined toolkits are very sophisticated solutions that are supported by large backend services, which are used for storing assets and facilitating the configurators functionality. The toolkits offer advanced features that allow for the definition of rules and logic, allowing companies to create configurators with a large amount of complexity. This indicates that these toolkits target a market composed mainly of larger corporations that require sophisticated solutions, which is also reflected in pricing.
 
@@ -278,7 +278,7 @@ The proposed toolkit is envisioned to be universal with regard to products, adap
 \subsection{Requirement Engineering} \label{section:requirements}
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Following the overview of objectives and the definition of the target market, it is necessary to formulate precise requirements for this solution. Detailing these features and characteristics is crucial for successful implementation. Thus, the description of requirement engineering for this solution will be provided here.
+Following the overview of objectives and the definition of the target market, it is necessary to formulate precise requirements for this solution. Detailing these features and characteristics is crucial for successful implementation. Thus, the~description of requirement engineering for this solution will be provided here.
 
 The process of requirement engineering for software products involves gathering, analyzing, selecting, and managing requirements. It focuses on interpreting and understanding the goals, needs, and beliefs of stakeholders and transforming them into specific requirements.~\cite{Aurum2005}
 
@@ -287,10 +287,10 @@ There are many ways to categorize software requirements, such as audience-orient
 Given that the majority of requirements for the solution fall either into the functionality or usability category, the requirements in this section are separated only into the following common~\cite{Aurum2005} two main categories:
 \begin{enumerate}
     \item Functional requirements: These requirements describe what the system should be able to do. They specifically outline the system's behavior and its interactions in specific situations.
-    \item Non-functional requirements: These requirements put constraints on the solution that meets the functional requirements, rather than being focused on specific behaviors of the system. They are often, among others, focused on performance, security, accessibility, and compatibility.
+    \item Non-functional requirements: These requirements put constraints on the~solution that meets the functional requirements, rather than being focused on specific behaviors of the system. They are often, among others, focused on performance, security, accessibility, and compatibility.
 \end{enumerate}
 
-To manage and prioritize these requirements, each is assigned an approximate priority level using the MoSCoW method. This approach classifies the requirements into four distinct categories:
+To manage and prioritize these requirements, each is assigned an approximate priority level using the MoSCoW method. This approach classifies the~requirements into four distinct categories:
 \begin{enumerate}
     \item Must: Requirements crucial for the final solution.
     \item Should: Requirements to be implemented if feasible.
@@ -303,7 +303,7 @@ This method helps to plan and allocate resources throughout the implementation p
 Additionally, each requirement is given a rough estimate of the implementation difficulty, separated into three categories: \nopagebreak
 \begin{enumerate}
     \item Simple: Requirements that are straightforward to implement and require little time and few resources.
-    \item Intermediate: Requirements that pose moderate challenges and demand a considerable amount of resources, time, and problem-solving.
+    \item Intermediate: Requirements that pose moderate challenges and demand a~considerable amount of resources, time, and problem-solving.
     \item Complex: Requirements that are highly challenging and involve substantial resources, time, and expertise.
 \end{enumerate}
 This preliminary assessment aims to classify the requirements without relying on specific rigid criteria for each category. This method is specifically used only for functional requirements, as non-functional requirements affect the software's functionality and user experience through abstract constraints, making them unsuitable for the same difficulty estimation approach.
@@ -323,7 +323,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F2} Dynamic orbital camera controls
 \vspace{2pt}
-\\The tool should have dynamic orbital camera controls that allow users to view the product in the 3D product visualization (see requirement \hyperref[itm:F1]{F1}) from any angle by rotating, panning, and zooming the camera around the product. This feature aims to provide an engaging visual experience that allows users to examine the product with a 360-degree view. The controls should be intuitive, allowing for seamless navigation through mouse actions or touch gestures depending on the device used.
+\\The tool should have dynamic orbital camera controls that allow users to view the product in the 3D product visualization (see requirement \hyperref[itm:F1]{F1}) from any angle by rotating, panning, and zooming the camera around the product. This feature aims to provide an engaging visual experience that allows users to examine the product with a 360-degree view. The~controls should be intuitive, allowing for seamless navigation through mouse actions or touch gestures depending on the device used.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Must
     \item \textbf{Difficulty:} Simple
@@ -350,7 +350,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F5} Open navigation
 \vspace{2pt}
-\\The configurator should offer high flexibility in the order of configuring components and attributes, avoiding a linear step-by-step configuration and enabling all changes to be performed at any point during the configuration process. This flexibility enhances the user's ability to navigate freely among various different components of the product (see requirement \hyperref[itm:F3]{F3}).
+\\The configurator should offer high flexibility in the order of configuring components and attributes, avoiding a linear step-by-step configuration and enabling all changes to be performed at any point during the~configuration process. This flexibility enhances the user's ability to navigate freely among various different components of the product (see requirement \hyperref[itm:F3]{F3}).
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Should
     \item \textbf{Difficulty:} Simple
@@ -359,7 +359,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F6} Fixed point component placement
 \vspace{2pt}
-\\In alignment with the modularity configuration mechanism (see requirement \hyperref[itm:F3]{F3}), the configurator should enable components to be attached to other components or the whole product at predefined fixed points. While this approach restricts the potential solution space, it greatly streamlines the configuration process from the user side and helps to ensure that the configured product remains within the realm of feasible configurations.
+\\In alignment with the modularity configuration mechanism (see requirement \hyperref[itm:F3]{F3}), the configurator should enable components to be attached to other components or the whole product at predefined fixed points. While this approach restricts the potential solution space, it greatly streamlines the configuration process from the user side and helps to ensure that the~configured product remains within the realm of feasible configurations.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Should
     \item \textbf{Difficulty:} Intermediate
@@ -395,7 +395,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F10} Configuration processing
 \vspace{2pt}
-\\At the end of the configuration process, users should be optionally presented with a confirmation button, provided that a specific confirmation action has been set up for the product. This button is intended for users to confirm their choices and trigger a predetermined action, such as calling a webhook or being directed to another page, as specified by the administrator. This should allow for a smooth transition, where, upon configuration confirmation, the user is engaged in a follow-up action, like a checkout process or being guided to a physical store locator page. The ability to perform a custom \noborderacrshort{api} call at the end of the configuration process provides a flexible way to integrate the configurator with different systems or processes, thus improving its functionality and delivering a seamless user experience from start to finish.
+\\At the end of the configuration process, users should be optionally presented with a confirmation button, provided that a specific confirmation action has been set up for the product. This button is intended for users to confirm their choices and trigger a predetermined action, such as calling a webhook or being directed to another page, as specified by the~administrator. This should allow for a smooth transition, where, upon configuration confirmation, the user is engaged in a follow-up action, like a checkout process or being guided to a physical store locator page. The ability to perform a custom \noborderacrshort{api} call at the end of the configuration process provides a flexible way to integrate the configurator with different systems or processes, thus improving its functionality and delivering a~seamless user experience from start to finish.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Should
     \item \textbf{Difficulty:} Simple
@@ -404,7 +404,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F11} Inquiry form
 \vspace{2pt}
-\\As an extension of configuration processing (see requirement \hyperref[itm:F10]{F10}), the administrator should be able to set the product's confirmation action to trigger an inquiry form. In this scenario, when users click on the confirmation button, they should encounter a form asking for their contact details. Once completed, the created product configuration along with the user's contact information should be sent to an \noborderacrshort{api} predefined by the toolkit's administrator. This allows for a standard inquiry form process directly within the configurator application.
+\\As an extension of configuration processing (see requirement \hyperref[itm:F10]{F10}), the~administrator should be able to set the product's confirmation action to trigger an inquiry form. In this scenario, when users click on the~confirmation button, they should encounter a form asking for their contact details. Once completed, the created product configuration along with the user's contact information should be sent to an \noborderacrshort{api} predefined by the~toolkit's administrator. This allows for a standard inquiry form process directly within the configurator application.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Should
     \item \textbf{Difficulty:} Simple
@@ -440,7 +440,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F15} Interface texts customization
 \vspace{2pt}
-\\The toolkit should provide a way for the administrator to change the textual contents of the configurator's interface, ensuring that the language, tone, and terminology used are perfectly aligned with the business's needs \phantom{and reflect the business's terminology and branding.}\newpage and reflect the business's terminology and branding.
+\\The toolkit should provide a way for the administrator to change the~textual contents of the configurator's interface, ensuring that the language, tone, and terminology used are perfectly aligned with the business's \phantom{needs and reflect the business's terminology and branding.}\newpage needs and reflect the business's terminology and branding.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Could
     \item \textbf{Difficulty:} Intermediate
@@ -449,7 +449,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F16} Visual catalog management
 \vspace{2pt}
-\\The toolkit should provide administrators with the ability to visually manage the catalog of configurable products and their components. The visual preview of the components provided within catalog management should mirror the 3D previews in the actual configuration process (see requirement \hyperref[itm:F1]{F1}). This management system should allow administrators to add, update, or remove products and components, along with specifying their precise mounting locations (see requirement \hyperref[itm:F6]{F6}), directly through a visual interface.
+\\The toolkit should provide administrators with the ability to visually manage the catalog of configurable products and their components. The~visual preview of the components provided within catalog management should mirror the 3D previews in the actual configuration process (see requirement \hyperref[itm:F1]{F1}). This management system should allow administrators to add, update, or remove products and components, along with specifying their precise mounting locations (see requirement \hyperref[itm:F6]{F6}), directly through a visual interface.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Must
     \item \textbf{Difficulty:} Complex
@@ -486,7 +486,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F20} Parametric configuration mechanism
 \vspace{2pt}
-\\As a complement of the modularity mechanism (see requirement \hyperref[itm:F3]{F3}) the toolkit should incorporate parametric mechanisms that allow users to configure products by setting parametric values on the configured components when interacting with them (see requirement \hyperref[itm:F4]{F4}). The toolkit administrator should have the ability to create configurable parameters on the modular components, along with the types and possible ranges of values, enlarging the solution space of configuration.
+\\As a complement of the modularity mechanism (see requirement \hyperref[itm:F3]{F3}) the~toolkit should incorporate parametric mechanisms that allow users to configure products by setting parametric values on the configured components when interacting with them (see requirement \hyperref[itm:F4]{F4}). The toolkit administrator should have the ability to create configurable parameters on the modular components, along with the types and possible ranges of values, enlarging the solution space of configuration.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Won't
     \item \textbf{Difficulty:} Complex
@@ -495,7 +495,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:F21} Real dimensions visualization
 \vspace{2pt}
-\\The tool should provide users with a visualization of the real dimensions of the configured products. The visualization should accompany the configured product in the 3D view (see requirement \hyperref[itm:F1]{F1}) and should provide realistic measurements of dimensions in actual, real-life units.
+\\The tool should provide users with a visualization of the real dimensions of the configured products. The visualization should accompany the~configured product in the 3D view (see requirement \hyperref[itm:F1]{F1}) and should provide realistic measurements of dimensions in actual, real-life units.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Could
     \item \textbf{Difficulty:} Intermediate
@@ -512,7 +512,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:NF1} Multiplatform compatibility
 \vspace{2pt}
-\\The solution should work smoothly on various operating systems and devices, such as desktop and mobile platforms. This ensures that the solution is accessible to a wide audience, regardless of their preferred technology, thereby maximizing user engagement and reach.
+\\The solution should work smoothly on various operating systems and devices, such as desktop and mobile platforms. This ensures that the~solution is accessible to a wide audience, regardless of their preferred technology, thereby maximizing user engagement and reach.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Must
 \end{itemize}
@@ -536,7 +536,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item \label{itm:NF4} Infrastructure needs
 \vspace{2pt}
-\\The toolkit should ideally operate with lightweight infrastructure needs, possibly leveraging the resources that may already be used to offer the products. The configurator application is expected to operate primarily on the client side, requiring only minimal back-end support, possibly making use of a simple serverless architecture if needed. This approach reduces the demand for maintenance and is for this solution cost-effective, improving existing operations without necessitating significant new investments in infrastructure.
+\\The toolkit should ideally operate with lightweight infrastructure needs, possibly leveraging the resources that may already be used to offer the~products. The configurator application is expected to operate primarily on the client side, requiring only minimal back-end support, possibly making use of a simple serverless architecture if needed. This approach reduces the demand for maintenance and is for this solution cost-effective, improving existing operations without necessitating significant new investments in infrastructure.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Must
 \end{itemize}
@@ -560,7 +560,7 @@ This preliminary assessment aims to classify the requirements without relying on
 
 \item Performance
 \vspace{2pt}
-\\The toolkit should ensure optimal performance under typical usage load, with swift loading and quick response times across all compatible devices, particularly those with lower processing power. Therefore, the application should aim to achieve performance of more than 30 frames per second on average consumer computers or mobile devices.
+\\The toolkit should ensure optimal performance under typical usage load, with swift loading and quick response times across all compatible devices, particularly those with lower processing power. Therefore, the~application should aim to achieve performance of more than 30~frames per second on average consumer computers or mobile devices.
 \begin{itemize}[noitemsep, label=\trianglebullet]
     \item \textbf{Priority:} Must
 \end{itemize}
